@@ -10,15 +10,24 @@ jobs:
       fail-fast: false
       matrix:
         projectPath:
-          - Consume-Clearly
+          - Consume-Clearly # Or '.'
         testMode:
           - playmode
           - editmode
-          - standalone
     steps:
       - uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Debug directory structure
+        run: |
+          echo "Workflow Directory:"
+          pwd
+          echo "Root Directory:"
+          ls -la
+          echo "Project Directory:"
+          ls -la ${{ matrix.projectPath }}
+          echo "ProjectSettings:"
+          ls -la ${{ matrix.projectPath }}/ProjectSettings
       - uses: actions/cache@v3
         with:
           path: ${{ matrix.projectPath }}/Library
@@ -37,30 +46,23 @@ jobs:
           artifactsPath: ${{ matrix.testMode }}-artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: ${{ matrix.testMode }} Test Results
-          coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: Test results for ${{ matrix.testMode }}
           path: ${{ steps.tests.outputs.artifactsPath }}
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: Coverage results for ${{ matrix.testMode }}
-          path: ${{ steps.tests.outputs.coveragePath }}
 
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    needs: testAllModes # This ensures tests complete and pass before moving to build.
+    needs: testAllModes # This ensures tests complete before building
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneOSX    # Build a macOS standalone (Intel 64-bit).
-          - StandaloneWindows # Build a Windows standalone.
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          # You can add more platforms like Linux, iOS, WebGL if needed.
+          - StandaloneOSX
+          - StandaloneWindows
+          - StandaloneWindows64
     steps:
       - uses: actions/checkout@v4
         with:
