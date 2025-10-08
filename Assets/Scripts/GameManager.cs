@@ -5,16 +5,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     
-    private float gameTime;
-    private SaveData currentSaveData;
-    
+    public float GameTime { get; private set; }
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeSaveSystem();
+            Initialize();
         }
         else
         {
@@ -22,43 +21,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void InitializeSaveSystem()
+    private void Initialize()
     {
-        currentSaveData = new SaveData();
-        LoadGame();
+        GameTime = 0f;
     }
 
     private void Update()
     {
-        if (currentSaveData != null)
-        {
-            currentSaveData.playTime += Time.deltaTime;
-        }
-    }
-
-    public void SaveGame()
-    {
-        SaveSystem.Save(currentSaveData);
-    }
-
-    public void LoadGame()
-    {
-        currentSaveData = SaveSystem.Load();
-        if (currentSaveData == null)
-        {
-            currentSaveData = new SaveData();
-        }
+        GameTime += Time.deltaTime;
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f;
-        SaveGame(); // Save before loading main menu
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void OnApplicationQuit()
+    public void RestartGame()
     {
-        SaveGame();
+        GameTime = 0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
