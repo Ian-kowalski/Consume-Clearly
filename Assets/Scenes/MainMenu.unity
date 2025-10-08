@@ -265,7 +265,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 203971765}
-  - component: {fileID: 203971764}
   m_Layer: 0
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -273,18 +272,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &203971764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203971763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43433f6e6da88204d98afacc980d4415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenu
 --- !u!4 &203971765
 Transform:
   m_ObjectHideFlags: 0
@@ -383,9 +370,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 203971764}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: OpenSettings
+        m_MethodName: LoadCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -444,7 +431,6 @@ GameObject:
   - component: {fileID: 393815863}
   - component: {fileID: 393815865}
   - component: {fileID: 393815864}
-  - component: {fileID: 393815866}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -570,18 +556,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393815862}
   m_CullTransparentMesh: 1
---- !u!114 &393815866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393815862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c78f3cf9a1ce3f94d914952ba039ee64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverTextEffect
 --- !u!1 &670039766
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +567,6 @@ GameObject:
   - component: {fileID: 670039767}
   - component: {fileID: 670039770}
   - component: {fileID: 670039769}
-  - component: {fileID: 670039768}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -620,18 +593,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &670039768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670039766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c78f3cf9a1ce3f94d914952ba039ee64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverTextEffect
 --- !u!114 &670039769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,7 +775,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 203971764}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: OpenSettings
         m_Mode: 1
@@ -947,9 +908,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 203971764}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1298,7 +1259,6 @@ GameObject:
   - component: {fileID: 1078835522}
   - component: {fileID: 1078835525}
   - component: {fileID: 1078835524}
-  - component: {fileID: 1078835523}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1325,18 +1285,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1078835523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078835521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c78f3cf9a1ce3f94d914952ba039ee64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverTextEffect
 --- !u!114 &1078835524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,6 +1393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1227164423}
+  - component: {fileID: 1227164424}
   m_Layer: 0
   m_Name: Menu Buttons
   m_TagString: Untagged
@@ -1472,6 +1421,18 @@ Transform:
   - {fileID: 1609789213}
   m_Father: {fileID: 1992433749}
   m_LocalEulerAnglesHint: {x: 14.211, y: -19.545, z: 8.763}
+--- !u!114 &1227164424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227164422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43433f6e6da88204d98afacc980d4415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
 --- !u!1 &1396056394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,9 +1516,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 203971764}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1688,7 +1649,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 203971764}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -1749,7 +1710,6 @@ GameObject:
   - component: {fileID: 1747089996}
   - component: {fileID: 1747089998}
   - component: {fileID: 1747089997}
-  - component: {fileID: 1747089999}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1875,18 +1835,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747089995}
   m_CullTransparentMesh: 1
---- !u!114 &1747089999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747089995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c78f3cf9a1ce3f94d914952ba039ee64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverTextEffect
 --- !u!1 &1869030277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +1994,6 @@ GameObject:
   - component: {fileID: 2117632580}
   - component: {fileID: 2117632582}
   - component: {fileID: 2117632581}
-  - component: {fileID: 2117632583}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2172,18 +2119,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117632579}
   m_CullTransparentMesh: 1
---- !u!114 &2117632583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117632579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c78f3cf9a1ce3f94d914952ba039ee64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverTextEffect
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
