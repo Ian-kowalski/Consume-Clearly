@@ -43,7 +43,7 @@ public class MenuButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isEnabled && textMeshPro != null)
-        {
+        { 
             textMeshPro.text = $">{originalText}";
         }
     }
