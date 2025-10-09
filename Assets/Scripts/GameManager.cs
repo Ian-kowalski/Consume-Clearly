@@ -36,12 +36,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void RestartGame()
-    {
-        GameTime = 0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
     public void QuitGame()
     {
         #if UNITY_EDITOR
