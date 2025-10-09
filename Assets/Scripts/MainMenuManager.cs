@@ -35,7 +35,7 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Continue functionality not implemented yet");
     }
 
-    public void StartGame()
+    private void StartGame()
     {
         SceneManager.LoadScene(GAME_SCENE_NAME);
     }

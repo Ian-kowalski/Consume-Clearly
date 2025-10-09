@@ -265,6 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 203971765}
+  - component: {fileID: 203971766}
   m_Layer: 0
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -287,6 +288,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &203971766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203971763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43433f6e6da88204d98afacc980d4415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::MainMenuManager
 --- !u!1 &224758890
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +383,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 203971766}
+        m_TargetAssemblyTypeName: MainMenuManager, Main
         m_MethodName: LoadCredits
         m_Mode: 1
         m_Arguments:
@@ -775,8 +788,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 203971766}
+        m_TargetAssemblyTypeName: MainMenuManager, Main
         m_MethodName: OpenSettings
         m_Mode: 1
         m_Arguments:
@@ -908,8 +921,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 203971766}
+        m_TargetAssemblyTypeName: MainMenuManager, Main
         m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
@@ -1516,8 +1529,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 203971766}
+        m_TargetAssemblyTypeName: MainMenuManager, Main
         m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
@@ -1649,8 +1662,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 203971766}
+        m_TargetAssemblyTypeName: MainMenuManager, Main
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -1660,7 +1673,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1609789215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,5 +2139,5 @@ SceneRoots:
   - {fileID: 169181031}
   - {fileID: 1992433749}
   - {fileID: 949638952}
-  - {fileID: 203971765}
   - {fileID: 1869030279}
+  - {fileID: 203971765}
