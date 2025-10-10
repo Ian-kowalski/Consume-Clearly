@@ -29,7 +29,7 @@ public class MovementScript : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
 
-        Flip();
+        FlipCharacter();
     }
 
     private void FixedUpdate()
@@ -55,7 +55,7 @@ public class MovementScript : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
+    private void FlipCharacter()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
