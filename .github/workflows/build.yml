@@ -16,6 +16,8 @@ jobs:
         testMode:
           - playmode
           - editmode
+        unityVersion:
+          - 6000.2.6f2
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +35,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ${{ matrix.projectPath }}/Library
-          key: Library-${{ matrix.projectPath }}
+          key: Library-${{ matrix.projectPath }}-${{ matrix.unityVersion }} 
           restore-keys: |
             Library-
       - uses: game-ci/unity-test-runner@v4
@@ -45,6 +47,7 @@ jobs:
         with:
           projectPath: ${{ matrix.projectPath }}
           testMode: ${{ matrix.testMode }}
+          unityVersion: ${{ matrix.unityVersion }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: ${{ matrix.testMode }} Test Results
@@ -56,7 +59,7 @@ jobs:
 
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    needs: testAllModes # This ensures tests complete before building
+    needs: testAllModes
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
