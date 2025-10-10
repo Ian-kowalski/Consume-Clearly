@@ -14,8 +14,7 @@ public class PlayerManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // Find the player once at startup
+            
             player = GameObject.FindGameObjectWithTag("Player");
             if (player == null)
             {
