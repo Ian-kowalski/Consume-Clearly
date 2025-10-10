@@ -22,12 +22,12 @@ public class MovementScript : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         ValidateComponents();
     }
 
     private void ValidateComponents()
     {
+        rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D missing from player!");
