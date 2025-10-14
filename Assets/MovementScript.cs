@@ -5,11 +5,20 @@ public class MovementScript : MonoBehaviour
 {
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 10f;
+    private float jumpingPower = 12f;
     private bool isFacingRight = true;
     private float targetSpeed;
-    private float acceleration = 20f;  // how fast you speed up
-    private float deceleration = 30f;   // how fast you slow down
+    private float accelRate;
+    private float airAcceleration = 20f;
+    private float airDeceleration = 30f;
+    private float landAcceleration = 40f;
+    private float landDeceleration = 50f;
+
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
+    private float jumpBufferTime = 0.2f;
+    private float jumpBufferTimeCounter;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -19,14 +28,35 @@ public class MovementScript : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+                jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+
+        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+
+            jumpBufferTimeCounter = 0f;
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+            /*coyoteTime = 0f;*/
         }
 
         FlipCharacter();
@@ -34,20 +64,20 @@ public class MovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         targetSpeed = horizontal * speed;
         if (!IsGrounded())
         {
-            // Choose acceleration based on input
-            float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
-
-            // Gradually approach target speed
-            float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+            accelRate = (Mathf.Abs(horizontal) > 0.01f) ? airAcceleration : airDeceleration;
         }
         else
         {
-            rb.linearVelocity = new Vector2(targetSpeed, rb.linearVelocity.y);
+            accelRate = (Mathf.Abs(horizontal) > 0.01f) ? landAcceleration : landDeceleration;
         }
+
+        // Gradually approach target speed
+        float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
 
     private bool IsGrounded()
