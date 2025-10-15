@@ -25,14 +25,30 @@ public class MainMenuManager : MonoBehaviour
             var buttonNameLower = button.name.ToLower();
             if (buttonNameLower.Contains("continue"))
             {
-                effect.SetEnabled(false);
+                bool saveExists = SaveSystem.IsSaveFileValid();
+                effect.SetEnabled(saveExists);
             }
         }
     }
     public void ContinueGame()
     {
-        // Functionality disabled for now
-        Debug.Log("Continue functionality not implemented yet");
+        SaveData saveData = SaveSystem.Load();
+        if (saveData != null)
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoadProgress();
+            }
+            else
+            {
+                Debug.LogWarning("GameManager instance not found! Falling back to scene load.");
+            }
+            SceneManager.LoadScene(saveData.CurrentScene);
+        }
+        else
+        {
+            Debug.LogError("No save data found! Unable to continue.");
+        }
     }
 
     private void StartGame()
@@ -42,8 +58,11 @@ public class MainMenuManager : MonoBehaviour
     
     public void NewGame()
     {
+        SaveSystem.ClearSaveData(); // New method to delete any existing save.
         StartGame();
     }
+    
+
     
     public void OpenSettings()
     {
