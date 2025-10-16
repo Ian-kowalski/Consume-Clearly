@@ -64,7 +64,6 @@ public class MovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         targetSpeed = horizontal * speed;
         if (!IsGrounded())
         {
