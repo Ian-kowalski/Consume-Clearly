@@ -125,7 +125,6 @@ public class MovementScript : MonoBehaviour
             accelRate = (Mathf.Abs(horizontal) > 0.01f) ? landAcceleration : landDeceleration;
         }
 
-        // Gradually approach target speed
         float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
         rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
@@ -140,4 +139,24 @@ public class MovementScript : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+#if UNITY_EDITOR
+    public void Test_SetHorizontal(float value)
+    {
+        horizontal = value;
+        Move();
+    }
+    public void Test_Jump()
+    {
+        if (IsGrounded())
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+        }
+    }
+
+    public bool Test_IsGrounded()
+    {
+        return IsGrounded();
+    }
+#endif
 }
