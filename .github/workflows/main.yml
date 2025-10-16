@@ -1,6 +1,6 @@
-name: Test and Build
+name: Test
 
-on: [workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 permissions: write-all
 
@@ -37,6 +37,7 @@ jobs:
           path: ${{ matrix.projectPath }}/Library
           key: Library-${{ matrix.projectPath }}-${{ matrix.unityVersion }} 
           restore-keys: |
+            Library-${{ matrix.projectPath }}-
             Library-
       - uses: game-ci/unity-test-runner@v4
         id: tests
@@ -56,37 +57,3 @@ jobs:
         with:
           name: Test results for ${{ matrix.testMode }}
           path: ${{ steps.tests.outputs.artifactsPath }}
-
-  buildForAllSupportedPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
-    needs: testAllModes
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        targetPlatform:
-          - StandaloneOSX
-          - StandaloneWindows
-          - StandaloneWindows64
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-          fetch-depth: 0
-      - uses: actions/cache@v3
-        with:
-          path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
-      - name: Build the Project
-        uses: game-ci/unity-builder@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: ${{ matrix.targetPlatform }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}

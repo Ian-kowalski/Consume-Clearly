@@ -1,9 +1,11 @@
 {
-    "name": "Tests1",
+    "name": "PlayModeTests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "Main",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
