@@ -153,10 +153,5 @@ public class MovementScript : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
         }
     }
-
-    public bool Test_IsGrounded()
-    {
-        return IsGrounded();
-    }
 #endif
 }
