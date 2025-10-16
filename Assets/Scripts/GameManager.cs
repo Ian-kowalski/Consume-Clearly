@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
+    SaveData data = new SaveData();
 
     public float GameTime { get; private set; }
     public string CurrentScene { get; private set; }
@@ -53,10 +55,11 @@ public class GameManager : MonoBehaviour
     public void SaveProgress()
     {
         GameObject player = PlayerManager.Instance?.GetPlayer();
-        if (player != null)
+        if (player)
         {
             SaveData saveData = new SaveData
             {
+                GameTime = GameTime,
                 CurrentScene = SceneManager.GetActiveScene().name,
                 PlayerPosition = player.transform.position
             };
@@ -66,20 +69,21 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No player found to save position.");
             SaveData saveData = new SaveData
             {
-                CurrentScene = SceneManager.GetActiveScene().name,
-                PlayerPosition = Vector3.zero
+                GameTime = GameTime,
+                CurrentScene = data.CurrentScene,
+                PlayerPosition = data.PlayerPosition,
             };
             SaveSystem.Save(saveData);
+            
         }
     }
 
     public void LoadProgress()
     {
         Debug.Log("Loading game progress...");
-        SaveData data = SaveSystem.Load();
+        data = SaveSystem.Load();
         if (data != null)
         {
             Debug.Log(
