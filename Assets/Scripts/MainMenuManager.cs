@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     private const string CREDITS_SCENE_NAME = "Credits";
-    private const string GAME_SCENE_NAME = "SampleScene";
+    private const string GAME_SCENE_NAME = "Test";
 
     private void Start()
     {
