@@ -39,7 +39,7 @@ public class MovementScript : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-                jumpBufferTimeCounter = jumpBufferTime;
+            jumpBufferTimeCounter = jumpBufferTime;
         }
         else
         {
