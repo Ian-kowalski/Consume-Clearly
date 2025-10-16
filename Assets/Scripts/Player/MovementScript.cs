@@ -5,12 +5,19 @@ public class MovementScript : MonoBehaviour
     [Header("Movement Settings")] [SerializeField]
     private float speed = 8f;
 
-    [SerializeField] private float jumpingPower = 10f;
-    [SerializeField] private float acceleration = 20f;
-    [SerializeField] private float deceleration = 30f;
+    [SerializeField] private float jumpingPower = 12f;
+    [SerializeField] private float landAcceleration = 40f;
+    [SerializeField] private float landDeceleration = 50f;
+    [SerializeField] private float airAcceleration = 20f;
+    [SerializeField] private float airDeceleration = 30f;
+
+    [Header("Jump Settings")] [SerializeField]
+    private float coyoteTime = 0.2f;
+
+    [SerializeField] private float jumpBufferTime = 0.2f;
 
     [Header("Ground Check")] [SerializeField]
-    private Transform groundCheck; // Ground Check Transform
+    private Transform groundCheck;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckRadius = 0.2f;
@@ -19,6 +26,9 @@ public class MovementScript : MonoBehaviour
     private float horizontal;
     private bool isFacingRight = true;
     private float targetSpeed;
+    private float accelRate;
+    private float coyoteTimeCounter;
+    private float jumpBufferTimeCounter;
 
     private void Awake()
     {
@@ -43,7 +53,6 @@ public class MovementScript : MonoBehaviour
         }
     }
 
-
     public void SetupGroundCheck(Transform groundCheckTransform)
     {
         groundCheck = groundCheckTransform;
@@ -57,12 +66,34 @@ public class MovementScript : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        // Jump logic
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        // Coyote time logic
+        if (IsGrounded())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
+        // Jump buffer logic
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+
+        // Jump execution
+        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            jumpBufferTimeCounter = 0f;
+        }
+
+        // Variable jump height
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -87,15 +118,16 @@ public class MovementScript : MonoBehaviour
 
         if (!IsGrounded())
         {
-            float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
-            float speedDiff = targetSpeed - rb.linearVelocity.x;
-            float movement = speedDiff * accelRate * Time.fixedDeltaTime;
-            rb.AddForce(new Vector2(movement, 0f), ForceMode2D.Force);
+            accelRate = (Mathf.Abs(horizontal) > 0.01f) ? airAcceleration : airDeceleration;
         }
         else
         {
-            rb.linearVelocity = new Vector2(targetSpeed, rb.linearVelocity.y);
+            accelRate = (Mathf.Abs(horizontal) > 0.01f) ? landAcceleration : landDeceleration;
         }
+
+        // Gradually approach target speed
+        float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
 
     private void UpdateFacingDirection()
