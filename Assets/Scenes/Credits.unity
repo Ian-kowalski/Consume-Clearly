@@ -165,7 +165,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424985467}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Animation: {fileID: 7400000, guid: fcc138df48a784440b0bc0f19e045b03, type: 2}
   m_Animations:
@@ -496,6 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daecaf71765f19d4a9c63589c0f99ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::CreditsManager
+  animation: {fileID: 424985469}
 --- !u!4 &1432575220
 Transform:
   m_ObjectHideFlags: 0
