@@ -48,7 +48,6 @@ public class MovementScriptPlayModeTests
     public IEnumerator PlayerMovesRightWhenInputIsPositive()
     {
         movementScript.Test_SetHorizontal(1f);
-        float initialRightMovement = rb.linearVelocity.x;
 
         yield return new WaitForFixedUpdate();
 
@@ -62,13 +61,9 @@ public class MovementScriptPlayModeTests
         player.transform.position = new Vector2(0, 1);
         yield return new WaitForFixedUpdate();
 
-        float initialerYVelocity = rb.linearVelocity.y;
         // Simulate jump input
         movementScript.Test_Jump();
         float initialYVelocity = rb.linearVelocity.y;
-        bool grounded = movementScript.Test_IsGrounded();
-
-
         // Get expected jump power
         float expectedJumpPower = (float)movementScript.GetType()
             .GetField("jumpingPower", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
@@ -76,7 +71,7 @@ public class MovementScriptPlayModeTests
 
         // Assert player jumped (vertical velocity should be close to jumpingPower)
         Assert.That(initialYVelocity, Is.EqualTo(expectedJumpPower).Within(0.5f),
-            "Player should jump with correct vertical velocity when grounded equals " + grounded + " and jump is executed.\ninitial velocity equals " + initialYVelocity + " and before the jump is " + initialerYVelocity);
+            "Player should jump with correct vertical velocity when grounded and jump is executed.");
     }
 
     [UnityTest]
