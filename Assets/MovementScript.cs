@@ -39,7 +39,7 @@ public class MovementScript : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-                jumpBufferTimeCounter = jumpBufferTime;
+            jumpBufferTimeCounter = jumpBufferTime;
         }
         else
         {
@@ -56,7 +56,7 @@ public class MovementScript : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-            /*coyoteTime = 0f;*/
+            
         }
 
         FlipCharacter();
@@ -64,7 +64,6 @@ public class MovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         targetSpeed = horizontal * speed;
         if (!IsGrounded())
         {
