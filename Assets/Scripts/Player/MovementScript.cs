@@ -75,29 +75,33 @@ public class MovementScript : MonoBehaviour
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        Debug.Log($"Horizontal Input: {horizontal}");
-    
-        // Handle animations with priority
         bool isGrounded = IsGrounded();
-        Debug.Log($"Is Grounded: {isGrounded}, Velocity: {rb.velocity}");
-    
-        if (!isGrounded)
+        
+        // Handle walking and idle animations
+        if (isGrounded)
         {
-            Debug.Log("Setting Jump Animation");
-            animationController.SetJumping();
-        }
-        else 
-        {
-            float horizontalVelocity = Mathf.Abs(rb.velocity.x);
-            if (horizontalVelocity > 0.1f)
+            if (Mathf.Abs(horizontal) > 0.1f)
             {
-                animationController.SetWalking();
+                animationController.SetWalking(true);
+                animationController.SetIdle(false);
             }
             else
             {
-                animationController.SetIdle();
+                animationController.SetWalking(false);
+                animationController.SetIdle(true);
             }
         }
+
+        // Handle jumping animation
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            animationController.TriggerJump();
+        }
+
+        // Handle sprite flipping
+        animationController.FlipSprite(horizontal);
+        
+        jump();
     }
 
     private void FixedUpdate()
