@@ -12,6 +12,7 @@ public class MovementScriptEditModeTests
     private const string AssertMessage = "Assertion failed on expression: 'ShouldRunBehaviour()'";
     private const string RigidbodyErrorMessage = "Rigidbody2D missing from player!";
     private const string GroundCheckErrorMessage = "Ground Check reference missing from player! Please set it using SetupGroundCheck.";
+    private const string AnimationControllerErrorMessage = "PlayerAnimationController missing from player!";
 
     private void ExpectValidateComponentsAssertion() =>
         LogAssert.Expect(LogType.Assert, AssertMessage);
@@ -32,6 +33,7 @@ public class MovementScriptEditModeTests
     public void SetupGroundCheckAssignsTransform()
     {
         playerObj = new GameObject("Player");
+        playerObj.AddComponent<PlayerAnimationController>();
         movement = playerObj.AddComponent<MovementScript>();
         groundCheck = new GameObject("GroundCheck").transform;
 
@@ -50,8 +52,11 @@ public class MovementScriptEditModeTests
         ExpectMissingRigidbodyLogs();
 
         playerObj = new GameObject("Player");
+        playerObj.AddComponent<PlayerAnimationController>();
         movement = playerObj.AddComponent<MovementScript>();
         groundCheck = new GameObject("GroundCheck").transform;
+        
+        
         typeof(MovementScript).GetField("groundCheck", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(movement, groundCheck);
 
@@ -68,8 +73,11 @@ public class MovementScriptEditModeTests
         ExpectMissingGroundCheckLogs();
 
         playerObj = new GameObject("Player");
+        playerObj.AddComponent<PlayerAnimationController>();
         playerObj.AddComponent<Rigidbody2D>();
         movement = playerObj.AddComponent<MovementScript>();
+        
+        
         typeof(MovementScript).GetField("groundCheck", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(movement, null);
 
