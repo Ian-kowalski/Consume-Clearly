@@ -66,38 +66,7 @@ public class MovementScript : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        // Coyote time logic
-        if (IsGrounded())
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-
-        // Jump buffer logic
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpBufferTimeCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferTimeCounter -= Time.deltaTime;
-        }
-
-        // Jump execution
-        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-            jumpBufferTimeCounter = 0f;
-        }
-
-        // Variable jump height
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-        }
+        jump();
 
         UpdateFacingDirection();
     }
@@ -140,6 +109,46 @@ public class MovementScript : MonoBehaviour
         }
     }
 
+    public void jump()
+    {
+        // Coyote time logic
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // Jump buffer logic
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+
+        jumpAction();
+    }
+
+    public void jumpAction()
+    {
+        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            jumpBufferTimeCounter = 0f;
+        }
+
+        // Variable jump height
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        }
+    }
+
 #if UNITY_EDITOR
     public void Test_SetHorizontal(float value)
     {
@@ -150,8 +159,14 @@ public class MovementScript : MonoBehaviour
     {
         if (IsGrounded())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            coyoteTimeCounter = coyoteTime;
         }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        jumpBufferTimeCounter = jumpBufferTime;
+        jumpAction();
     }
 #endif
 }

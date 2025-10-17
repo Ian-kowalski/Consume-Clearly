@@ -55,7 +55,7 @@ public class MovementScriptPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator Player_Jumps_When_Grounded_And_Jump_Executed()
+    public IEnumerator PlayerJumpsWhenGroundedAndJumpExecuted()
     {
         // Ensure player is on the ground
         player.transform.position = new Vector2(0, 1);

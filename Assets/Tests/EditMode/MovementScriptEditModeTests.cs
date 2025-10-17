@@ -5,12 +5,35 @@ using UnityEngine.TestTools;
 [TestFixture]
 public class MovementScriptEditModeTests
 {
-    [Test]
-    public void SetupGroundCheck_AssignsTransform()
+    private GameObject playerObj;
+    private MovementScript movement;
+    private Transform groundCheck;
+
+    private const string AssertMessage = "Assertion failed on expression: 'ShouldRunBehaviour()'";
+    private const string RigidbodyErrorMessage = "Rigidbody2D missing from player!";
+    private const string GroundCheckErrorMessage = "Ground Check reference missing from player! Please set it using SetupGroundCheck.";
+
+    private void ExpectValidateComponentsAssertion() =>
+        LogAssert.Expect(LogType.Assert, AssertMessage);
+
+    private void ExpectMissingRigidbodyLogs()
     {
-        var playerObj = new GameObject("Player");
-        var movement = playerObj.AddComponent<MovementScript>();
-        var groundCheck = new GameObject("GroundCheck").transform;
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error, RigidbodyErrorMessage);
+    }
+
+    private void ExpectMissingGroundCheckLogs()
+    {
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error, GroundCheckErrorMessage);
+    }
+
+    [Test]
+    public void SetupGroundCheckAssignsTransform()
+    {
+        playerObj = new GameObject("Player");
+        movement = playerObj.AddComponent<MovementScript>();
+        groundCheck = new GameObject("GroundCheck").transform;
 
         movement.SetupGroundCheck(groundCheck);
 
@@ -22,14 +45,13 @@ public class MovementScriptEditModeTests
     }
 
     [Test]
-    public void ValidateComponents_MissingRigidbody_DisablesScript()
+    public void ValidateComponentsMissingRigidbodyDisablesScript()
     {
-        LogAssert.Expect(LogType.Assert, "Assertion failed on expression: 'ShouldRunBehaviour()'");
-        LogAssert.Expect(LogType.Error, "Rigidbody2D missing from player!");
+        ExpectMissingRigidbodyLogs();
 
-        var playerObj = new GameObject("Player");
-        var movement = playerObj.AddComponent<MovementScript>();
-        var groundCheck = new GameObject("GroundCheck").transform;
+        playerObj = new GameObject("Player");
+        movement = playerObj.AddComponent<MovementScript>();
+        groundCheck = new GameObject("GroundCheck").transform;
         typeof(MovementScript).GetField("groundCheck", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(movement, groundCheck);
 
@@ -41,14 +63,13 @@ public class MovementScriptEditModeTests
     }
 
     [Test]
-    public void ValidateComponents_MissingGroundCheck_DisablesScript()
+    public void ValidateComponentsMissingGroundCheckDisablesScript()
     {
-        LogAssert.Expect(LogType.Assert, "Assertion failed on expression: 'ShouldRunBehaviour()'");
-        LogAssert.Expect(LogType.Error, "Ground Check reference missing from player! Please set it using SetupGroundCheck.");
+        ExpectMissingGroundCheckLogs();
 
-        var playerObj = new GameObject("Player");
+        playerObj = new GameObject("Player");
         playerObj.AddComponent<Rigidbody2D>();
-        var movement = playerObj.AddComponent<MovementScript>();
+        movement = playerObj.AddComponent<MovementScript>();
         typeof(MovementScript).GetField("groundCheck", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(movement, null);
 
