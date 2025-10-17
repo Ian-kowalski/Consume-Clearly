@@ -116,10 +116,10 @@ TextureImporter:
       name: Mc_Walk-2_0
       rect:
         serializedVersion: 2
-        x: 817
-        y: 109
-        width: 660
-        height: 1380
+        x: 799
+        y: 120
+        width: 729
+        height: 1355
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
