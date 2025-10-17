@@ -131,17 +131,6 @@ public class MovementScript : MonoBehaviour
         rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
 
-    private void UpdateFacingDirection()
-    {
-        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f))
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
-
     public void jump()
     {
         // Coyote time logic
