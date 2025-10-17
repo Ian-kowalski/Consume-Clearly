@@ -11,16 +11,16 @@ public class MovementScript_EditModeTests
 
     private const string AssertMessage = "Assertion failed on expression: 'ShouldRunBehaviour()'";
     private const string RigidbodyErrorMessage = "Rigidbody2D missing from player!";
-    private const string GroundCheckErrorMessage = "Ground Check reference missing from player! Please set it using SetupGroundCheck.";
+
+    private const string GroundCheckErrorMessage =
+        "Ground Check reference missing from player! Please set it using SetupGroundCheck.";
+
     private const string AnimationControllerErrorMessage = "PlayerAnimationController missing from player!";
 
     [SetUp]
     public void SetUp()
     {
         playerObj = new GameObject("Player");
-        playerObj.AddComponent<SpriteRenderer>();
-        playerObj.AddComponent<Animator>();
-        playerObj.AddComponent<PlayerAnimationController>();
         groundCheck = new GameObject("GroundCheck").transform;
     }
 
@@ -32,28 +32,7 @@ public class MovementScript_EditModeTests
         if (groundCheck != null)
             Object.DestroyImmediate(groundCheck.gameObject);
     }
-
-    private void ExpectValidateComponentsAssertion() =>
-        LogAssert.Expect(LogType.Assert, AssertMessage);
-
-    private void ExpectMissingRigidbodyLogs()
-    {
-        ExpectValidateComponentsAssertion();
-        LogAssert.Expect(LogType.Error, RigidbodyErrorMessage);
-    }
-
-    private void ExpectMissingGroundCheckLogs()
-    {
-        ExpectValidateComponentsAssertion();
-        LogAssert.Expect(LogType.Error, GroundCheckErrorMessage);
-    }
     
-    private void ExpectMissingAnimationControllerLogs()
-    {
-        ExpectValidateComponentsAssertion();
-        LogAssert.Expect(LogType.Error, AnimationControllerErrorMessage);
-    }
-
     [Test]
     public void SetupGroundCheckAssignsTransform()
     {
@@ -68,47 +47,85 @@ public class MovementScript_EditModeTests
     [Test]
     public void ValidateComponentsMissingRigidbodyDisablesScript()
     {
-        ExpectMissingRigidbodyLogs();
-        movement = playerObj.AddComponent<MovementScript>();
+        // Add required components except Rigidbody2D
+        var animator = playerObj.AddComponent<Animator>();
+        var spriteRenderer = playerObj.AddComponent<SpriteRenderer>();
+        var animController = playerObj.AddComponent<PlayerAnimationController>();
 
-        typeof(MovementScript).GetField("groundCheck",
+        // Setup animator and sprite renderer on animation controller using reflection
+        typeof(PlayerAnimationController)
+            .GetField("animator", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(animController, animator);
+        typeof(PlayerAnimationController)
+            .GetField("spriteRenderer",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(movement, groundCheck);
+            .SetValue(animController, spriteRenderer);
 
+        // Add MovementScript and setup groundCheck
+        movement = playerObj.AddComponent<MovementScript>();
+        movement.SetupGroundCheck(groundCheck);
+
+        // First expect assertion message, then error message
+        LogAssert.Expect(LogType.Assert, AssertMessage);
+        LogAssert.Expect(LogType.Assert, AssertMessage);
+        LogAssert.Expect(LogType.Error, RigidbodyErrorMessage);
+
+        // Validate components
         movement.SendMessage("ValidateComponents", null, SendMessageOptions.DontRequireReceiver);
+
+        // Check if script is disabled
         Assert.IsFalse(movement.enabled);
     }
 
     [Test]
     public void ValidateComponentsMissingGroundCheckDisablesScript()
     {
-        ExpectMissingGroundCheckLogs();
+        // Add all required components except setting up groundCheck
         playerObj.AddComponent<Rigidbody2D>();
+        var animator = playerObj.AddComponent<Animator>();
+        var spriteRenderer = playerObj.AddComponent<SpriteRenderer>();
+        var animController = playerObj.AddComponent<PlayerAnimationController>();
+
+        // Setup animator and sprite renderer on animation controller
+        typeof(PlayerAnimationController)
+            .GetField("animator", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(animController, animator);
+        typeof(PlayerAnimationController)
+            .GetField("spriteRenderer",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(animController, spriteRenderer);
+
+        // Add MovementScript without setting up groundCheck
         movement = playerObj.AddComponent<MovementScript>();
 
-        typeof(MovementScript).GetField("groundCheck",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(movement, null);
+        // First expect assertion message, then error message
+        LogAssert.Expect(LogType.Assert, AssertMessage);
+        LogAssert.Expect(LogType.Assert, AssertMessage);
+        LogAssert.Expect(LogType.Error, GroundCheckErrorMessage);
 
+        // Validate components
         movement.SendMessage("ValidateComponents", null, SendMessageOptions.DontRequireReceiver);
+
+        // Check if script is disabled
         Assert.IsFalse(movement.enabled);
     }
-    
 
     [Test]
     public void ValidateComponentsMissingAnimationControllerDisablesScript()
     {
-        ExpectMissingAnimationControllerLogs();
-        
-        Object.DestroyImmediate(playerObj);
-        playerObj = new GameObject("Player");
+        // Add only Rigidbody2D and set up groundCheck
         playerObj.AddComponent<Rigidbody2D>();
         movement = playerObj.AddComponent<MovementScript>();
-        
-        typeof(MovementScript).GetField("groundCheck", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(movement, groundCheck);
+        movement.SetupGroundCheck(groundCheck);
 
+        // First expect assertion message, then error message
+        LogAssert.Expect(LogType.Assert, AssertMessage);
+        LogAssert.Expect(LogType.Error, AnimationControllerErrorMessage);
+
+        // Validate components
         movement.SendMessage("ValidateComponents", null, SendMessageOptions.DontRequireReceiver);
+
+        // Check if script is disabled
         Assert.IsFalse(movement.enabled);
     }
 }
