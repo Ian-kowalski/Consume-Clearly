@@ -30,6 +30,8 @@ public class MovementScript : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferTimeCounter;
 
+    private PlayerAnimationController animationController;
+    
     private void Awake()
     {
         ValidateComponents();
@@ -38,6 +40,7 @@ public class MovementScript : MonoBehaviour
     private void ValidateComponents()
     {
         rb = GetComponent<Rigidbody2D>();
+        animationController = GetComponent<PlayerAnimationController>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D missing from player!");
@@ -45,6 +48,13 @@ public class MovementScript : MonoBehaviour
             return;
         }
 
+        if (animationController == null)
+        {
+            Debug.LogError("PlayerAnimationController missing from player!");
+            enabled = false;
+            return;
+        }
+        
         if (groundCheck == null)
         {
             Debug.LogError("Ground Check reference missing from player! Please set it using SetupGroundCheck.");
@@ -65,10 +75,33 @@ public class MovementScript : MonoBehaviour
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        bool isGrounded = IsGrounded();
+        
+        // Handle walking and idle animations
+        if (isGrounded)
+        {
+            if (Mathf.Abs(horizontal) > 0.1f)
+            {
+                animationController.SetWalking(true);
+                animationController.SetIdle(false);
+            }
+            else
+            {
+                animationController.SetWalking(false);
+                animationController.SetIdle(true);
+            }
+        }
 
+        // Handle jumping animation
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            animationController.TriggerJump();
+        }
+
+        // Handle sprite flipping
+        animationController.FlipSprite(horizontal);
+        
         jump();
-
-        UpdateFacingDirection();
     }
 
     private void FixedUpdate()
@@ -96,17 +129,6 @@ public class MovementScript : MonoBehaviour
 
         float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
         rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
-    }
-
-    private void UpdateFacingDirection()
-    {
-        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f))
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
     }
 
     public void jump()
