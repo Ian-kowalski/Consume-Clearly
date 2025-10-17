@@ -59,6 +59,7 @@ public class MovementScript_EditModeTests
     {
         movement = playerObj.AddComponent<MovementScript>();
         movement.SetupGroundCheck(groundCheck);
+        
 
         var field = typeof(MovementScript).GetField("groundCheck",
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -68,7 +69,16 @@ public class MovementScript_EditModeTests
     [Test]
     public void ValidateComponentsMissingRigidbodyDisablesScript()
     {
-        ExpectMissingRigidbodyLogs();
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error, "Animator component missing from player!");
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error, "Rigidbody2D missing from player!");
+
+        Object.DestroyImmediate(playerObj);
+        playerObj = new GameObject("Player");
+
+        // Add components in order
+        playerObj.AddComponent<PlayerAnimationController>();
         movement = playerObj.AddComponent<MovementScript>();
 
         typeof(MovementScript).GetField("groundCheck",
@@ -82,30 +92,38 @@ public class MovementScript_EditModeTests
     [Test]
     public void ValidateComponentsMissingGroundCheckDisablesScript()
     {
-        ExpectMissingGroundCheckLogs();
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error, "Animator component missing from player!");
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error,
+            "Ground Check reference missing from player! Please set it using SetupGroundCheck.");
+
+        Object.DestroyImmediate(playerObj);
+        playerObj = new GameObject("Player");
+
+        // Add components in order
+        playerObj.AddComponent<Rigidbody2D>();
+        playerObj.AddComponent<PlayerAnimationController>();
+        movement = playerObj.AddComponent<MovementScript>();
+
+        movement.SendMessage("ValidateComponents", null, SendMessageOptions.DontRequireReceiver);
+        Assert.IsFalse(movement.enabled);
+    }
+
+    [Test]
+    public void ValidateComponentsMissingAnimationControllerDisablesScript()
+    {
+        ExpectValidateComponentsAssertion();
+        LogAssert.Expect(LogType.Error, "PlayerAnimationController missing from player!");
+
+        Object.DestroyImmediate(playerObj);
+        playerObj = new GameObject("Player");
+
         playerObj.AddComponent<Rigidbody2D>();
         movement = playerObj.AddComponent<MovementScript>();
 
         typeof(MovementScript).GetField("groundCheck",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(movement, null);
-
-        movement.SendMessage("ValidateComponents", null, SendMessageOptions.DontRequireReceiver);
-        Assert.IsFalse(movement.enabled);
-    }
-    
-
-    [Test]
-    public void ValidateComponentsMissingAnimationControllerDisablesScript()
-    {
-        ExpectMissingAnimationControllerLogs();
-        
-        Object.DestroyImmediate(playerObj);
-        playerObj = new GameObject("Player");
-        playerObj.AddComponent<Rigidbody2D>();
-        movement = playerObj.AddComponent<MovementScript>();
-        
-        typeof(MovementScript).GetField("groundCheck", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(movement, groundCheck);
 
         movement.SendMessage("ValidateComponents", null, SendMessageOptions.DontRequireReceiver);
