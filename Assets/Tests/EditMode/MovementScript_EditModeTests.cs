@@ -32,6 +32,17 @@ public class MovementScript_EditModeTests
         if (groundCheck != null)
             Object.DestroyImmediate(groundCheck.gameObject);
     }
+    
+    [Test]
+    public void SetupGroundCheckAssignsTransform()
+    {
+        movement = playerObj.AddComponent<MovementScript>();
+        movement.SetupGroundCheck(groundCheck);
+
+        var field = typeof(MovementScript).GetField("groundCheck",
+            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        Assert.AreEqual(groundCheck, field.GetValue(movement));
+    }
 
     [Test]
     public void ValidateComponentsMissingRigidbodyDisablesScript()
