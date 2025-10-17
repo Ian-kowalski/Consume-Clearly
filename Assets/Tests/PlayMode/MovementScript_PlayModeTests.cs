@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
 
-public class MovementScriptPlayModeTests
+public class MovementScript_PlayModeTests
 {
     private GameObject player;
     private MovementScript movementScript;

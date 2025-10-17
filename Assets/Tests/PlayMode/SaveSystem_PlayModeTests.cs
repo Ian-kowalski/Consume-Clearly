@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class SaveSystemPlayModeTests
+public class SaveSystem_PlayModeTests
 {
     [UnityTest]
     public IEnumerator SaveSystem_SavesAndLoadsGameCorrectly()

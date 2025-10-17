@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 [TestFixture]
-public class MovementScriptEditModeTests
+public class MovementScript_EditModeTests
 {
     private GameObject playerObj;
     private MovementScript movement;

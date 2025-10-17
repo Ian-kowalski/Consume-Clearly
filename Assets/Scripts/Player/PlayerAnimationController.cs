@@ -14,9 +14,31 @@ public class PlayerAnimationController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        if (ValidateComponents()) return;
+
         // Initialize parameters
         SetIdle(true);
         SetWalking(false);
+    }
+
+    private bool ValidateComponents()
+    {
+        if (animator == null)
+        {
+            Debug.LogError("Animator component missing from player!");
+            enabled = false;
+            return true;
+        }
+
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer component missing from player!");
+            enabled = false;
+            return true;
+        }
+
+        return false;
     }
 
     public void SetWalking(bool isWalking)
