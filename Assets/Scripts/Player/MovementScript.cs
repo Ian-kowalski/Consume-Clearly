@@ -30,6 +30,8 @@ public class MovementScript : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferTimeCounter;
 
+    private PlayerAnimationController animationController;
+    
     private void Awake()
     {
         ValidateComponents();
@@ -38,6 +40,7 @@ public class MovementScript : MonoBehaviour
     private void ValidateComponents()
     {
         rb = GetComponent<Rigidbody2D>();
+        animationController = GetComponent<PlayerAnimationController>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D missing from player!");
@@ -45,6 +48,13 @@ public class MovementScript : MonoBehaviour
             return;
         }
 
+        if (animationController == null)
+        {
+            Debug.LogError("PlayerAnimationController missing from player!");
+            enabled = false;
+            return;
+        }
+        
         if (groundCheck == null)
         {
             Debug.LogError("Ground Check reference missing from player! Please set it using SetupGroundCheck.");

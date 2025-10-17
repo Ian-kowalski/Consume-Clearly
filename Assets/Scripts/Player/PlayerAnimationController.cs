@@ -5,10 +5,10 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    // Animation parameter IDs (for better performance)
-    private readonly int IsWalking = Animator.StringToHash("isWalking");
-    private readonly int IsJumping = Animator.StringToHash("isJumping");
-    private readonly int IsIdle = Animator.StringToHash("isIdle");
+    // Animation trigger parameter IDs
+    private readonly int TriggerWalk = Animator.StringToHash("TriggerWalk");
+    private readonly int TriggerJump = Animator.StringToHash("TriggerJump");
+    private readonly int TriggerIdle = Animator.StringToHash("TriggerIdle");
 
     void Start()
     {
@@ -16,18 +16,19 @@ public class PlayerAnimationController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void SetWalking(bool isWalking)
+    public void SetWalking()
     {
-        animator.SetBool(IsWalking, isWalking);
-        // When walking, we're not idle
-        animator.SetBool(IsIdle, !isWalking && !animator.GetBool(IsJumping));
+        animator.SetTrigger(TriggerWalk);
     }
 
-    public void SetJumping(bool isJumping)
+    public void SetJumping()
     {
-        animator.SetBool(IsJumping, isJumping);
-        // When jumping, we're not idle
-        animator.SetBool(IsIdle, !isJumping && !animator.GetBool(IsWalking));
+        animator.SetTrigger(TriggerJump);
+    }
+
+    public void SetIdle()
+    {
+        animator.SetTrigger(TriggerIdle);
     }
 
     public void FlipSprite(float horizontalInput)
