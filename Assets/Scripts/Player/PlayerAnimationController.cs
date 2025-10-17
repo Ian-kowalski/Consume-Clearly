@@ -5,30 +5,48 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    // Animation trigger parameter IDs
-    private readonly int TriggerWalk = Animator.StringToHash("TriggerWalk");
-    private readonly int TriggerJump = Animator.StringToHash("TriggerJump");
-    private readonly int TriggerIdle = Animator.StringToHash("TriggerIdle");
+    // Animation States
+    private string currentState;
+
+    // Animation States
+    private static readonly string IDLE = "Idle";
+    private static readonly string WALK = "Walk";
+    private static readonly string JUMP = "Jump";
 
     void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        // Start with idle
+        ChangeAnimationState(IDLE);
+    }
+
+    // Call this before changing animations to ensure proper transition
+    void ChangeAnimationState(string newState)
+    {
+        // prevent same animation from interrupting itself
+        if (currentState == newState) return;
+
+        // play the animation
+        animator.Play(newState);
+
+        // reassign the current state
+        currentState = newState;
     }
 
     public void SetWalking()
     {
-        animator.SetTrigger(TriggerWalk);
+        ChangeAnimationState(WALK);
     }
 
     public void SetJumping()
     {
-        animator.SetTrigger(TriggerJump);
+        ChangeAnimationState(JUMP);
     }
 
     public void SetIdle()
     {
-        animator.SetTrigger(TriggerIdle);
+        ChangeAnimationState(IDLE);
     }
 
     public void FlipSprite(float horizontalInput)
