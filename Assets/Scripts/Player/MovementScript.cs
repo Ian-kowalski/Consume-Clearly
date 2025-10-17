@@ -76,38 +76,7 @@ public class MovementScript : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        // Coyote time logic
-        if (IsGrounded())
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-
-        // Jump buffer logic
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpBufferTimeCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferTimeCounter -= Time.deltaTime;
-        }
-
-        // Jump execution
-        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-            jumpBufferTimeCounter = 0f;
-        }
-
-        // Variable jump height
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-        }
+        jump();
 
         UpdateFacingDirection();
     }
@@ -135,7 +104,6 @@ public class MovementScript : MonoBehaviour
             accelRate = (Mathf.Abs(horizontal) > 0.01f) ? landAcceleration : landDeceleration;
         }
 
-        // Gradually approach target speed
         float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
         rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
@@ -150,4 +118,65 @@ public class MovementScript : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    public void jump()
+    {
+        // Coyote time logic
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // Jump buffer logic
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+
+        jumpAction();
+    }
+
+    public void jumpAction()
+    {
+        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            jumpBufferTimeCounter = 0f;
+        }
+
+        // Variable jump height
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        }
+    }
+
+#if UNITY_EDITOR
+    public void Test_SetHorizontal(float value)
+    {
+        horizontal = value;
+        Move();
+    }
+    public void Test_Jump()
+    {
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        jumpBufferTimeCounter = jumpBufferTime;
+        jumpAction();
+    }
+#endif
 }
