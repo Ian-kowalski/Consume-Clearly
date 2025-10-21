@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 2585146}
   - component: {fileID: 2585148}
   - component: {fileID: 2585147}
-  - component: {fileID: 2585149}
   - component: {fileID: 2585150}
   m_Layer: 6
   m_Name: Ground (6)
@@ -258,22 +257,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2585149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2585145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &2585150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +333,6 @@ GameObject:
   - component: {fileID: 277571070}
   - component: {fileID: 277571072}
   - component: {fileID: 277571071}
-  - component: {fileID: 277571073}
   - component: {fileID: 277571074}
   m_Layer: 6
   m_Name: Ground (5)
@@ -478,22 +460,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &277571073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277571069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &277571074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,8 +490,8 @@ GameObject:
   m_Component:
   - component: {fileID: 647981722}
   - component: {fileID: 647981724}
-  - component: {fileID: 647981723}
   - component: {fileID: 647981725}
+  - component: {fileID: 647981726}
   m_Layer: 0
   m_Name: EnviromentNav (1)
   m_TagString: Untagged
@@ -542,28 +508,12 @@ Transform:
   m_GameObject: {fileID: 647981721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5715, y: 5.4081, z: 0}
+  m_LocalPosition: {x: 4.5715, y: 4.74, z: 0}
   m_LocalScale: {x: 143.48582, y: 18.802353, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1847089149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &647981723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 647981721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 0
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!212 &647981724
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -642,6 +592,22 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &647981726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647981721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a181f53eedb119499d46f91a851fdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &766561146
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,8 +617,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766561149}
-  - component: {fileID: 766561148}
-  - component: {fileID: 766561147}
+  - component: {fileID: 766561151}
+  - component: {fileID: 766561150}
   m_Layer: 0
   m_Name: NavMesh
   m_TagString: Untagged
@@ -660,7 +626,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &766561147
+--- !u!4 &766561149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766561146}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 3.74214, y: 3.10044, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &766561150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -669,14 +650,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 766561146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bd44a44cd62c64fbfc1eea95b24880, type: 3}
+  m_Script: {fileID: 11500000, guid: 806561ed20af9284ca71f9cf829b6d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.CollectSources2d
   m_OverrideByGrid: 0
   m_UseMeshPrefab: {fileID: 0}
   m_CompressBounds: 0
   m_OverrideVector: {x: 1, y: 1, z: 1}
---- !u!114 &766561148
+--- !u!114 &766561151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -685,7 +666,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 766561146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e04976799df50f54ba128eff723155a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fa789e3bab20aa48baec31c60d06717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshSurface
   m_AgentTypeID: 0
@@ -706,22 +687,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: f9f43f300178e01459bfbf9aa7e3926f, type: 2}
---- !u!4 &766561149
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766561146}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.74214, y: 3.10044, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 06d37c7274b2a80448ea5d9a6ddd4356, type: 2}
 --- !u!1 &975674496
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +906,6 @@ GameObject:
   - component: {fileID: 1258405978}
   - component: {fileID: 1258405980}
   - component: {fileID: 1258405979}
-  - component: {fileID: 1258405981}
   - component: {fileID: 1258405982}
   m_Layer: 0
   m_Name: Square
@@ -1068,22 +1033,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1258405981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258405977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &1258405982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1064,6 @@ GameObject:
   - component: {fileID: 1398623377}
   - component: {fileID: 1398623379}
   - component: {fileID: 1398623378}
-  - component: {fileID: 1398623380}
   - component: {fileID: 1398623381}
   m_Layer: 6
   m_Name: Ground (3)
@@ -1243,22 +1191,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1398623380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398623376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &1398623381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,7 +1222,6 @@ GameObject:
   - component: {fileID: 1653004748}
   - component: {fileID: 1653004750}
   - component: {fileID: 1653004749}
-  - component: {fileID: 1653004751}
   - component: {fileID: 1653004752}
   m_Layer: 6
   m_Name: Ground (2)
@@ -1418,22 +1349,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1653004751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653004747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &1653004752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,7 +1419,6 @@ GameObject:
   - component: {fileID: 1848287477}
   - component: {fileID: 1848287478}
   - component: {fileID: 1848287479}
-  - component: {fileID: 1848287480}
   - component: {fileID: 1848287481}
   m_Layer: 6
   m_Name: Ground
@@ -1632,22 +1546,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1848287480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848287476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &1848287481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1679,7 +1577,6 @@ GameObject:
   - component: {fileID: 1971027545}
   - component: {fileID: 1971027547}
   - component: {fileID: 1971027546}
-  - component: {fileID: 1971027548}
   - component: {fileID: 1971027549}
   m_Layer: 6
   m_Name: Ground (4)
@@ -1807,22 +1704,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1971027548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971027544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!114 &1971027549
 MonoBehaviour:
   m_ObjectHideFlags: 0
