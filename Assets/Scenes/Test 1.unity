@@ -162,7 +162,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -375,7 +375,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -479,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647981722}
   - component: {fileID: 647981724}
-  - component: {fileID: 647981726}
+  - component: {fileID: 647981725}
   m_Layer: 0
   m_Name: EnviromentNav (1)
   m_TagString: Untagged
@@ -560,7 +560,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &647981726
+--- !u!114 &647981725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 647981721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a181f53eedb119499d46f91a851fdbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
   m_OverrideArea: 0
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 766561146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806561ed20af9284ca71f9cf829b6d57, type: 3}
+  m_Script: {fileID: 11500000, guid: 70bd44a44cd62c64fbfc1eea95b24880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.CollectSources2d
   m_OverrideByGrid: 0
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 766561146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa789e3bab20aa48baec31c60d06717, type: 3}
+  m_Script: {fileID: 11500000, guid: e04976799df50f54ba128eff723155a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshSurface
   m_AgentTypeID: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 06d37c7274b2a80448ea5d9a6ddd4356, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 37a8a6f70ea4e8740acf3878f1248f6e, type: 2}
 --- !u!1 &975674496
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +949,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1117,7 +1117,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1254,7 +1254,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1796,7 +1796,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
