@@ -1,17 +1,16 @@
 {
-    "name": "Main",
-    "rootNamespace": "",
+    "name": "NavMeshPlusEditor",
     "references": [
-        "Unity.TextMeshPro",
         "NavMeshPlus"
     ],
-    "includePlatforms": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+    "defineConstraints": []
 }

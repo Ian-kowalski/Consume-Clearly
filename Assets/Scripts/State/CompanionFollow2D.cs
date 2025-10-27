@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-//using NavMeshPlus.Components;
+using NavMeshPlus.Components;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,7 +8,7 @@ public class CompanionFollow2D : MonoBehaviour
 {
     [Header("References")]
     public Transform target;
-    //public NavMeshSurface surface2D;
+    public NavMeshSurface surface2D;
     
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
