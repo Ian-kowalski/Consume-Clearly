@@ -20,10 +20,18 @@ public class CompanionFollow2D : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     
+    [Header("Jump Settings")] [SerializeField]
+    private float coyoteTime = 0.2f;
+
+    [SerializeField] private float jumpBufferTime = 0.2f;
+    
     private Rigidbody2D rb;
     private NavMeshPath path;
-    private int currentCorner = 0;
+    private int currentCorner = 1;
     private bool isGrounded;
+    private float coyoteTimeCounter;
+    private float jumpBufferTimeCounter;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,9 +62,14 @@ public class CompanionFollow2D : MonoBehaviour
         rb.linearVelocity = new Vector2(direction.x * moveSpeed, rb.linearVelocity.y);
 
         // Vertical (jump) handling
-        if (canJump && isGrounded && nextCorner.y > transform.position.y + 0.5f)
+        if (canJump && isGrounded && nextCorner.y > transform.position.y + 0.2f)
         {
             Jump();
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
         }
 
         // Progress to next corner if close enough
@@ -64,11 +77,25 @@ public class CompanionFollow2D : MonoBehaviour
         {
             currentCorner++;
         }
+        // Coyote time logic
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
     }
     void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpBufferTimeCounter = 0f;
+        }
+
     }
 
     void CheckGrounded()
@@ -77,6 +104,11 @@ public class CompanionFollow2D : MonoBehaviour
         isGrounded = hit != null;
     }
 
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+    
     void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
