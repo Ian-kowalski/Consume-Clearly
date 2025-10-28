@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f4c5707dec45d5848a014ab946e968e3
+guid: 5171202bce771f542b1ebef92b478201
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1833688731561352029
-    second: Mc Jump 7_0
+      213: -617309393983339949
+    second: Idle_Breathing_MC-9_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mc Jump 7_0
+      name: Idle_Breathing_MC-9_0
       rect:
         serializedVersion: 2
-        x: 986
-        y: 41
-        width: 905
-        height: 1504
+        x: 846
+        y: 115
+        width: 601
+        height: 1392
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a426ae50dd6d86e0800000000000000
-      internalID: -1833688731561352029
+      spriteID: 3528c177060ee67f0800000000000000
+      internalID: -617309393983339949
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mc Jump 7_0: -1833688731561352029
+      Idle_Breathing_MC-9_0: -617309393983339949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
