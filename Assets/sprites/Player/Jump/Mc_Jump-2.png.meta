@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4a35c3ea3eef7f449ac81cf3615f6087
+guid: 65124766ec33f094d887599e149b69bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7084232390735457286
-    second: Mc Jump 3_0
+      213: -5947566783290449625
+    second: Mc_Jump-2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mc Jump 3_0
+      name: Mc_Jump-2_0
       rect:
         serializedVersion: 2
-        x: 714
-        y: 24
-        width: 960
-        height: 1166
+        x: 798
+        y: 27
+        width: 886
+        height: 1350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60c6a1453df305260800000000000000
-      internalID: 7084232390735457286
+      spriteID: 7216f0ca58ff57da0800000000000000
+      internalID: -5947566783290449625
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mc Jump 3_0: 7084232390735457286
+      Mc_Jump-2_0: -5947566783290449625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
