@@ -30,6 +30,8 @@ public class MovementScript : MonoBehaviour
     private float coyoteTimeCounter;
     private float jumpBufferTimeCounter;
 
+    private PlayerAnimationController animationController;
+    
     private void Awake()
     {
         ValidateComponents();
@@ -38,6 +40,7 @@ public class MovementScript : MonoBehaviour
     private void ValidateComponents()
     {
         rb = GetComponent<Rigidbody2D>();
+        animationController = GetComponent<PlayerAnimationController>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D missing from player!");
@@ -45,6 +48,13 @@ public class MovementScript : MonoBehaviour
             return;
         }
 
+        if (animationController == null)
+        {
+            Debug.LogError("PlayerAnimationController missing from player!");
+            enabled = false;
+            return;
+        }
+        
         if (groundCheck == null)
         {
             Debug.LogError("Ground Check reference missing from player! Please set it using SetupGroundCheck.");
@@ -65,41 +75,33 @@ public class MovementScript : MonoBehaviour
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-
-        // Coyote time logic
-        if (IsGrounded())
+        bool isGrounded = IsGrounded();
+        
+        // Handle walking and idle animations
+        if (isGrounded)
         {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-
-        // Jump buffer logic
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpBufferTimeCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferTimeCounter -= Time.deltaTime;
+            if (Mathf.Abs(horizontal) > 0.1f)
+            {
+                animationController.SetWalking(true);
+                animationController.SetIdle(false);
+            }
+            else
+            {
+                animationController.SetWalking(false);
+                animationController.SetIdle(true);
+            }
         }
 
-        // Jump execution
-        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        // Handle jumping animation
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-            jumpBufferTimeCounter = 0f;
+            animationController.TriggerJump();
         }
 
-        // Variable jump height
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-        }
-
-        UpdateFacingDirection();
+        // Handle sprite flipping
+        animationController.FlipSprite(horizontal);
+        
+        jump();
     }
 
     private void FixedUpdate()
@@ -125,19 +127,68 @@ public class MovementScript : MonoBehaviour
             accelRate = (Mathf.Abs(horizontal) > 0.01f) ? landAcceleration : landDeceleration;
         }
 
-        // Gradually approach target speed
         float newX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, accelRate * Time.fixedDeltaTime);
         rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
 
-    private void UpdateFacingDirection()
+    public void jump()
     {
-        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f))
+        // Coyote time logic
+        if (IsGrounded())
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // Jump buffer logic
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+
+        jumpAction();
+    }
+
+    public void jumpAction()
+    {
+        if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            jumpBufferTimeCounter = 0f;
+        }
+
+        // Variable jump height
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
     }
+
+#if UNITY_EDITOR
+    public void Test_SetHorizontal(float value)
+    {
+        horizontal = value;
+        Move();
+    }
+    public void Test_Jump()
+    {
+        if (IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        jumpBufferTimeCounter = jumpBufferTime;
+        jumpAction();
+    }
+#endif
 }

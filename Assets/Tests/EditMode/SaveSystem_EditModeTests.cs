@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-public class SaveSystemEditModeTests
+public class SaveSystem_EditModeTests
 {
     [Test]
     public void SaveSystem_SavesDataCorrectly()

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 
 [TestFixture]
-public class MenuButtonEffectEditModeTests
+public class MenuButtonEffect_EditModeTests
 {
     private GameObject buttonObject;
     private TextMeshProUGUI textComponent;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MenuButtonEffectPlayModeTests
+public class MenuButtonEffect_PlayModeTests
 {
     [UnityTest]
     public System.Collections.IEnumerator MenuButtonEffect_DisabledStateRendersCorrectlyInRuntime()
