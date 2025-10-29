@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -8,10 +9,10 @@ public class SaveData
     public string CurrentScene;
     public Vector3 PlayerPosition;
     
+    private static readonly HashSet<string> InvalidScenes = new() { "Credits", "MainMenu" };
+    
     public bool IsSceneValidForSaving()
     {
-        return !string.IsNullOrEmpty(CurrentScene) && 
-               CurrentScene != "Credits" && 
-               CurrentScene != "MainMenu";
+        return !string.IsNullOrEmpty(CurrentScene) && InvalidScenes.Contains(CurrentScene) == false;
     }
 }
