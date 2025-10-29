@@ -25,32 +25,30 @@ public class CompanionFollow2D : MonoBehaviour
 
     [SerializeField] private float jumpBufferTime = 0.2f;
     
+    [Header("Path Settings")] [SerializeField]
+    private float repathDistance = 1.0f;
+    [SerializeField] private float stuckCheckDistance = 2.0f;
+    
     private Rigidbody2D rb;
     private NavMeshPath path;
     private int currentCorner = 1;
     private bool isGrounded;
     private float coyoteTimeCounter;
     private float jumpBufferTimeCounter;
+    private Vector3 lastTargetPosition;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         path = new NavMeshPath();
-        InvokeRepeating(nameof(UpdatePath), 0f, 0.2f); // refresh path every 0.2s
+        lastTargetPosition = target.position;
     }
-    void UpdatePath()
-    {
-        if (target != null)
-        {
-            NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
-            Mathf.Min(1, path.corners.Length - 1);
-        }
-    }
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         CheckGrounded();
+        UpdatePathIfNeeded();
 
         if (path == null || path.corners.Length == 0) return;
         if (currentCorner >= path.corners.Length) return;
@@ -99,6 +97,35 @@ public class CompanionFollow2D : MonoBehaviour
 
     }
 
+    void UpdatePathIfNeeded()
+    {
+        if (target != null)
+        {
+            // Target moved far enough
+            if (Vector3.Distance(target.position, lastTargetPosition) > repathDistance)
+            {
+                RecalculatePath();
+                lastTargetPosition = target.position;
+                return;
+            }
+
+            // If companion too far from path, repath as recovery
+            if (path != null && path.corners.Length > 0)
+            {
+                float distToPath = Vector2.Distance(transform.position, path.corners[Mathf.Min(currentCorner, path.corners.Length - 1)]);
+                if (distToPath > stuckCheckDistance)
+                {
+                    RecalculatePath();
+                }
+            }
+        }
+    }
+    
+    void RecalculatePath()
+    {
+        NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
+        Mathf.Min(1, path.corners.Length - 1);
+    }
     void CheckGrounded()
     {
         Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
