@@ -19,8 +19,6 @@ public class InventoryLogic : MonoBehaviour
     public int testQuantity;
     public string testTitle, testDescription;
 
-    //public event Action<int> OnItemActionSelected, OnDescriptionRequested;
-
     private List<InventoryItemLogic> inventoryitems = new List<InventoryItemLogic>();
 
     private void Awake()
@@ -42,14 +40,6 @@ public class InventoryLogic : MonoBehaviour
         }
     }
 
-    //public void updateData(int itemindex, int itemQuantity, Sprite itemImage)
-    //{
-    //    if (inventoryitems.Count > itemindex)
-    //    {
-    //        inventoryitems[itemindex].SetData(itemImage, itemQuantity);
-    //    }
-    //}
-
     private void HandleShowItemAction(InventoryItemLogic logic)
     {
         throw new NotImplementedException();
@@ -59,16 +49,12 @@ public class InventoryLogic : MonoBehaviour
     {
         logic.Select();
         descriptionpanel.SetDescription(testSprite, testTitle, testDescription);
-        //int index = inventoryitems.IndexOf(logic);
-        //if (index == -1) return;
-        //OnDescriptionRequested?.Invoke(index);
     }
 
     public void Show() 
     {
         gameObject.SetActive(true);
         descriptionpanel.ResetDescription();
-        //ResetDescription();
 
         inventoryitems[0].SetData(testSprite, testQuantity);
     }
@@ -76,6 +62,7 @@ public class InventoryLogic : MonoBehaviour
     public void Hide() 
     {
         gameObject.SetActive(false);
+        ResetDescription();
     }
 
     private void ResetDescription()

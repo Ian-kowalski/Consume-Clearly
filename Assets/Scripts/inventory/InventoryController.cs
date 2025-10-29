@@ -16,9 +16,7 @@ public class InventoryController : MonoBehaviour
         {
             if (inventory.isActiveAndEnabled == false)
             {
-                Debug.Log("Showing Inventory");
                 inventory.Show();
-                Debug.Log("Inventory shown" + inventory.gameObject.activeSelf);
             }
             else
             {
