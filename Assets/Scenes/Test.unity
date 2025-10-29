@@ -1539,6 +1539,10 @@ PrefabInstance:
       value: Rope
       objectReference: {fileID: 0}
     - target: {fileID: 703533820689791267, guid: 1ee65627da75c094f8db8c8b9ab8d273, type: 3}
+      propertyPath: testSprite
+      value: 
+      objectReference: {fileID: -4570153536982545689, guid: 756f2426d9db9c8499593cf1f529a608, type: 3}
+    - target: {fileID: 703533820689791267, guid: 1ee65627da75c094f8db8c8b9ab8d273, type: 3}
       propertyPath: testQuantity
       value: 1
       objectReference: {fileID: 0}
