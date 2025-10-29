@@ -24,7 +24,6 @@ public class MovementScript : MonoBehaviour
 
     private Rigidbody2D rb;
     private float horizontal;
-    private bool isFacingRight = true;
     private float targetSpeed;
     private float accelRate;
     private float coyoteTimeCounter;
@@ -144,7 +143,7 @@ public class MovementScript : MonoBehaviour
         }
 
         // Jump buffer logic
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpBufferTimeCounter = jumpBufferTime;
         }
