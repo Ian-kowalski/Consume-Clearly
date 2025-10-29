@@ -998,6 +998,8 @@ MonoBehaviour:
     m_Bits: 64
   coyoteTime: 0.8
   jumpBufferTime: 0.8
+  repathDistance: 1
+  stuckCheckDistance: 2
 --- !u!4 &1214302664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4036169441490382326, guid: f68b7f545b139a44b9e954055174f11d, type: 3}
@@ -2200,9 +2202,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2066726415}
   - {fileID: 766561149}
   - {fileID: 1847089149}
-  - {fileID: 2066726415}
   - {fileID: 169734484}
   - {fileID: 975674502}
   - {fileID: 2015888639}

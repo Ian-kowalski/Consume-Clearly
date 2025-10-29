@@ -102,6 +102,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         SetupMovementScript();
+        AssignTargetToCompanions();
     }
 
     private void SetupMovementScript()
@@ -131,4 +132,27 @@ public class PlayerManager : MonoBehaviour
                 "GroundCheck transform could not be found on the player prefab. Please ensure the prefab is properly configured.");
         }
     }
+    
+    private void AssignTargetToCompanions()
+    {
+        if (player == null)
+        {
+            Debug.LogWarning("No player found when assigning companion targets.");
+            return;
+        }
+
+        Transform targetPoint = player.transform.Find("TargetPoint");
+        if (targetPoint == null)
+        {
+            Debug.LogWarning("Player prefab does not contain a TargetPoint child!");
+            return;
+        }
+
+        foreach (var companion in FindObjectsOfType<CompanionFollow2D>())
+        {
+            companion.SetTarget(targetPoint);
+            Debug.Log($"Assigned TargetPoint to {companion.name}");
+        }
+    }
+
 }

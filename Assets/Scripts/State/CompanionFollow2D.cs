@@ -42,6 +42,31 @@ public class CompanionFollow2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         path = new NavMeshPath();
+
+        if (target == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                Transform found = player.transform.Find("TargetPoint");
+                if (found != null)
+                    target = found;
+                else
+                    Debug.LogWarning("TargetPoint not found on player prefab!");
+            }
+            else
+            {
+                Debug.LogWarning("Player not found in scene!");
+            }
+        }
+
+        if (target != null)
+            lastTargetPosition = target.position;
+    }
+    
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
         lastTargetPosition = target.position;
     }
     
