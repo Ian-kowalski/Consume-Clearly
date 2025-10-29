@@ -7,18 +7,18 @@ using NavMeshPlus.Components;
 public class CompanionFollow2D : MonoBehaviour
 {
     [Header("References")]
-    public Transform target;
-    public NavMeshSurface surface2D;
+    [SerializeField] private Transform target;
+    [SerializeField] private NavMeshSurface surface2D;
     
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float jumpForce = 12f;
-    public bool canJump = true;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 12f;
+    [SerializeField] private bool canJump = true;
     
     [Header("Ground Settings")]
-    public float groundCheckRadius = 0.1f;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
+    [SerializeField] private float groundCheckRadius = 0.1f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
     
     [Header("Jump Settings")] [SerializeField]
     private float coyoteTime = 0.2f;
@@ -44,7 +44,7 @@ public class CompanionFollow2D : MonoBehaviour
         if (target != null)
         {
             NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
-            currentCorner = 0;
+            Mathf.Min(1, path.corners.Length - 1);
         }
     }
     // Update is called once per frame
@@ -53,6 +53,7 @@ public class CompanionFollow2D : MonoBehaviour
         CheckGrounded();
 
         if (path == null || path.corners.Length == 0) return;
+        if (currentCorner >= path.corners.Length) return;
 
         // Move toward the next path corner
         Vector3 nextCorner = path.corners[currentCorner];
