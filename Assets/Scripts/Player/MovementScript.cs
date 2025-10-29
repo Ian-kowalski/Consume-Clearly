@@ -24,7 +24,6 @@ public class MovementScript : MonoBehaviour
 
     private Rigidbody2D rb;
     private float horizontal;
-    private bool isFacingRight = true;
     private float targetSpeed;
     private float accelRate;
     private float coyoteTimeCounter;
