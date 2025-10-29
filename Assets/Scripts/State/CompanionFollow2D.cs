@@ -32,7 +32,6 @@ public class CompanionFollow2D : MonoBehaviour
     private Rigidbody2D rb;
     private NavMeshPath path;
     private int currentCorner = 1;
-    private bool isGrounded;
     private float coyoteTimeCounter;
     private float jumpBufferTimeCounter;
     private Vector3 lastTargetPosition;
@@ -72,7 +71,6 @@ public class CompanionFollow2D : MonoBehaviour
     
     void FixedUpdate()
     {
-        CheckGrounded();
         UpdatePathIfNeeded();
 
         if (path == null || path.corners.Length == 0) return;
@@ -86,7 +84,7 @@ public class CompanionFollow2D : MonoBehaviour
         rb.linearVelocity = new Vector2(direction.x * moveSpeed, rb.linearVelocity.y);
 
         // Vertical (jump) handling
-        if (canJump && isGrounded && nextCorner.y > transform.position.y + 0.2f)
+        if (canJump && IsGrounded() && nextCorner.y > transform.position.y + 0.2f)
         {
             Jump();
             jumpBufferTimeCounter = jumpBufferTime;
@@ -150,11 +148,6 @@ public class CompanionFollow2D : MonoBehaviour
     {
         NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
         Mathf.Min(1, path.corners.Length - 1);
-    }
-    void CheckGrounded()
-    {
-        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        isGrounded = hit != null;
     }
 
     private bool IsGrounded()
