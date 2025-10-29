@@ -55,29 +55,14 @@ public class GameManager : MonoBehaviour
     public void SaveProgress()
     {
         GameObject player = PlayerManager.Instance?.GetPlayer();
-        if (player)
+        SaveData saveData = new SaveData
         {
-            SaveData saveData = new SaveData
-            {
-                GameTime = GameTime,
-                CurrentScene = SceneManager.GetActiveScene().name,
-                PlayerPosition = player.transform.position
-            };
-            SaveSystem.Save(saveData);
-            Debug.Log(
-                $"Saving game state - Time: {Time.time}, Scene: {saveData.CurrentScene}, Position: {saveData.PlayerPosition}");
-        }
-        else
-        {
-            SaveData saveData = new SaveData
-            {
-                GameTime = GameTime,
-                CurrentScene = data.CurrentScene,
-                PlayerPosition = data.PlayerPosition,
-            };
-            SaveSystem.Save(saveData);
-            
-        }
+            GameTime = GameTime,
+            CurrentScene = SceneManager.GetActiveScene().name,
+            PlayerPosition = player ? player.transform.position : data.PlayerPosition
+        };
+    
+        SaveSystem.Save(saveData);
     }
 
     public void LoadProgress()

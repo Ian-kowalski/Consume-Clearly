@@ -7,6 +7,12 @@ public static class SaveSystem
 
     public static void Save(SaveData data)
     {
+        if (data == null || !data.IsSceneValidForSaving())
+        {
+            Debug.LogWarning("Save aborted: Scene is excluded from saving.");
+            return;
+        }
+
         try
         {
             string json = JsonUtility.ToJson(data, prettyPrint: true);
@@ -27,6 +33,13 @@ public static class SaveSystem
             {
                 string json = File.ReadAllText(SaveFilePath);
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+                if (!data.IsSceneValidForSaving())
+                {
+                    Debug.LogWarning("Loaded save data is associated with an invalid scene. Save ignored.");
+                    return null;
+                }
+
                 Debug.Log("Game loaded successfully!");
                 return data;
             }
@@ -40,7 +53,7 @@ public static class SaveSystem
             Debug.LogWarning("Save file not found.");
         }
 
-        return null; // Return null if loading fails or file doesn't exist.
+        return null; // Return null if loading fails or file doesn't exist
     }
     
     public static bool IsSaveFileValid()
