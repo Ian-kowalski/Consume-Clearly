@@ -143,7 +143,7 @@ public class MovementScript : MonoBehaviour
         }
 
         // Jump buffer logic
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpBufferTimeCounter = jumpBufferTime;
         }
