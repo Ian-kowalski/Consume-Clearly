@@ -1,11 +1,8 @@
 using NavMeshPlus.Components;
-using UnityEngine.AI;
-
 using UnityEngine;
+using UnityEngine.AI;
+using System.Collections;
 
-/// <summary>
-/// Controls the companion's movement and pathfinding behavior in a 2D environment.
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AnimationController))]
 public class CompanionFollow2D : MonoBehaviour
@@ -16,13 +13,10 @@ public class CompanionFollow2D : MonoBehaviour
     [SerializeField] private NavMeshSurface surface2D;
 
     [Header("Movement Settings")]
-    [Tooltip("Maximum movement speed")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private bool canJump = true;
-    [Tooltip("Minimum distance to maintain from target")]
     [SerializeField] private float followDistance = 2f;
-    [Tooltip("Distance to look ahead on path for smoother movement")]
     [SerializeField] private float lookAheadDistance = 2f;
 
     [Header("Ground Settings")]
@@ -31,14 +25,16 @@ public class CompanionFollow2D : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Path Settings")]
-    [Tooltip("Distance threshold to recalculate path")]
     [SerializeField] private float repathDistance = 1.0f;
-    [Tooltip("Distance to check if companion is stuck")]
     [SerializeField] private float stuckCheckDistance = 2.0f;
-    [Tooltip("Time before forcing path recalculation when stuck")]
     [SerializeField] private float stuckTimeout = 1.0f;
-    [Tooltip("Number of points used for path smoothing")]
     [SerializeField] private int smoothingPoints = 3;
+
+    [Header("OffMesh Link Settings")]
+    [Tooltip("Height of the jump arc when traversing off-mesh links")]
+    [SerializeField] private float linkJumpHeight = 2.5f;
+    [Tooltip("Duration of the jump animation over an off-mesh link")]
+    [SerializeField] private float linkJumpDuration = 0.5f;
 
     private Rigidbody2D rb;
     private NavMeshPath path;
@@ -50,19 +46,15 @@ public class CompanionFollow2D : MonoBehaviour
     private Vector3 lastPosition;
     private Vector3[] smoothedPath;
 
-    /// <summary>
-    /// Initializes the companion's components and references.
-    /// </summary>
+    // Tracks if the companion is currently jumping via an OffMeshLink
+    private bool isOnOffMeshLink = false;
+
     private void Start()
     {
         InitializeComponents();
         FindTarget();
     }
 
-    /// <summary>
-    /// Sets a new target for the companion to follow.
-    /// </summary>
-    /// <param name="newTarget">The new transform to follow</param>
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
@@ -72,7 +64,7 @@ public class CompanionFollow2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsTargetValid()) return;
+        if (!IsTargetValid() || isOnOffMeshLink) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
@@ -83,13 +75,17 @@ public class CompanionFollow2D : MonoBehaviour
         }
 
         UpdatePathfinding();
+
+        // Check if we're about to traverse an off-mesh link
+        if (TryHandleOffMeshLink()) return;
+
         HandleMovement();
         CheckIfStuck();
     }
 
     private void HandleIdleState()
     {
-        rb.velocity = new Vector2(0f, rb.velocity.y);
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
         animationController.SetWalking(false);
         animationController.SetIdle(true);
     }
@@ -122,7 +118,7 @@ public class CompanionFollow2D : MonoBehaviour
         Vector2 direction = (nextCorner - transform.position).normalized;
 
         // Apply movement
-        rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(direction.x * moveSpeed, rb.linearVelocity.y);
         animationController.FlipSprite(direction.x);
         UpdateAnimationState(direction);
 
@@ -200,28 +196,67 @@ public class CompanionFollow2D : MonoBehaviour
         }
     }
 
+    private bool TryHandleOffMeshLink()
+    {
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 0.5f, NavMesh.AllAreas))
+        {
+            if (NavMesh.FindClosestEdge(hit.position, out NavMeshHit edge, NavMesh.AllAreas))
+            {
+                if (edge.mask == 0 && !isOnOffMeshLink)
+                {
+                    // No valid edge found, might be on a jump link
+                    OffMeshLinkData linkData = new OffMeshLinkData();
+                    if (linkData.valid)
+                    {
+                        StartCoroutine(TraverseOffMeshLink(linkData));
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private IEnumerator TraverseOffMeshLink(OffMeshLinkData data)
+    {
+        isOnOffMeshLink = true;
+        animationController.TriggerJump();
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = data.endPos;
+        float time = 0f;
+
+        while (time < linkJumpDuration)
+        {
+            float t = time / linkJumpDuration;
+            float height = Mathf.Sin(t * Mathf.PI) * linkJumpHeight;
+            Vector3 newPos = Vector3.Lerp(startPos, endPos, t);
+            newPos.y += height;
+            transform.position = newPos;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
+        isOnOffMeshLink = false;
+        RecalculatePath();
+    }
+
     private void OnDrawGizmos()
     {
         if (path != null && path.corners.Length > 0)
         {
-            // Draw raw path
             Gizmos.color = Color.red;
             for (int i = 0; i < path.corners.Length - 1; i++)
-            {
                 Gizmos.DrawLine(path.corners[i], path.corners[i + 1]);
-            }
 
-            // Draw smoothed path
             if (smoothedPath != null && smoothedPath.Length > 1)
             {
                 Gizmos.color = Color.green;
                 for (int i = 0; i < smoothedPath.Length - 1; i++)
-                {
                     Gizmos.DrawLine(smoothedPath[i], smoothedPath[i + 1]);
-                }
             }
 
-            // Draw current target point
             if (currentCorner < path.corners.Length)
             {
                 Gizmos.color = Color.blue;
@@ -229,7 +264,6 @@ public class CompanionFollow2D : MonoBehaviour
             }
         }
 
-        // Draw ground check and follow distance
         Gizmos.color = Color.yellow;
         if (groundCheck != null)
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
@@ -237,7 +271,7 @@ public class CompanionFollow2D : MonoBehaviour
             Gizmos.DrawWireSphere(target.position, followDistance);
     }
 
-    // Helper methods...
+    // --- Helpers ---
     private void InitializeComponents()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -258,10 +292,7 @@ public class CompanionFollow2D : MonoBehaviour
         }
     }
 
-    private bool IsTargetValid()
-    {
-        return target != null;
-    }
+    private bool IsTargetValid() => target != null;
 
     private void UpdateAnimationState(Vector2 direction)
     {
@@ -272,7 +303,7 @@ public class CompanionFollow2D : MonoBehaviour
 
     private void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         animationController.TriggerJump();
     }
 
