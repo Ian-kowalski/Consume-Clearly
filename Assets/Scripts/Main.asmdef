@@ -2,7 +2,8 @@
     "name": "Main",
     "rootNamespace": "",
     "references": [
-      "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "NavMeshPlus"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
