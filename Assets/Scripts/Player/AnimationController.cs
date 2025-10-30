@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimationController : MonoBehaviour
+public class AnimationController : MonoBehaviour
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;

@@ -15,7 +15,7 @@ public class MovementScript_EditModeTests
     private const string GroundCheckErrorMessage =
         "Ground Check reference missing from player! Please set it using SetupGroundCheck.";
 
-    private const string AnimationControllerErrorMessage = "PlayerAnimationController missing from player!";
+    private const string AnimationControllerErrorMessage = "AnimationController missing from player!";
 
     [SetUp]
     public void SetUp()
@@ -50,13 +50,13 @@ public class MovementScript_EditModeTests
         // Add required components except Rigidbody2D
         var animator = playerObj.AddComponent<Animator>();
         var spriteRenderer = playerObj.AddComponent<SpriteRenderer>();
-        var animController = playerObj.AddComponent<PlayerAnimationController>();
+        var animController = playerObj.AddComponent<AnimationController>();
 
         // Setup animator and sprite renderer on animation controller using reflection
-        typeof(PlayerAnimationController)
+        typeof(AnimationController)
             .GetField("animator", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(animController, animator);
-        typeof(PlayerAnimationController)
+        typeof(AnimationController)
             .GetField("spriteRenderer",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(animController, spriteRenderer);
@@ -84,13 +84,13 @@ public class MovementScript_EditModeTests
         playerObj.AddComponent<Rigidbody2D>();
         var animator = playerObj.AddComponent<Animator>();
         var spriteRenderer = playerObj.AddComponent<SpriteRenderer>();
-        var animController = playerObj.AddComponent<PlayerAnimationController>();
+        var animController = playerObj.AddComponent<AnimationController>();
 
         // Setup animator and sprite renderer on animation controller
-        typeof(PlayerAnimationController)
+        typeof(AnimationController)
             .GetField("animator", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(animController, animator);
-        typeof(PlayerAnimationController)
+        typeof(AnimationController)
             .GetField("spriteRenderer",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(animController, spriteRenderer);
