@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 625152158153895744}
   - component: {fileID: -8249197410289733627}
   - component: {fileID: 6831183442283334714}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Miner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,6 +237,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 12
   canJump: 1
+  followDistance: 2
   groundCheckRadius: 0.1
   groundCheck: {fileID: 8132787090314073876}
   groundLayer:
@@ -255,7 +256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8132787090314073876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
