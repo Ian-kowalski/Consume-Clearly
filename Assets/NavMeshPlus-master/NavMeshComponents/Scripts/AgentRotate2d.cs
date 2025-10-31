@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NavMeshPlus.Extensions
+namespace NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts
 {
     public class AgentRotate2d: MonoBehaviour
     {

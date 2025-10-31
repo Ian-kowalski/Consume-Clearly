@@ -1,10 +1,9 @@
-﻿using NavMeshPlus.Components;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
-namespace NavMeshPlus.Extensions
+namespace NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts
 {
     [ExecuteAlways]
     [AddComponentMenu("Navigation/Navigation CollectSources2d", 30)]

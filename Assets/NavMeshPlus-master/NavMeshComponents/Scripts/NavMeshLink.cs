@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using NavMeshPlus.Extensions;
 
-namespace NavMeshPlus.Components
+namespace NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts
 {
     [ExecuteInEditMode]
     [DefaultExecutionOrder(-101)]

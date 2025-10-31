@@ -1,84 +1,88 @@
+using Save;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuManager : MonoBehaviour
+namespace MainMenu
 {
-    private const string CREDITS_SCENE_NAME = "Credits";
-    private const string GAME_SCENE_NAME = "Test";
+    public class MainMenuManager : MonoBehaviour
+    {
+        private const string CREDITS_SCENE_NAME = "Credits";
+        private const string GAME_SCENE_NAME = "Test";
 
-    private void Start()
-    {
-        SetupAllMenuButtons();
-    }
-    
-    private void SetupAllMenuButtons()
-    {
-        var buttons = GetComponentsInChildren<Button>(true);
-        
-        foreach (var button in buttons)
+        private void Start()
         {
-            var text = button.GetComponentInChildren<TMP_Text>(true);
-            var effect = text.gameObject.AddComponent<MenuButtonEffect>();
-            
-            var buttonNameLower = button.name.ToLower();
-            if (buttonNameLower.Contains("continue"))
+            SetupAllMenuButtons();
+        }
+    
+        private void SetupAllMenuButtons()
+        {
+            var buttons = GetComponentsInChildren<Button>(true);
+        
+            foreach (var button in buttons)
             {
-                bool saveExists = SaveSystem.IsSaveFileValid();
-                effect.SetEnabled(saveExists);
+                var text = button.GetComponentInChildren<TMP_Text>(true);
+                var effect = text.gameObject.AddComponent<MenuButtonEffect>();
+            
+                var buttonNameLower = button.name.ToLower();
+                if (buttonNameLower.Contains("continue"))
+                {
+                    bool saveExists = SaveSystem.IsSaveFileValid();
+                    effect.SetEnabled(saveExists);
+                }
             }
         }
-    }
-    public void ContinueGame()
-    {
-        SaveData saveData = SaveSystem.Load();
-        if (saveData != null)
+        public void ContinueGame()
         {
-            if (GameManager.Instance != null)
+            SaveData saveData = SaveSystem.Load();
+            if (saveData != null)
             {
-                GameManager.Instance.LoadProgress();
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.LoadProgress();
+                }
+                else
+                {
+                    Debug.LogWarning("GameManager instance not found! Falling back to scene load.");
+                }
+                SceneManager.LoadScene(saveData.CurrentScene);
             }
             else
             {
-                Debug.LogWarning("GameManager instance not found! Falling back to scene load.");
+                Debug.LogError("No save data found! Unable to continue.");
             }
-            SceneManager.LoadScene(saveData.CurrentScene);
         }
-        else
+
+        private void StartGame()
         {
-            Debug.LogError("No save data found! Unable to continue.");
+            SceneManager.LoadScene(GAME_SCENE_NAME);
         }
-    }
-
-    private void StartGame()
-    {
-        SceneManager.LoadScene(GAME_SCENE_NAME);
-    }
     
-    public void NewGame()
-    {
-        SaveSystem.ClearSaveData(); // New method to delete any existing save.
-        StartGame();
-    }
-    
-
-    
-    public void OpenSettings()
-    {
-        Debug.Log("Settings menu opened! Implementation pending.");
-    }
-
-    public void LoadCredits()
-    {
-        SceneManager.LoadScene(CREDITS_SCENE_NAME);
-    }
-    
-    public void ExitGame()
-    {
-        if (GameManager.Instance != null)
+        public void NewGame()
         {
-			GameManager.Instance.QuitGame();
+            SaveSystem.ClearSaveData(); // New method to delete any existing save.
+            StartGame();
+        }
+    
+
+    
+        public void OpenSettings()
+        {
+            Debug.Log("Settings menu opened! Implementation pending.");
+        }
+
+        public void LoadCredits()
+        {
+            SceneManager.LoadScene(CREDITS_SCENE_NAME);
+        }
+    
+        public void ExitGame()
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.QuitGame();
+            }
         }
     }
 }

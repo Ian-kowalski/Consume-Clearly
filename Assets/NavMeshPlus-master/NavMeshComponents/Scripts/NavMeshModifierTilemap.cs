@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using NavMeshPlus.Extensions;
 using UnityEngine.Tilemaps;
 
 //***********************************************************************************
 // Contributed by author jl-randazzo github.com/jl-randazzo
 //***********************************************************************************
-namespace NavMeshPlus.Components
+namespace NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts
 {
     [AddComponentMenu("Navigation/Navigation Modifier Tilemap", 33)]
     [HelpURL("https://github.com/Unity-Technologies/NavMeshComponents#documentation-draft")]
