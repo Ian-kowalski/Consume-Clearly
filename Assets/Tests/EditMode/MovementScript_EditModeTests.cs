@@ -18,7 +18,7 @@ namespace Tests.EditMode
         private const string GroundCheckErrorMessage =
             "Ground Check reference missing from player! Please set it using SetupGroundCheck.";
 
-        private const string AnimationControllerErrorMessage = "PlayerAnimationController missing from player!";
+        private const string AnimationControllerErrorMessage = "AnimationController missing from player!";
 
         [SetUp]
         public void SetUp()
