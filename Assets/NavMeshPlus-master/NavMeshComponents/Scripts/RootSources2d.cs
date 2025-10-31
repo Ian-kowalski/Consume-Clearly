@@ -1,13 +1,8 @@
-﻿using NavMeshPlus.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace NavMeshPlus.Extensions
+namespace NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts
 {
     [ExecuteAlways]
     [AddComponentMenu("Navigation/Navigation RootSources2d", 30)]

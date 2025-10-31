@@ -1,4 +1,6 @@
 using System.Collections;
+using Player;
+using SaveSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
                 CurrentScene = SceneManager.GetActiveScene().name,
                 PlayerPosition = player.transform.position
             };
-            SaveSystem.Save(saveData);
+            SaveSystem.SaveSystem.Save(saveData);
             Debug.Log(
                 $"Saving game state - Time: {Time.time}, Scene: {saveData.CurrentScene}, Position: {saveData.PlayerPosition}");
         }
@@ -75,7 +77,7 @@ public class GameManager : MonoBehaviour
                 CurrentScene = data.CurrentScene,
                 PlayerPosition = data.PlayerPosition,
             };
-            SaveSystem.Save(saveData);
+            SaveSystem.SaveSystem.Save(saveData);
             
         }
     }
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
     public void LoadProgress()
     {
         Debug.Log("Loading game progress...");
-        data = SaveSystem.Load();
+        data = SaveSystem.SaveSystem.Load();
         if (data != null)
         {
             Debug.Log(

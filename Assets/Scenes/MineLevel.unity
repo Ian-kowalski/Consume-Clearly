@@ -2477,7 +2477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1153330409}
   - component: {fileID: 1153330410}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lift lever handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3436,7 +3436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553404933}
   - component: {fileID: 1553404934}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lift lever base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3968,7 +3968,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667027882}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lift Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}

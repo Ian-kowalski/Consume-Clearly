@@ -1,29 +1,33 @@
-using UnityEngine.TestTools;
+using MainMenu;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.TestTools;
+using UnityEngine.UI;
 
-public class MenuButtonEffect_PlayModeTests
+namespace Tests.PlayMode
 {
-    [UnityTest]
-    public System.Collections.IEnumerator MenuButtonEffect_DisabledStateRendersCorrectlyInRuntime()
+    public class MenuButtonEffect_PlayModeTests
     {
-        var buttonObj = new GameObject("Button");
-        var button = buttonObj.AddComponent<Button>();
-        var textObj = new GameObject("Text");
-        textObj.transform.SetParent(buttonObj.transform);
+        [UnityTest]
+        public System.Collections.IEnumerator MenuButtonEffect_DisabledStateRendersCorrectlyInRuntime()
+        {
+            var buttonObj = new GameObject("Button");
+            var button = buttonObj.AddComponent<Button>();
+            var textObj = new GameObject("Text");
+            textObj.transform.SetParent(buttonObj.transform);
         
-        var text = textObj.AddComponent<TextMeshProUGUI>();
-        text.text = "Default Text";
+            var text = textObj.AddComponent<TextMeshProUGUI>();
+            text.text = "Default Text";
         
-        var menuButtonEffect = textObj.AddComponent<MenuButtonEffect>();
+            var menuButtonEffect = textObj.AddComponent<MenuButtonEffect>();
         
-        menuButtonEffect.SetEnabled(false);
+            menuButtonEffect.SetEnabled(false);
 
-        yield return null;
+            yield return null;
 
-        Assert.AreEqual(new Color(0.5f, 0.5f, 0.5f, 1), text.color, "Disabled color wasn't correctly applied in runtime");
-        Assert.IsFalse(button.interactable, "Button interactability wasn't disabled in runtime");
+            Assert.AreEqual(new Color(0.5f, 0.5f, 0.5f, 1), text.color, "Disabled color wasn't correctly applied in runtime");
+            Assert.IsFalse(button.interactable, "Button interactability wasn't disabled in runtime");
+        }
     }
 }

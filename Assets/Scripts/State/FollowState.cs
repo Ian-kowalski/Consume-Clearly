@@ -1,20 +1,24 @@
 using UnityEngine;
 using UnityEngine.AI;
-public class FollowState : MonoBehaviour
-{
-    private Transform target;
-    
-    private NavMeshAgent agent;
 
-    void Start()
+namespace State
+{
+    public class FollowState : MonoBehaviour
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-    }
+        private Transform target;
     
-    void Update()
-    {
-        agent.SetDestination(target.position);
+        private NavMeshAgent agent;
+
+        void Start()
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
+    
+        void Update()
+        {
+            agent.SetDestination(target.position);
+        }
     }
 }

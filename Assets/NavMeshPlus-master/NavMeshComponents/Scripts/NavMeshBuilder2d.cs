@@ -1,5 +1,4 @@
-﻿using NavMeshPlus.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 
-namespace NavMeshPlus.Extensions
+namespace NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts
 {
     class NavMeshBuilder2dState: IDisposable
     {

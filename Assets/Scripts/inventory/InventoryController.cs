@@ -1,26 +1,29 @@
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+namespace inventory
 {
-    private InventoryLogic inventory;
-
-    private void Start()
+    public class InventoryController : MonoBehaviour
     {
-        inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
-        inventory.InitializeInventory();
-    }
+        private InventoryLogic inventory;
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
+        private void Start()
         {
-            if (inventory.isActiveAndEnabled == false)
+            inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
+            inventory.InitializeInventory();
+        }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                inventory.Show();
-            }
-            else
-            {
-                inventory.Hide();
+                if (inventory.isActiveAndEnabled == false)
+                {
+                    inventory.Show();
+                }
+                else
+                {
+                    inventory.Hide();
+                }
             }
         }
     }

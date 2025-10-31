@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts;
 using UnityEditor;
+using UnityEngine;
 
-namespace NavMeshPlus.Extensions.Editors
+namespace NavMeshPlus_master.NavMeshComponents.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(CollectSourcesCache2d))]
-    internal class CollectSourcesCache2dEditor : Editor
+    internal class CollectSourcesCache2dEditor : UnityEditor.Editor
     {
 
         public override void OnInspectorGUI()

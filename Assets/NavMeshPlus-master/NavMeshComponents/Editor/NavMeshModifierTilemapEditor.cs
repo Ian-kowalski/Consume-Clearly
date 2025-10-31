@@ -1,16 +1,17 @@
 using System.Collections.Generic;
-using UnityEngine;
+using NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 //***********************************************************************************
 // Contributed by author jl-randazzo github.com/jl-randazzo
 //***********************************************************************************
-namespace NavMeshPlus.Components.Editors
+namespace NavMeshPlus_master.NavMeshComponents.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(NavMeshModifierTilemap))]
-    class NavMeshModifierTilemapEditor : Editor
+    class NavMeshModifierTilemapEditor : UnityEditor.Editor
     {
         SerializedProperty m_AffectedAgents;
         SerializedProperty m_TileModifiers;

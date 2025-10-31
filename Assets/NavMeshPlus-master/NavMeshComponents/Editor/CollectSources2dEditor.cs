@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts;
 using UnityEditor;
+using UnityEngine;
 
-namespace NavMeshPlus.Extensions.Editors
+namespace NavMeshPlus_master.NavMeshComponents.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(CollectSources2d))]
-    internal class CollectSources2dEditor: Editor
+    internal class CollectSources2dEditor: UnityEditor.Editor
     {
         SerializedProperty m_OverrideByGrid;
         SerializedProperty m_UseMeshPrefab;

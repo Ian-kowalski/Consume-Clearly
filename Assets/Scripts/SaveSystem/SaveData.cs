@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class SaveData
+namespace SaveSystem
 {
-    public float GameTime;
-    public string CurrentScene;
-    public Vector3 PlayerPosition;
+    [Serializable]
+    public class SaveData
+    {
+        public float GameTime;
+        public string CurrentScene;
+        public Vector3 PlayerPosition;
+    }
 }

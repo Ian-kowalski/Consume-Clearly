@@ -1,44 +1,48 @@
 using System.Collections;
 using NUnit.Framework;
+using SaveSystem;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class SaveSystem_PlayModeTests
+namespace Tests.PlayMode
 {
-    [UnityTest]
-    public IEnumerator SaveSystem_SavesAndLoadsGameCorrectly()
+    public class SaveSystem_PlayModeTests
     {
-        // Arrange
-        var saveData = new SaveData
+        [UnityTest]
+        public IEnumerator SaveSystem_SavesAndLoadsGameCorrectly()
         {
-            GameTime = 100.5f,
-            CurrentScene = "TestScene",
-            PlayerPosition = new Vector3(1f, 2f, 3f)
-        };
+            // Arrange
+            var saveData = new SaveData
+            {
+                GameTime = 100.5f,
+                CurrentScene = "TestScene",
+                PlayerPosition = new Vector3(1f, 2f, 3f)
+            };
         
-        // Act
-        SaveSystem.Save(saveData);
-        yield return null;
+            // Act
+            SaveSystem.SaveSystem.Save(saveData);
+            yield return null;
 
-        var loadedData = SaveSystem.Load();
+            var loadedData = SaveSystem.SaveSystem.Load();
         
-        // Assert
-        Assert.IsNotNull(loadedData);
-        Assert.AreEqual(saveData.GameTime, loadedData.GameTime);
-        Assert.AreEqual(saveData.CurrentScene, loadedData.CurrentScene);
-        Assert.AreEqual(saveData.PlayerPosition, loadedData.PlayerPosition);
-    }
+            // Assert
+            Assert.IsNotNull(loadedData);
+            Assert.AreEqual(saveData.GameTime, loadedData.GameTime);
+            Assert.AreEqual(saveData.CurrentScene, loadedData.CurrentScene);
+            Assert.AreEqual(saveData.PlayerPosition, loadedData.PlayerPosition);
+        }
 
-    [UnityTest]
-    public IEnumerator SaveSystem_InvalidSaveFileReturnsNull()
-    {
-        // Act
-        SaveSystem.ClearSaveData();
-        yield return null;
+        [UnityTest]
+        public IEnumerator SaveSystem_InvalidSaveFileReturnsNull()
+        {
+            // Act
+            SaveSystem.SaveSystem.ClearSaveData();
+            yield return null;
 
-        var loadedData = SaveSystem.Load();
+            var loadedData = SaveSystem.SaveSystem.Load();
         
-        // Assert
-        Assert.IsNull(loadedData);
+            // Assert
+            Assert.IsNull(loadedData);
+        }
     }
 }
