@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SaveSystem
+namespace Save
 {
     [Serializable]
     public class SaveData

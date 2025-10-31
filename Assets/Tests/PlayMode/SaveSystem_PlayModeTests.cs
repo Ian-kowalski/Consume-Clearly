@@ -1,6 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
-using SaveSystem;
+using Save;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -20,10 +20,10 @@ namespace Tests.PlayMode
             };
         
             // Act
-            SaveSystem.SaveSystem.Save(saveData);
+            SaveSystem.Save(saveData);
             yield return null;
 
-            var loadedData = SaveSystem.SaveSystem.Load();
+            var loadedData = SaveSystem.Load();
         
             // Assert
             Assert.IsNotNull(loadedData);
@@ -36,10 +36,10 @@ namespace Tests.PlayMode
         public IEnumerator SaveSystem_InvalidSaveFileReturnsNull()
         {
             // Act
-            SaveSystem.SaveSystem.ClearSaveData();
+            SaveSystem.ClearSaveData();
             yield return null;
 
-            var loadedData = SaveSystem.SaveSystem.Load();
+            var loadedData = SaveSystem.Load();
         
             // Assert
             Assert.IsNull(loadedData);

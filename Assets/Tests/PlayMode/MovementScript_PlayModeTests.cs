@@ -33,7 +33,7 @@ namespace Tests.PlayMode
             rb = player.AddComponent<Rigidbody2D>();
             var spriteRenderer = player.AddComponent<SpriteRenderer>();
             var animator = player.AddComponent<Animator>();
-            var animController = player.AddComponent<PlayerAnimationController>();
+            var animController = player.AddComponent<AnimationController>();
 
             player.transform.position = new Vector2(0, 1);
             rb.gravityScale = 2f;

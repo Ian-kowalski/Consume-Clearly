@@ -1,4 +1,4 @@
-using SaveSystem;
+using Save;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,14 +28,14 @@ namespace MainMenu
                 var buttonNameLower = button.name.ToLower();
                 if (buttonNameLower.Contains("continue"))
                 {
-                    bool saveExists = SaveSystem.SaveSystem.IsSaveFileValid();
+                    bool saveExists = SaveSystem.IsSaveFileValid();
                     effect.SetEnabled(saveExists);
                 }
             }
         }
         public void ContinueGame()
         {
-            SaveData saveData = SaveSystem.SaveSystem.Load();
+            SaveData saveData = SaveSystem.Load();
             if (saveData != null)
             {
                 if (GameManager.Instance != null)
@@ -61,7 +61,7 @@ namespace MainMenu
     
         public void NewGame()
         {
-            SaveSystem.SaveSystem.ClearSaveData(); // New method to delete any existing save.
+            SaveSystem.ClearSaveData(); // New method to delete any existing save.
             StartGame();
         }
     

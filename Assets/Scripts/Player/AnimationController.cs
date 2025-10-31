@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerAnimationController : MonoBehaviour
+    public class AnimationController : MonoBehaviour
     {
         private Animator animator;
         private SpriteRenderer spriteRenderer;

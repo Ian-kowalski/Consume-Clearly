@@ -31,7 +31,7 @@ namespace Player
         private float coyoteTimeCounter;
         private float jumpBufferTimeCounter;
 
-        private PlayerAnimationController animationController;
+        private AnimationController animationController;
     
         private void Awake()
         {
@@ -41,7 +41,7 @@ namespace Player
         private void ValidateComponents()
         {
             rb = GetComponent<Rigidbody2D>();
-            animationController = GetComponent<PlayerAnimationController>();
+            animationController = GetComponent<AnimationController>();
             if (rb == null)
             {
                 Debug.LogError("Rigidbody2D missing from player!");
@@ -51,7 +51,7 @@ namespace Player
 
             if (animationController == null)
             {
-                Debug.LogError("PlayerAnimationController missing from player!");
+                Debug.LogError("AnimationController missing from player!");
                 enabled = false;
                 return;
             }
