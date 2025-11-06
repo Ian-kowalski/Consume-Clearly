@@ -2333,7 +2333,7 @@ GameObject:
   - component: {fileID: 1285284233}
   - component: {fileID: 1285284235}
   - component: {fileID: 1285284234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Foreground without beams and ropes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
