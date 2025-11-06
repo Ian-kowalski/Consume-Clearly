@@ -146,6 +146,7 @@ MonoBehaviour:
   bottomPoint: {fileID: 0}
   moveSpeed: 1
   liftGround: {fileID: 1517881735222530970}
+  playerYOffset: 1.1
   isMoving: 0
 --- !u!50 &6397797316560632233
 Rigidbody2D:

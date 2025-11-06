@@ -5,16 +5,17 @@ namespace LevelObjects.Interactable
 {
     public class LiftPlatform : Interactable
     {
-        public Transform topPoint;
+        [Header("Lift Movement")] public Transform topPoint;
         public Transform bottomPoint;
         public float moveSpeed = 2f;
         public GameObject liftGround;
+
+        [Header("Player Settings")] public float playerYOffset = 0.5f; // Height above lift ground where player stands
 
         private bool isAtTop = false;
         public bool isMoving = false;
         private GameObject currentPlayer;
         private Rigidbody2D playerRb;
-        private Vector3 playerStartLocalPosition;
 
         private void Start()
         {
@@ -26,6 +27,26 @@ namespace LevelObjects.Interactable
                     Debug.LogError("LiftGround not found! Please assign it in the inspector.");
                 }
             }
+            
+            CheckInitialPosition();
+        }
+
+        private void CheckInitialPosition()
+        {
+            if (topPoint == null || bottomPoint == null)
+            {
+                Debug.LogWarning("Top or Bottom point not assigned!");
+                return;
+            }
+
+            // Calculate distances to top and bottom
+            float distanceToTop = Vector3.Distance(transform.position, topPoint.position);
+            float distanceToBottom = Vector3.Distance(transform.position, bottomPoint.position);
+
+            // If closer to top, set isAtTop to true
+            isAtTop = distanceToTop < distanceToBottom;
+    
+            Debug.Log($"Lift starting position: {(isAtTop ? "TOP" : "BOTTOM")}");
         }
 
         public override void Interact()
@@ -37,6 +58,8 @@ namespace LevelObjects.Interactable
         private IEnumerator MoveLift()
         {
             isMoving = true;
+            UpdatePlayerConstraints();
+
             Vector3 startPos = transform.position;
             Vector3 targetPos = isAtTop ? bottomPoint.position : topPoint.position;
 
@@ -44,26 +67,62 @@ namespace LevelObjects.Interactable
             while (t < 1f)
             {
                 t += Time.deltaTime * moveSpeed;
-                Vector3 newPosition = Vector3.Lerp(startPos, targetPos, t);
-
-                // Calculate movement delta
-                Vector3 movement = newPosition - transform.position;
-
-                // Move platform
-                transform.position = newPosition;
-
-                // Update player position directly if attached
-                if (currentPlayer != null && playerRb != null)
-                {
-                    currentPlayer.transform.position += movement;
-                }
-
+                transform.position = Vector3.Lerp(startPos, targetPos, t);
+                UpdatePlayerPosition();
                 yield return null;
             }
 
             transform.position = targetPos;
             isAtTop = !isAtTop;
             isMoving = false;
+            UpdatePlayerConstraints();
+        }
+
+        private void UpdatePlayerPosition()
+        {
+            if (currentPlayer != null && playerRb != null)
+            {
+                Vector3 newPlayerPos = currentPlayer.transform.position;
+                newPlayerPos.y = liftGround.transform.position.y + playerYOffset;
+                currentPlayer.transform.position = newPlayerPos;
+            }
+        }
+
+        private void UpdatePlayerConstraints()
+        {
+            if (playerRb == null) return;
+
+            if (isMoving)
+            {
+                playerRb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            }
+            else
+            {
+                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
+        }
+
+        private void SetPlayerPhysics(bool onLift)
+        {
+            if (playerRb == null) return;
+
+            if (onLift)
+            {
+                playerRb.gravityScale = 0;
+                playerRb.linearVelocity = Vector2.zero;
+                UpdatePlayerConstraints();
+            }
+            else
+            {
+                playerRb.gravityScale = 1;
+                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                if (isMoving)
+                {
+                    Vector2 platformVelocity = (bottomPoint.position - topPoint.position).normalized * moveSpeed;
+                    playerRb.linearVelocity = platformVelocity;
+                }
+            }
         }
 
         public void OnPlayerEntered(GameObject player)
@@ -72,33 +131,24 @@ namespace LevelObjects.Interactable
             {
                 currentPlayer = player;
                 playerRb = player.GetComponent<Rigidbody2D>();
+
                 if (playerRb != null)
                 {
-                    // Keep track of the player's relative position
-                    playerStartLocalPosition = transform.InverseTransformPoint(player.transform.position);
-
-                    // Make the player a child of the platform and disable physics
                     player.transform.SetParent(transform);
-                    playerRb.simulated = false;
-
-                    // Ensure player is at the correct position immediately
-                    Vector3 worldPos = transform.TransformPoint(playerStartLocalPosition);
-                    player.transform.position = worldPos;
+                    SetPlayerPhysics(true);
+                    UpdatePlayerPosition();
                 }
             }
         }
-        
+
         public void OnPlayerExited(GameObject player)
         {
             if (player == currentPlayer)
             {
                 if (playerRb != null)
                 {
-                    // Restore the player's parent to null
                     player.transform.SetParent(null);
-
-                    // Re-enable rigidbody physics
-                    playerRb.simulated = true;
+                    SetPlayerPhysics(false);
                 }
 
                 currentPlayer = null;
@@ -108,42 +158,45 @@ namespace LevelObjects.Interactable
 
         private void OnDrawGizmos()
         {
-            if (topPoint != null && bottomPoint != null)
+            if (topPoint == null || bottomPoint == null) return;
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(topPoint.position, bottomPoint.position);
+
+            float pointSize = 0.3f;
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(topPoint.position, pointSize);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(bottomPoint.position, pointSize);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position, Vector3.one * pointSize);
+
+            if (liftGround != null)
             {
-                // Draw path
-                Gizmos.color = Color.cyan;
-                Gizmos.DrawLine(topPoint.position, bottomPoint.position);
-
-                float pointSize = 0.3f;
-
-                // Top point
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(topPoint.position, pointSize);
-
-                // Bottom point
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(bottomPoint.position, pointSize);
-
-                // Current position
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawWireCube(transform.position, Vector3.one * pointSize);
-
-                // Platform bounds
-                if (liftGround != null)
+                Gizmos.color = isMoving ? new Color(1f, 0.5f, 0f, 0.3f) : new Color(0f, 1f, 1f, 0.3f);
+                BoxCollider2D collider = liftGround.GetComponent<BoxCollider2D>();
+                if (collider != null)
                 {
-                    Gizmos.color = isMoving ? new Color(1f, 0.5f, 0f, 0.3f) : new Color(0f, 1f, 1f, 0.3f);
-                    BoxCollider2D collider = liftGround.GetComponent<BoxCollider2D>();
-                    if (collider != null)
-                    {
-                        Vector3 pos = liftGround.transform.position + (Vector3)collider.offset;
-                        Vector3 size = new Vector3(
-                            collider.size.x * liftGround.transform.lossyScale.x,
-                            collider.size.y * liftGround.transform.lossyScale.y,
-                            0.1f
-                        );
-                        Gizmos.DrawCube(pos, size);
-                    }
+                    Vector3 pos = liftGround.transform.position + (Vector3)collider.offset;
+                    Vector3 size = new Vector3(
+                        collider.size.x * liftGround.transform.lossyScale.x,
+                        collider.size.y * liftGround.transform.lossyScale.y,
+                        0.1f
+                    );
+                    Gizmos.DrawCube(pos, size);
                 }
+
+                // Visualize player offset
+                Gizmos.color = Color.magenta;
+                Vector3 playerStandPos = liftGround.transform.position + Vector3.up * playerYOffset;
+                Gizmos.DrawLine(
+                    playerStandPos + Vector3.left * 1f,
+                    playerStandPos + Vector3.right * 1f
+                );
+                Gizmos.DrawWireSphere(playerStandPos, 0.2f);
             }
         }
     }
