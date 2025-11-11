@@ -6,17 +6,33 @@ namespace LevelObjects.Interactable
     [RequireComponent(typeof(Collider2D))]
     public class PresenceTrigger : MonoBehaviour
     {
-        [Header("Trigger Layer")]
-        [Tooltip("What layer can activate this trigger")]
-        [SerializeField] private LayerMask triggerLayer;
-        
-        [Tooltip("Check if the trigger should happen continuously when object is inside")]
-        [SerializeField] private readonly bool triggerContinuously = false;
-        
-        [Header("Trigger Events")]
-        [SerializeField] private UnityEvent onTriggerEnter;
+        [Header("Trigger Layer")] [Tooltip("What layer can activate this trigger")] [SerializeField]
+        private LayerMask triggerLayer;
+
+        [Tooltip("Check if the trigger should happen continuously when object is inside")] [SerializeField]
+        private readonly bool triggerContinuously = false;
+
+        [Header("Activation Settings")]
+        [Tooltip("If true, trigger will be inactive until the player exits the zone first")]
+        [SerializeField]
+        private bool activateAfterFirstExit = false;
+
+        private bool isActivated = false;
+
+        [Header("Trigger Events")] [SerializeField]
+        private UnityEvent onTriggerEnter;
+
         [SerializeField] private UnityEvent onTriggerExit;
         [SerializeField] private UnityEvent onTriggerStay; //only for continuous trigger = true
+
+        private void Start()
+        {
+            // If we don't need to wait for first exit, activate immediately
+            if (!activateAfterFirstExit)
+            {
+                isActivated = true;
+            }
+        }
 
         private void Reset()
         {
@@ -26,22 +42,33 @@ namespace LevelObjects.Interactable
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsInLayerMask(other.gameObject.layer))
+            if (IsInLayerMask(other.gameObject.layer) && isActivated)
             {
                 onTriggerEnter?.Invoke();
             }
         }
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (IsInLayerMask(other.gameObject.layer))
             {
-                onTriggerExit?.Invoke();
+                // Activate the trigger after first exit
+                if (activateAfterFirstExit && !isActivated)
+                {
+                    isActivated = true;
+                }
+
+                // Only invoke exit event if already activated
+                if (isActivated)
+                {
+                    onTriggerExit?.Invoke();
+                }
             }
         }
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (triggerContinuously && IsInLayerMask(other.gameObject.layer))
+            if (triggerContinuously && IsInLayerMask(other.gameObject.layer) && isActivated)
             {
                 onTriggerStay?.Invoke();
             }
