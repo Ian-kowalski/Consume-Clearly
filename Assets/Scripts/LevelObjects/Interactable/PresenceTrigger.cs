@@ -11,7 +11,7 @@ namespace LevelObjects.Interactable
         [SerializeField] private LayerMask triggerLayer;
         
         [Tooltip("Check if the trigger should happen continuously when object is inside")]
-        [SerializeField] private bool triggerContinuously = false;
+        [SerializeField] private readonly bool triggerContinuously = false;
         
         [Header("Trigger Events")]
         [SerializeField] private UnityEvent onTriggerEnter;
