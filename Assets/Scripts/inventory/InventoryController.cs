@@ -1,29 +1,27 @@
+using System;
 using UnityEngine;
 
-namespace inventory
+public class InventoryController : MonoBehaviour
 {
-    public class InventoryController : MonoBehaviour
+    private InventoryLogic inventory;
+
+    private void Start()
     {
-        private InventoryLogic inventory;
+        inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
+        inventory.InitializeInventory();
+    }
 
-        private void Start()
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
-            inventory.InitializeInventory();
-        }
-
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (inventory.isActiveAndEnabled == false)
             {
-                if (inventory.isActiveAndEnabled == false)
-                {
-                    inventory.Show();
-                }
-                else
-                {
-                    inventory.Hide();
-                }
+                inventory.Show();
+            }
+            else
+            {
+                inventory.Hide();
             }
         }
     }

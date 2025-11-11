@@ -1,20 +1,22 @@
+using Inventory;
+using log4net.Util;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace inventory
+public class InventoryItemLogic : MonoBehaviour
 {
-    public class InventoryItemLogic : MonoBehaviour
-    {
-        [Header("Unity objects")]
-        [SerializeField]
-        private Image itemIcon;
-        [SerializeField]
-        private TMP_Text itemQuantity;
-        [SerializeField]
-        private Image itemBorder;
+    [Header("Unity objects")]
+    [SerializeField]
+    private Image itemIcon;
+    [SerializeField]
+    private TMP_Text itemQuantity;
+    [SerializeField]
+    private Image itemBorder;
+    [SerializeField]
+    private ItemActionPanel itemactionpanel;
 
         public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
 
@@ -49,27 +51,31 @@ namespace inventory
             itemBorder.enabled = true;
         }
 
-        public void OnPointerClick(BaseEventData eventData)
+    public void OnPointerClick(BaseEventData eventData)
+    {
+        PointerEventData pointerData = eventData as PointerEventData;
+        if (pointerData != null)
         {
-            PointerEventData pointerData = eventData as PointerEventData;
-            if (pointerData != null)
+            if (pointerData.button == PointerEventData.InputButton.Left)
             {
-                if (empty)
-                {
-                    return;
-                }
-                if (pointerData.button == PointerEventData.InputButton.Left)
-                {
-                    OnItemClicked?.Invoke(this);
-                }
-                else if (pointerData.button == PointerEventData.InputButton.Right)
-                {
-                    OnRightMouseBtnClick?.Invoke(this);
-                }
+                OnItemClicked?.Invoke(this);
+            }
+            else if (pointerData.button == PointerEventData.InputButton.Right)
+            {
+                OnRightMouseBtnClick?.Invoke(this);
             }
         }
+    }
 
+    public void btnEnable()
+    {
+        itemactionpanel.enable();
+    }
 
+    public void btnDisable()
+    {
+        itemactionpanel.disable();
+    }
 
     }
 }
