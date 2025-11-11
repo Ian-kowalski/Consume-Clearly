@@ -5,30 +5,24 @@ namespace LevelObjects.Interactable
     [RequireComponent(typeof(BoxCollider2D))]
     public class LiftGround : MonoBehaviour
     {
-        private LiftPlatform parentLift;
+        // This component now only serves as a reference point for height calculations
+        // The collision detection is handled by the LiftPlatform's trigger collider
 
         private void Start()
         {
-            parentLift = GetComponentInParent<LiftPlatform>();
+            // Verify it's a child of LiftPlatform
+            LiftPlatform parentLift = GetComponentInParent<LiftPlatform>();
             if (parentLift == null)
             {
-                Debug.LogError("LiftGround must be a child of an object with LiftPlatform script!");
+                Debug.LogWarning(
+                    "LiftGround should be a child of an object with LiftPlatform script for proper functionality.");
             }
-        }
 
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (parentLift != null)
+            // This collider can be used for visual debugging or as a platform surface
+            BoxCollider2D collider = GetComponent<BoxCollider2D>();
+            if (collider != null)
             {
-                parentLift.OnPlayerEntered(collision.gameObject);
-            }
-        }
-
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            if (parentLift != null)
-            {
-                parentLift.OnPlayerExited(collision.gameObject);
+                Debug.Log($"LiftGround initialized at position: {transform.position}");
             }
         }
     }

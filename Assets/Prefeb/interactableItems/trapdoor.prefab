@@ -100,8 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3896278450337867155}
   - component: {fileID: 471541655120538141}
-  - component: {fileID: 3895642586748303462}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Sleeping area trapdoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,22 +180,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3895642586748303462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5968634883841795848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d13eb9623f82e4fa5c98400403adad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Main::Trapdoor
-  requiresLever: 0
-  door: {fileID: 0}
-  openAngle: 90
-  rotationSpeed: 90
 --- !u!1 &8668437882220773941
 GameObject:
   m_ObjectHideFlags: 0

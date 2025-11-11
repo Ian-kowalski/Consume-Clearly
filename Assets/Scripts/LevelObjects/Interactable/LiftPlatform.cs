@@ -27,7 +27,7 @@ namespace LevelObjects.Interactable
                     Debug.LogError("LiftGround not found! Please assign it in the inspector.");
                 }
             }
-            
+
             CheckInitialPosition();
         }
 
@@ -45,7 +45,7 @@ namespace LevelObjects.Interactable
 
             // If closer to top, set isAtTop to true
             isAtTop = distanceToTop < distanceToBottom;
-    
+
             Debug.Log($"Lift starting position: {(isAtTop ? "TOP" : "BOTTOM")}");
         }
 
@@ -80,7 +80,7 @@ namespace LevelObjects.Interactable
 
         private void UpdatePlayerPosition()
         {
-            if (currentPlayer != null && playerRb != null)
+            if (currentPlayer != null && playerRb != null && liftGround != null)
             {
                 Vector3 newPlayerPos = currentPlayer.transform.position;
                 newPlayerPos.y = liftGround.transform.position.y + playerYOffset;
@@ -125,30 +125,33 @@ namespace LevelObjects.Interactable
             }
         }
 
-        public void OnPlayerEntered(GameObject player)
+        // Called when player enters the lift cabin collision box
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (player.CompareTag("Player"))
+            if (collision.CompareTag("Player"))
             {
-                currentPlayer = player;
-                playerRb = player.GetComponent<Rigidbody2D>();
+                currentPlayer = collision.gameObject;
+                playerRb = collision.GetComponent<Rigidbody2D>();
 
                 if (playerRb != null)
                 {
-                    player.transform.SetParent(transform);
+                    currentPlayer.transform.SetParent(transform);
                     SetPlayerPhysics(true);
-                    UpdatePlayerPosition();
+                    Debug.Log("Player entered lift cabin");
                 }
             }
         }
 
-        public void OnPlayerExited(GameObject player)
+        // Called when player exits the lift cabin collision box
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (player == currentPlayer)
+            if (collision.gameObject == currentPlayer)
             {
                 if (playerRb != null)
                 {
-                    player.transform.SetParent(null);
+                    currentPlayer.transform.SetParent(null);
                     SetPlayerPhysics(false);
+                    Debug.Log("Player exited lift cabin");
                 }
 
                 currentPlayer = null;
