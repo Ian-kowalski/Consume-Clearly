@@ -16,6 +16,7 @@
             public float GameTime { get; private set; }
             public string CurrentScene { get; private set; }
         
+// csharp
             private void Awake()
             {
                 if (Instance == null)
@@ -24,9 +25,22 @@
                     DontDestroyOnLoad(gameObject);
                     Initialize();
                 }
-                else
+                else if (Instance != this)
                 {
-                    Destroy(gameObject);
+                    // If the scene that just spawned this GameManager is the MainMenu,
+                    // prefer the scene's GameManager: destroy the old persistent one and take over.
+                    string activeScene = SceneManager.GetActiveScene().name;
+                    if (activeScene == "MainMenu")
+                    {
+                        Destroy(Instance.gameObject);
+                        Instance = this;
+                        DontDestroyOnLoad(gameObject);
+                        Initialize();
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
         
