@@ -53,11 +53,13 @@ public class InventoryItemLogic : MonoBehaviour
 
     public void OnPointerClick(BaseEventData eventData)
     {
+        Debug.Log("Pointer click detected on inventory item.");
         PointerEventData pointerData = eventData as PointerEventData;
         if (pointerData != null)
         {
             if (pointerData.button == PointerEventData.InputButton.Left)
             {
+                Debug.Log("Left click detected on inventory item.");
                 OnItemClicked?.Invoke(this);
             }
             else if (pointerData.button == PointerEventData.InputButton.Right)

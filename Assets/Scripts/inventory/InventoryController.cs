@@ -23,6 +23,7 @@ public class InventoryController : MonoBehaviour
 
     private void HandleDescriptionRequest(int itemIndex)
     {
+        Debug.Log($"in handledescriptionrequest");
         inventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
         if (inventoryItem.isEmpty)
         {
