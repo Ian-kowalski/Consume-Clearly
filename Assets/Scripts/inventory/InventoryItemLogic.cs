@@ -1,5 +1,4 @@
 using Inventory;
-using log4net.Util;
 using System;
 using TMPro;
 using UnityEngine;
