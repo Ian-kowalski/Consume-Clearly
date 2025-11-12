@@ -1490,6 +1490,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1574299042}
     m_Modifications:
+    - target: {fileID: 472310759894383349, guid: 4332ef01586141746a2e9fca2ad4cf5e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1224569570556291785, guid: 4332ef01586141746a2e9fca2ad4cf5e, type: 3}
       propertyPath: m_Name
       value: MineLift
@@ -6694,9 +6698,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 905371727}
     m_Modifications:
+    - target: {fileID: 472310759894383349, guid: 4332ef01586141746a2e9fca2ad4cf5e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1224569570556291785, guid: 4332ef01586141746a2e9fca2ad4cf5e, type: 3}
       propertyPath: m_Name
       value: MineLift
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224569570556291785, guid: 4332ef01586141746a2e9fca2ad4cf5e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2661910896105574002, guid: 4332ef01586141746a2e9fca2ad4cf5e, type: 3}
       propertyPath: m_LocalPosition.x
