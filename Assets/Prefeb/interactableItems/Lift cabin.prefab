@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.LiftPlatform
   requiresLever: 1
+  uniqueId: 5336ee44-8576-4db0-b001-b29b5082e5b3
   topPoint: {fileID: 0}
   bottomPoint: {fileID: 0}
   moveSpeed: 1
@@ -209,7 +210,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.011520386, y: -0.2592181}
+  m_Offset: {x: 0.011520386, y: -1.0595236}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -219,7 +220,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.2903328, y: 2.4861844}
+  m_Size: {x: 2.2903328, y: 0.8855734}
   m_EdgeRadius: 0
 --- !u!1 &4453196420036351263
 GameObject:
