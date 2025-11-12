@@ -1,57 +1,58 @@
-using System;
 using UnityEngine;
-using Inventory;
 
-public class InventoryController : MonoBehaviour
+namespace inventory
 {
-    private InventoryLogic inventory;
-    [SerializeField]
-    private inventoryObject inventoryData;
-
-    private void Start()
+    public class InventoryController : MonoBehaviour
     {
-        PrepareUI();
-        inventory.inventorySizeTest();
-    }
+        private InventoryLogic inventory;
+        [SerializeField]
+        private inventoryObject inventoryData;
 
-    private void PrepareUI()
-    {
-        inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
-        inventory.InitializeInventory(inventoryData.Size);
-        inventory.OnDescriptionRequested += HandleDescriptionRequest;
-    }
-
-    private void HandleDescriptionRequest(int itemIndex)
-    {
-        Debug.Log($"in handledescriptionrequest");
-        inventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
-        if (inventoryItem.isEmpty)
+        private void Start()
         {
-            inventory.ResetDescription();
-            return;
+            PrepareUI();
+            inventory.inventorySizeTest();
         }
-        itemObject item = inventoryItem.item;
-        inventory.UpdateDescription(itemIndex, item.ItemImage,
-            item.name, item.Description);
-    }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
+        private void PrepareUI()
         {
-            if (inventory.isActiveAndEnabled == false)
+            inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
+            inventory.InitializeInventory(inventoryData.Size);
+            inventory.OnDescriptionRequested += HandleDescriptionRequest;
+        }
+
+        private void HandleDescriptionRequest(int itemIndex)
+        {
+            Debug.Log($"in handledescriptionrequest");
+            inventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.isEmpty)
             {
-                inventory.Show();
-                foreach (var item in inventoryData.GetCurrentInventoryState())
-                {
-                    inventory.UpdateData(item.Key,
-                        item.Value.item.ItemImage,
-                        item.Value.quantity);
-                }
+                inventory.ResetDescription();
+                return;
             }
-            else
+            itemObject item = inventoryItem.item;
+            inventory.UpdateDescription(itemIndex, item.ItemImage,
+                item.name, item.Description);
+        }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                inventory.Hide();
+                if (inventory.isActiveAndEnabled == false)
+                {
+                    inventory.Show();
+                    foreach (var item in inventoryData.GetCurrentInventoryState())
+                    {
+                        inventory.UpdateData(item.Key,
+                            item.Value.item.ItemImage,
+                            item.Value.quantity);
+                    }
+                }
+                else
+                {
+                    inventory.Hide();
+                }
             }
         }
     }
