@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.Lever
   requiresLever: 0
+  uniqueId: 7041ff4b-95d0-4192-be7b-2ffa935a2a17
   linkedObjects: []
   handle: {fileID: 6260807980954356346}
   flipAngle: 90
