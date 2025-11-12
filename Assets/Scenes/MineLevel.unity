@@ -4038,9 +4038,9 @@ PrefabInstance:
       value: -0.13543606
       objectReference: {fileID: 0}
     - target: {fileID: 3003327264871337997, guid: a37cad1638bf380459a25c0f2e6aa825, type: 3}
-      propertyPath: activateAfterFirstExit
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: _gameManager
+      value: 
+      objectReference: {fileID: 1088954572}
     - target: {fileID: 3003327264871337997, guid: a37cad1638bf380459a25c0f2e6aa825, type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.size
       value: 1

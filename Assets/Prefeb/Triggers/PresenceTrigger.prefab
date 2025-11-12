@@ -94,6 +94,7 @@ MonoBehaviour:
   triggerLayer:
     serializedVersion: 2
     m_Bits: 8
+  activateAfterFirstExit: 1
   onTriggerEnter:
     m_PersistentCalls:
       m_Calls: []
