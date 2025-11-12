@@ -5,9 +5,8 @@ using UnityEngine;
 public class rock : Interactable
 {
     private Collider2D collider;
-
     private SpriteRenderer sprite;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         collider = GetComponent<Collider2D>();
@@ -22,11 +21,24 @@ public class rock : Interactable
 
     public override InteractableObjectState SaveState()
     {
-        throw new System.NotImplementedException();
+        return new InteractableObjectState
+        {
+            uniqueId = gameObject.name,
+            isActive = sprite != null && sprite.enabled && collider != null && collider.enabled,
+            position = transform.position,
+            rotation = transform.rotation
+        };
     }
 
     public override void LoadState(InteractableObjectState state)
     {
-        throw new System.NotImplementedException();
+        if (state == null) return;
+
+        transform.position = state.position;
+        transform.rotation = state.rotation;
+
+        bool active = state.isActive;
+        if (sprite != null) sprite.enabled = active;
+        if (collider != null) collider.enabled = active;
     }
 }

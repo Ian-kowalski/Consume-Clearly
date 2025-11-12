@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.LiftPlatform
   requiresLever: 1
-  uniqueId: 5336ee44-8576-4db0-b001-b29b5082e5b3
+  uniqueId: 5e7dc751-c60e-4ff8-bc71-04a2179f32c5
   topPoint: {fileID: 0}
   bottomPoint: {fileID: 0}
   moveSpeed: 1

@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.Trapdoor
   requiresLever: 0
+  uniqueId: 66625b8e-a523-4d23-bba9-ac45c5af8c19
   door: {fileID: 3896278450337867155}
   openAngle: -90
   rotationSpeed: 90

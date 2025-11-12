@@ -18,6 +18,12 @@ namespace LevelObjects.Interactable
             {
                 uniqueId = System.Guid.NewGuid().ToString();
             }
+
+            // Ensure objects that require a lever are on the Default layer (0)
+            if (requiresLever)
+            {
+                gameObject.layer = 0; // Default layer
+            }
         }
 
         protected virtual void Awake()
@@ -25,6 +31,11 @@ namespace LevelObjects.Interactable
             if (string.IsNullOrEmpty(uniqueId))
             {
                 uniqueId = System.Guid.NewGuid().ToString();
+            }
+
+            if (requiresLever)
+            {
+                gameObject.layer = 0; // Default layer at runtime
             }
         }
 

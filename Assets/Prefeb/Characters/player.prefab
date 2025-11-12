@@ -248,11 +248,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a155c56df1849434fbe408cd4705e4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerInteract
-  interactRange: 1.5
+  interactRange: 1
   interactKey: 113
   interactableLayer:
     serializedVersion: 2
     m_Bits: 256
+  originOffset: 0.5
+  circleRadius: 0.12
 --- !u!1 &2287662028223444186
 GameObject:
   m_ObjectHideFlags: 0
