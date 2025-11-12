@@ -168,6 +168,15 @@ namespace LevelObjects.Interactable
                 {
                     currentPlayer.transform.SetParent(transform);
                     SetPlayerPhysics(true);
+                    
+                    // Position player on the lift ground immediately
+                    if (liftGround != null)
+                    {
+                        Vector3 playerPos = currentPlayer.transform.position;
+                        playerPos.y = liftGround.transform.position.y + playerYOffset;
+                        currentPlayer.transform.position = playerPos;
+                    }
+                    
                     Debug.Log("Player entered lift cabin");
                 }
             }
