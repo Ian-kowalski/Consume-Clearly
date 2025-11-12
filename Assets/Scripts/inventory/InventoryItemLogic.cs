@@ -18,38 +18,38 @@ public class InventoryItemLogic : MonoBehaviour
     [SerializeField]
     private ItemActionPanel itemactionpanel;
 
-        public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
+    public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
 
-        private bool empty = true;
+    private bool empty = true;
 
-        private void Start()
-        {
-            Deselect();
-        }
+    private void Start()
+    {
+        Deselect();
+    }
 
-        public void ResetData()
-        {
-            this.itemIcon.gameObject.SetActive(false);
-            empty = true;
-        }
+    public void ResetData()
+    {
+        this.itemIcon.gameObject.SetActive(false);
+        empty = true;
+    }
 
-        public void Deselect()
-        {
-            itemBorder.enabled = false;
-        }
+    public void Deselect()
+    {
+        itemBorder.enabled = false;
+    }
 
-        public void SetData(Sprite sprite, int quantity)
-        {
-            this.itemIcon.gameObject.SetActive(true);
-            this.itemIcon.sprite = sprite;
-            this.itemQuantity.text = quantity.ToString();
-            empty = false;
-        }
+    public void SetData(Sprite sprite, int quantity)
+    {
+        this.itemIcon.gameObject.SetActive(true);
+        this.itemIcon.sprite = sprite;
+        this.itemQuantity.text = quantity.ToString();
+        empty = false;
+    }
 
-        public void Select() 
-        {
-            itemBorder.enabled = true;
-        }
+    public void Select() 
+    {
+        itemBorder.enabled = true;
+    }
 
     public void OnPointerClick(BaseEventData eventData)
     {
@@ -77,5 +77,4 @@ public class InventoryItemLogic : MonoBehaviour
         itemactionpanel.disable();
     }
 
-    }
 }

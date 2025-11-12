@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System;
 using Inventory;
+using UnityEngine;
+using inventory;
 
 public class InventoryLogic : MonoBehaviour
 {
@@ -11,10 +13,6 @@ public class InventoryLogic : MonoBehaviour
     private RectTransform contentpanel;
     [SerializeField]
     private InventoryDescription descriptionpanel;
-
-        public Sprite testSprite;
-        public int testQuantity;
-        public string testTitle, testDescription;
 
         private List<InventoryItemLogic> inventoryitems = new List<InventoryItemLogic>();
 
@@ -50,15 +48,16 @@ public class InventoryLogic : MonoBehaviour
 
     private void HandleShowItemAction(InventoryItemLogic logic)
     {
-        //ResetDescription();
-        //int index = inventoryitems.IndexOf(logic);
-        //if (index < 0) return;
-        //inventoryitems[index].btnEnable();
+        HideButtons();
+        int index = inventoryitems.IndexOf(logic);
+        if (index < 0) return;
+        inventoryitems[index].btnEnable();
     }
 
     private void HandleItemSelected(InventoryItemLogic logic)
     {
-        HideButtons();
+        Debug.Log("Item selected");
+        ResetDescription();
         int index = inventoryitems.IndexOf(logic);
         if (index < 0) return;
         OnDescriptionRequested?.Invoke(index);
@@ -70,11 +69,11 @@ public class InventoryLogic : MonoBehaviour
         ResetDescription();
     }
 
-        public void Hide() 
-        {
-            gameObject.SetActive(false);
-            ResetDescription();
-        }
+    public void Hide() 
+    {
+        gameObject.SetActive(false);
+        ResetDescription();
+    }
 
     public void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
     {
@@ -105,5 +104,10 @@ public class InventoryLogic : MonoBehaviour
         {
             item.btnDisable();
         }
+    }
+
+    public void inventorySizeTest()
+    {
+        Debug.Log("Inventory size is: " + inventoryitems.Count);
     }
 }
