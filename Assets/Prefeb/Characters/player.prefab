@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 625152158153895744}
   - component: {fileID: -8249197410289733627}
   - component: {fileID: 6978252231117196438}
-  - component: {fileID: 6232343306973154135}
+  - component: {fileID: 3325875414331394727}
   m_Layer: 3
   m_Name: player
   m_TagString: Player
@@ -235,7 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17d686654617d4485dd179130b3e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::InventoryController
---- !u!114 &6232343306973154135
+  inventoryData: {fileID: 11400000, guid: a80e3be288a25ca4dbd16a350766402d, type: 2}
+--- !u!114 &3325875414331394727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

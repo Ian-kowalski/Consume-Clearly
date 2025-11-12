@@ -1,29 +1,57 @@
+using System;
 using UnityEngine;
+using Inventory;
 
-namespace inventory
+public class InventoryController : MonoBehaviour
 {
-    public class InventoryController : MonoBehaviour
+    private InventoryLogic inventory;
+    [SerializeField]
+    private inventoryObject inventoryData;
+
+    private void Start()
     {
-        private InventoryLogic inventory;
+        PrepareUI();
+        inventory.inventorySizeTest();
+    }
 
-        private void Start()
+    private void PrepareUI()
+    {
+        inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
+        inventory.InitializeInventory(inventoryData.Size);
+        inventory.OnDescriptionRequested += HandleDescriptionRequest;
+    }
+
+    private void HandleDescriptionRequest(int itemIndex)
+    {
+        Debug.Log($"in handledescriptionrequest");
+        inventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+        if (inventoryItem.isEmpty)
         {
-            inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
-            inventory.InitializeInventory();
+            inventory.ResetDescription();
+            return;
         }
+        itemObject item = inventoryItem.item;
+        inventory.UpdateDescription(itemIndex, item.ItemImage,
+            item.name, item.Description);
+    }
 
-        public void Update()
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (!inventory.isActiveAndEnabled)
             {
-                if (inventory.isActiveAndEnabled == false)
+                inventory.Show();
+                foreach (var item in inventoryData.GetCurrentInventoryState())
                 {
-                    inventory.Show();
+                    inventory.UpdateData(item.Key,
+                        item.Value.item.ItemImage,
+                        item.Value.quantity);
                 }
-                else
-                {
-                    inventory.Hide();
-                }
+            }
+            else
+            {
+                inventory.Hide();
             }
         }
     }
