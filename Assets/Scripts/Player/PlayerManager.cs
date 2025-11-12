@@ -62,17 +62,48 @@ namespace Player
         {
             StartCoroutine(WaitAndSetPosition(position));
         }
-
+        
         private IEnumerator WaitAndSetPosition(Vector3 position)
         {
             while (player == null)
+                yield return null;
+
+            var movement = player.GetComponent<MovementScript>();
+            var controller = player.GetComponent<CharacterController>();
+            var rb = player.GetComponent<Rigidbody>();
+
+            if (movement != null) movement.enabled = false;
+            if (controller != null) controller.enabled = false;
+            if (rb != null)
             {
-                yield return null; // Wait until the player is instantiated
+                rb.isKinematic = true;
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
 
+            // Wait a physics step so any gravity/physics settle
+            yield return new WaitForFixedUpdate();
+
+            // Teleport
             player.transform.position = position;
-            Debug.Log($"Player position set to {position}.");
+
+            // Clear residual physics state
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
+            // Let one frame pass so other systems react to the new position
+            yield return null;
+
+            if (controller != null) controller.enabled = true;
+            if (rb != null) rb.isKinematic = false;
+            if (movement != null) movement.enabled = true;
+
+            Debug.Log($"Player position set to ({player.transform.position.x:F2}, {player.transform.position.y:F2}, {player.transform.position.z:F2}).");
         }
+
         
         private Vector3 GetSpawnPosition()
         {
