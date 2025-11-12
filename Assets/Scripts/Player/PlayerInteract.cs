@@ -14,12 +14,11 @@ namespace Player
         public float circleRadius = 0.12f;    // thickness of the cast
 
         private SpriteRenderer spriteRenderer;
-        private Collider2D playerCollider;
+
 
         void Awake()
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            playerCollider = GetComponent<Collider2D>();
         }
 
         void Update()
