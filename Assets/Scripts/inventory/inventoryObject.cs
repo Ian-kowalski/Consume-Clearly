@@ -29,6 +29,7 @@ namespace Inventory
                 if (items[i].isEmpty)
                 {
                     items[i] = new inventoryItem { item = item, quantity = quantity };
+                    return;
                 }
             }
         }

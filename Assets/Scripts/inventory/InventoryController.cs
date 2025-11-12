@@ -39,7 +39,7 @@ namespace inventory
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                if (inventory.isActiveAndEnabled == false)
+                if (!inventory.isActiveAndEnabled)
                 {
                     inventory.Show();
                     foreach (var item in inventoryData.GetCurrentInventoryState())
