@@ -48,10 +48,10 @@ public class InventoryLogic : MonoBehaviour
 
     private void HandleShowItemAction(InventoryItemLogic logic)
     {
-        HideButtons();
-        int index = inventoryitems.IndexOf(logic);
-        if (index < 0) return;
-        inventoryitems[index].btnEnable();
+        //HideButtons();
+        //int index = inventoryitems.IndexOf(logic);
+        //if (index < 0) return;
+        //inventoryitems[index].btnEnable();
     }
 
     private void HandleItemSelected(InventoryItemLogic logic)
