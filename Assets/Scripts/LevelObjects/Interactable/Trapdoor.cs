@@ -1,4 +1,5 @@
 using System.Collections;
+using Save;
 using UnityEngine;
 
 namespace LevelObjects.Interactable
@@ -33,6 +34,32 @@ namespace LevelObjects.Interactable
         {
             if (!isRotating)
                 StartCoroutine(RotateTrapdoor(isOpen ? closedRotation : openRotation));
+        }
+
+        public override InteractableObjectState SaveState()
+        {
+            return new InteractableObjectState
+            {
+                uniqueId = GetUniqueId(),
+                isActive = isOpen,
+                position = transform.position,
+                rotation = door.localRotation
+            };
+        }
+
+        public override void LoadState(InteractableObjectState state)
+        {
+            if (state == null || state.uniqueId != GetUniqueId()) return;
+
+            isOpen = state.isActive;
+            
+            if (door != null)
+            {
+                door.localRotation = state.rotation;
+            }
+            
+            StopAllCoroutines();
+            isRotating = false;
         }
 
         private IEnumerator RotateTrapdoor(Quaternion target)

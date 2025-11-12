@@ -1,4 +1,5 @@
 using System.Collections;
+using Save;
 using UnityEngine;
 
 namespace LevelObjects.Interactable
@@ -51,6 +52,32 @@ namespace LevelObjects.Interactable
                 if (obj != null)
                     obj.Interact();
             }
+        }
+
+        public override InteractableObjectState SaveState()
+        {
+            return new InteractableObjectState
+            {
+                uniqueId = GetUniqueId(),
+                isActive = isOn,
+                position = transform.position,
+                rotation = handle.localRotation
+            };
+        }
+
+        public override void LoadState(InteractableObjectState state)
+        {
+            if (state == null || state.uniqueId != GetUniqueId()) return;
+
+            isOn = state.isActive;
+            
+            if (handle != null)
+            {
+                handle.localRotation = state.rotation;
+            }
+            
+            StopAllCoroutines();
+            isFlipping = false;
         }
 
         private IEnumerator FlipHandle()

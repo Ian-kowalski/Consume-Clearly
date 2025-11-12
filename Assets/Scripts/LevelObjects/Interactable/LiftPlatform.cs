@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Save;
 
 namespace LevelObjects.Interactable
 {
@@ -53,6 +54,36 @@ namespace LevelObjects.Interactable
         {
             if (!isMoving)
                 StartCoroutine(MoveLift());
+        }
+
+        public override InteractableObjectState SaveState()
+        {
+            return new InteractableObjectState
+            {
+                uniqueId = GetUniqueId(),
+                isActive = isAtTop,
+                position = transform.position,
+                rotation = transform.rotation
+            };
+        }
+
+        public override void LoadState(InteractableObjectState state)
+        {
+            if (state == null || state.uniqueId != GetUniqueId()) return;
+
+            isAtTop = state.isActive;
+            transform.position = state.position;
+            
+            StopAllCoroutines();
+            isMoving = false;
+            
+            if (currentPlayer != null && playerRb != null)
+            {
+                currentPlayer.transform.SetParent(null);
+                SetPlayerPhysics(false);
+                currentPlayer = null;
+                playerRb = null;
+            }
         }
 
         private IEnumerator MoveLift()
