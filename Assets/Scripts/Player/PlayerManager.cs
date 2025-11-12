@@ -49,7 +49,8 @@ namespace Player
             if (scene.name != "MainMenu" && player == null)
             {
                 Debug.Log($"Spawning player in scene {scene.name}.");
-                SpawnPlayer(Vector3.zero); // Default spawn position
+                Vector3 spawnPosition = GetSpawnPosition();
+                SpawnPlayer(spawnPosition);
             }
             else if (player != null)
             {
@@ -71,6 +72,32 @@ namespace Player
 
             player.transform.position = position;
             Debug.Log($"Player position set to {position}.");
+        }
+        
+        private Vector3 GetSpawnPosition()
+        {
+            // Look for spawn points in the scene
+            PlayerSpawnPoint[] spawnPoints = FindObjectsOfType<PlayerSpawnPoint>();
+                
+            if (spawnPoints.Length > 0)
+            {
+                // Find the default spawn point
+                foreach (var spawnPoint in spawnPoints)
+                {
+                    if (spawnPoint.IsDefaultSpawn)
+                    {
+                        Debug.Log($"Using default spawn point at {spawnPoint.transform.position}");
+                        return spawnPoint.transform.position;
+                    }
+                }
+                    
+                // If no default, use the first one found
+                Debug.Log($"Using first available spawn point at {spawnPoints[0].transform.position}");
+                return spawnPoints[0].transform.position;
+            }
+                
+            Debug.LogWarning("No spawn point found in scene. Using Vector3.zero as fallback.");
+            return Vector3.zero;
         }
 
         public GameObject GetPlayer()

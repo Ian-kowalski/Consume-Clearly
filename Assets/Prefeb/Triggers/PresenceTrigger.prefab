@@ -93,8 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.PresenceTrigger
   triggerLayer:
     serializedVersion: 2
-    m_Bits: 0
-  triggerContinuously: 0
+    m_Bits: 8
+  activateAfterFirstExit: 1
   onTriggerEnter:
     m_PersistentCalls:
       m_Calls: []

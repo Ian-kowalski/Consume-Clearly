@@ -9,7 +9,7 @@ namespace MainMenu
     public class MainMenuManager : MonoBehaviour
     {
         private const string CREDITS_SCENE_NAME = "Credits";
-        private const string GAME_SCENE_NAME = "Test";
+        private const string GAME_SCENE_NAME = "MineLevel";
 
         private void Start()
         {

@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 625152158153895744}
   - component: {fileID: -8249197410289733627}
   - component: {fileID: 6978252231117196438}
+  - component: {fileID: 6232343306973154135}
   m_Layer: 3
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2554049261657720467}
@@ -87,7 +88,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 80
   m_Sprite: {fileID: 3178561070948002050, guid: 08e26a7ad0736834ba23ef3f460c9696, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -114,7 +115,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 840c3cce1bdd2c040a4fe3709884d55e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -139,11 +140,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Main::MovementScript
   speed: 8
-  jumpingPower: 10
-  landAcceleration: 40
-  landDeceleration: 50
-  airAcceleration: 20
-  airDeceleration: 30
+  jumpingPower: 7
+  landAcceleration: 30
+  landDeceleration: 40
+  airAcceleration: 10
+  airDeceleration: 20
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   groundCheck: {fileID: 8132787090314073876}
@@ -234,6 +235,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17d686654617d4485dd179130b3e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::InventoryController
+--- !u!114 &6232343306973154135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823572384380113146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a155c56df1849434fbe408cd4705e4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerInteract
+  interactRange: 1.5
+  interactKey: 113
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2287662028223444186
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +326,7 @@ GameObject:
   - component: {fileID: 4432041185540907788}
   - component: {fileID: 2877808787234032120}
   - component: {fileID: 939191693086221872}
+  - component: {fileID: 6297034053106242988}
   m_Layer: 3
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -433,3 +452,18 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &6297034053106242988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026642297331686119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f149b446a8b5274c8c645b183010ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.CameraController
+  target: {fileID: 4036169441490382326}
+  offset: {x: 0, y: 0, z: -10}
+  backgroundSprite: {fileID: 0}

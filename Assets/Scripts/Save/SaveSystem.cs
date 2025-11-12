@@ -20,7 +20,7 @@ namespace Save
     
         private static string SaveFilePath(string fileName = null)
         {
-            fileName ??= "SaveData.json"; // Assign default if fileName is null
+            fileName ??= "SaveData.json";
 
             string basePath = string.IsNullOrEmpty(_customSaveDirectory)
                 ? Application.persistentDataPath

@@ -1,42 +1,80 @@
 using System.Collections;
+using Save;
 using UnityEngine;
 
 namespace LevelObjects.Interactable
 {
-    public class Trapdoor : MonoBehaviour
+    public class Trapdoor : Interactable
     {
-        public bool isOpen = false;
-        public float openAngle = 90f;
-        public float rotationSpeed = 90f; // degrees per second
+        [Header("Trapdoor Parts")]
+        public Transform door;
+        public float openAngle = -90;  
+        public float rotationSpeed = 90f; 
+
+        private bool isOpen = false;
+        private bool isRotating = false;
 
         private Quaternion closedRotation;
         private Quaternion openRotation;
-        private Coroutine rotationCoroutine;
 
         void Start()
         {
-            closedRotation = transform.rotation;
-            openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, openAngle));
-        }
-
-        public void ToggleTrapdoor()
-        {
-            isOpen = !isOpen;
-
-            if (rotationCoroutine != null)
-                StopCoroutine(rotationCoroutine);
-
-            rotationCoroutine = StartCoroutine(RotateTrapdoor(isOpen ? openRotation : closedRotation));
-        }
-
-        IEnumerator RotateTrapdoor(Quaternion targetRotation)
-        {
-            while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+            if (door == null)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                Debug.LogWarning("Trapdoor door not assigned — defaulting to this object.");
+                door = transform;
+            }
+
+            // The door rotates around its local axis, so we use its own local rotation
+            closedRotation = door.localRotation;
+            openRotation = Quaternion.Euler(door.localEulerAngles + new Vector3(0, 0, openAngle));
+        }
+
+        public override void Interact()
+        {
+            if (!isRotating)
+                StartCoroutine(RotateTrapdoor(isOpen ? closedRotation : openRotation));
+        }
+
+        public override InteractableObjectState SaveState()
+        {
+            return new InteractableObjectState
+            {
+                uniqueId = GetUniqueId(),
+                isActive = isOpen,
+                position = transform.position,
+                rotation = door.localRotation
+            };
+        }
+
+        public override void LoadState(InteractableObjectState state)
+        {
+            if (state == null || state.uniqueId != GetUniqueId()) return;
+
+            isOpen = state.isActive;
+            
+            if (door != null)
+            {
+                door.localRotation = state.rotation;
+            }
+            
+            StopAllCoroutines();
+            isRotating = false;
+        }
+
+        private IEnumerator RotateTrapdoor(Quaternion target)
+        {
+            isRotating = true;
+
+            while (Quaternion.Angle(door.localRotation, target) > 0.1f)
+            {
+                door.localRotation = Quaternion.RotateTowards(door.localRotation, target, rotationSpeed * Time.deltaTime);
                 yield return null;
             }
-            transform.rotation = targetRotation;
+
+            door.localRotation = target;
+            isOpen = !isOpen;
+            isRotating = false;
         }
     }
 }

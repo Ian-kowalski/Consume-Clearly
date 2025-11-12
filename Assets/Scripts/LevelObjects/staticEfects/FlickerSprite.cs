@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LevelObjects.@static
+namespace LevelObjects.staticEfects
 {
     public class FlickerSprite : MonoBehaviour
     {
