@@ -10,11 +10,10 @@ namespace LevelObjects.Interactable
     {
         private Collider2D _collider;
         private SpriteRenderer _sprite;
-
-        // runtime-only references (not serialized)
+        
         private Animator _poofAnimator;
         private List<SpriteRenderer> _poofRenderers = new List<SpriteRenderer>();
-        private const string poofClipName = "DustPoof"; // DustPoof is an animation clip
+        private const string poofClipName = "DustPoof";
         private const string poofTriggerName = "Poof";
 
         private bool _used;
@@ -27,32 +26,26 @@ namespace LevelObjects.Interactable
 
             _collider = GetComponent<Collider2D>();
             _sprite = GetComponent<SpriteRenderer>();
-
-            // Try to find an Animator in children or on the same GameObject
             _poofAnimator = GetComponentInChildren<Animator>();
 
             if (_poofAnimator != null)
             {
-                // Record whether animator was enabled and then disable it so it won't apply the first-frame sprite
                 _poofAnimatorOriginallyEnabled = _poofAnimator.enabled;
                 _poofAnimator.enabled = false;
                 Debug.Log($"[{name}] Found Animator (controller assigned={_poofAnimator.runtimeAnimatorController != null}). Disabled Animator to prevent auto-first-frame draw.");
-
-                // Gather SpriteRenderers that belong to the poof animator (exclude this rock's main sprite)
+                
                 var allPoofRenderers = _poofAnimator.gameObject.GetComponentsInChildren<SpriteRenderer>(true);
                 foreach (var r in allPoofRenderers)
                 {
-                    if (r == _sprite) continue; // don't touch the rock's main sprite
+                    if (r == _sprite) continue;
                     _poofRenderers.Add(r);
                 }
-
-                // Disable those renderers so the poof's initial sprite doesn't show
+                
                 foreach (var r in _poofRenderers)
                 {
                     r.enabled = false;
                 }
-
-                // Log clips for debugging
+                
                 var controller = _poofAnimator.runtimeAnimatorController;
                 if (controller != null && controller.animationClips != null && controller.animationClips.Length > 0)
                 {
@@ -78,8 +71,7 @@ namespace LevelObjects.Interactable
             {
                 Debug.Log($"[{name}] No Animator found on rock or its children.");
             }
-
-            // Initialize used based on current enabled state of the visual/collider
+            
             bool active = _sprite != null && _sprite.enabled && _collider != null && _collider.enabled;
             _used = !active;
             Debug.Log($"[{name}] Initialized. active={active}, used={_used}");
@@ -89,26 +81,22 @@ namespace LevelObjects.Interactable
         {
             Debug.Log($"[{name}] Interact() called. used={_used}");
 
-            if (_used) return; // only one interaction
+            if (_used) return;
             _used = true;
 
             if (_collider != null) _collider.enabled = false;
-
-            // Debug stack so we can trace unexpected callers
+            
             Debug.Log($"[{name}] Interact stack trace:\n" + Environment.StackTrace);
 
             if (_poofAnimator != null && !_poofPlayed)
             {
                 _poofPlayed = true;
-
-                // Enable renderers that make up the poof visual
+                
                 foreach (var r in _poofRenderers)
                     r.enabled = true;
-
-                // Enable the Animator so it can play from a fresh start
+                
                 _poofAnimator.enabled = true;
-
-                // If the controller has a trigger named "Poof", use it. Otherwise try to Play the state named poofClipName.
+                
                 if (HasAnimatorTrigger(_poofAnimator, poofTriggerName))
                 {
                     Debug.Log($"[{name}] Triggering animator trigger '{poofTriggerName}'");
@@ -123,8 +111,7 @@ namespace LevelObjects.Interactable
                 StartCoroutine(DisableAfterPoofFromAnimator());
                 return;
             }
-
-            // No animator or already played — disable immediately
+            
             if (_sprite != null)
             {
                 _sprite.enabled = false;
@@ -149,7 +136,6 @@ namespace LevelObjects.Interactable
             var controller = _poofAnimator != null ? _poofAnimator.runtimeAnimatorController : null;
             if (controller != null && controller.animationClips != null && controller.animationClips.Length > 0)
             {
-                // Prefer clip that matches the poofClipName if present
                 foreach (var c in controller.animationClips)
                 {
                     if (string.Equals(c.name, poofClipName, StringComparison.OrdinalIgnoreCase))
@@ -158,8 +144,7 @@ namespace LevelObjects.Interactable
                         break;
                     }
                 }
-
-                // If we didn't find a matching clip, fall back to the first clip
+                
                 if (duration <= 0f)
                     duration = controller.animationClips[0].length;
             }
@@ -169,19 +154,17 @@ namespace LevelObjects.Interactable
             if (duration > 0f)
                 yield return new WaitForSeconds(duration);
             else
-                yield return null; // wait a frame so the animation can start
+                yield return null;
 
             if (_sprite != null) _sprite.enabled = false;
             Debug.Log($"[{name}] Poof finished; sprite disabled.");
-
-            // Disable the poof visuals and animator again so the poof's first-frame doesn't appear later
+            
             foreach (var r in _poofRenderers)
                 r.enabled = false;
 
             if (_poofAnimator != null)
             {
                 _poofAnimator.enabled = false;
-                // restore original enabled state is unnecessary because we want it off after play
                 Debug.Log($"[{name}] Animator disabled after poof.");
             }
         }
