@@ -1230,6 +1230,7 @@ GameObject:
   - component: {fileID: 366992974}
   - component: {fileID: 366992975}
   - component: {fileID: 366992976}
+  - component: {fileID: 366992977}
   m_Layer: 8
   m_Name: Rocks storage hut
   m_TagString: Untagged
@@ -1482,6 +1483,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::rock
   requiresLever: 0
   uniqueId: 4588b5fd-a3a3-4100-a6b4-170ce676cbde
+--- !u!95 &366992977
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366992972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ec795d0f862c894cb5c2ba829c9df4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &432436364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1824,6 +1847,7 @@ GameObject:
   - component: {fileID: 824329526}
   - component: {fileID: 824329527}
   - component: {fileID: 824329528}
+  - component: {fileID: 824329529}
   m_Layer: 8
   m_Name: Rocks below middle
   m_TagString: Untagged
@@ -1892,7 +1916,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: e4ad03c3d77e8644fb3c7f8908e4c796, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2098,6 +2122,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::rock
   requiresLever: 0
   uniqueId: 9b32a4a5-81c0-4212-99ea-bb8e6b19cb58
+--- !u!95 &824329529
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824329524}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ec795d0f862c894cb5c2ba829c9df4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &859835701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,6 +2156,7 @@ GameObject:
   - component: {fileID: 859835703}
   - component: {fileID: 859835704}
   - component: {fileID: 859835705}
+  - component: {fileID: 859835706}
   m_Layer: 8
   m_Name: Rocks middle right
   m_TagString: Untagged
@@ -2178,7 +2225,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: b56c147968e885f4899edd1a2f7e3475, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2379,6 +2426,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::rock
   requiresLever: 0
   uniqueId: f7fc6ab9-9ab1-4a75-b586-3909464f9d76
+--- !u!95 &859835706
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859835701}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ec795d0f862c894cb5c2ba829c9df4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &905371726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4285,6 +4354,7 @@ GameObject:
   - component: {fileID: 1382250562}
   - component: {fileID: 1382250563}
   - component: {fileID: 1382250564}
+  - component: {fileID: 1382250565}
   m_Layer: 8
   m_Name: Rocks middle left
   m_TagString: Untagged
@@ -4353,7 +4423,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: d96f3267d24d1334e9d3333e6074b46f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4510,6 +4580,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::rock
   requiresLever: 0
   uniqueId: 20750e37-a05f-44c2-97fe-97927f68dcc6
+--- !u!95 &1382250565
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382250560}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ec795d0f862c894cb5c2ba829c9df4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1394403520
 GameObject:
   m_ObjectHideFlags: 0
@@ -4522,6 +4614,7 @@ GameObject:
   - component: {fileID: 1394403522}
   - component: {fileID: 1394403523}
   - component: {fileID: 1394403524}
+  - component: {fileID: 1394403525}
   m_Layer: 8
   m_Name: Rocks sleeping area
   m_TagString: Untagged
@@ -4590,7 +4683,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 4fddae6cef5c1104eaf61feb54b6e088, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4753,6 +4846,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::rock
   requiresLever: 0
   uniqueId: e08936db-7367-45b7-8dda-66c3d0160408
+--- !u!95 &1394403525
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394403520}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ec795d0f862c894cb5c2ba829c9df4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1417093801
 PrefabInstance:
   m_ObjectHideFlags: 0
