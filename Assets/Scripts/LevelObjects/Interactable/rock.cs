@@ -1,3 +1,4 @@
+using System.Collections;
 using LevelObjects.Interactable;
 using Save;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class rock : Interactable
     private Collider2D collider;
     private SpriteRenderer sprite;
 
+    [SerializeField] private Animator poofAnimator;
+    [SerializeField] private string poofTrigger = "Poof";
+
     void Start()
     {
         collider = GetComponent<Collider2D>();
@@ -15,8 +19,35 @@ public class rock : Interactable
 
     public override void Interact()
     {
-        collider.enabled = false;
-        sprite.enabled = false;
+        if (collider != null) collider.enabled = false;
+
+        if (poofAnimator != null)
+        {
+            poofAnimator.SetTrigger(poofTrigger);
+            StartCoroutine(DisableAfterPoof());
+        }
+        else
+        {
+            if (sprite != null) sprite.enabled = false;
+        }
+    }
+
+    private IEnumerator DisableAfterPoof()
+    {
+        float duration = 0f;
+
+        var controller = poofAnimator?.runtimeAnimatorController;
+        if (controller != null && controller.animationClips != null && controller.animationClips.Length > 0)
+        {
+            duration = controller.animationClips[0].length;
+        }
+
+        if (duration > 0f)
+            yield return new WaitForSeconds(duration);
+        else
+            yield return null; // wait one frame so the trigger can take effect
+
+        if (sprite != null) sprite.enabled = false;
     }
 
     public override InteractableObjectState SaveState()
