@@ -52,8 +52,23 @@ jobs:
           artifactsPath: ${{ matrix.testMode }}-artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: ${{ matrix.testMode }} Test Results
+
+      # Ensure we always have a concrete path for upload-artifact
+      - name: Determine artifact path
+        id: artifact_path
+        run: |
+          if [ -n "${{ steps.tests.outputs.artifactsPath }}" ]; then
+            echo "artifact_path=${{ steps.tests.outputs.artifactsPath }}" >> $GITHUB_OUTPUT
+          else
+            echo "artifact_path=${{ matrix.testMode }}-artifacts" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Ensure artifact path exists
+        run: |
+          mkdir -p "${{ steps.artifact_path.outputs.artifact_path }}" || true
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: Test results for ${{ matrix.testMode }}
-          path: ${{ steps.tests.outputs.artifactsPath }}
+          path: ${{ steps.artifact_path.outputs.artifact_path }}
