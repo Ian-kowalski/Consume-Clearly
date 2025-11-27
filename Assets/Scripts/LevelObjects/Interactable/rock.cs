@@ -1,44 +1,46 @@
-using LevelObjects.Interactable;
 using Save;
 using UnityEngine;
 
-public class rock : Interactable
+namespace LevelObjects.Interactable
 {
-    private Collider2D collider;
-    private SpriteRenderer sprite;
-
-    void Start()
+    public class rock : Interactable
     {
-        collider = GetComponent<Collider2D>();
-        sprite = GetComponent<SpriteRenderer>();
-    }
+        private Collider2D collider;
+        private SpriteRenderer sprite;
 
-    public override void Interact()
-    {
-        collider.enabled = false;
-        sprite.enabled = false;
-    }
-
-    public override InteractableObjectState SaveState()
-    {
-        return new InteractableObjectState
+        void Start()
         {
-            uniqueId = gameObject.name,
-            isActive = sprite != null && sprite.enabled && collider != null && collider.enabled,
-            position = transform.position,
-            rotation = transform.rotation
-        };
-    }
+            collider = GetComponent<Collider2D>();
+            sprite = GetComponent<SpriteRenderer>();
+        }
 
-    public override void LoadState(InteractableObjectState state)
-    {
-        if (state == null) return;
+        public override void Interact()
+        {
+            collider.enabled = false;
+            sprite.enabled = false;
+        }
 
-        transform.position = state.position;
-        transform.rotation = state.rotation;
+        public override InteractableObjectState SaveState()
+        {
+            return new InteractableObjectState
+            {
+                uniqueId = gameObject.name,
+                isActive = sprite != null && sprite.enabled && collider != null && collider.enabled,
+                position = transform.position,
+                rotation = transform.rotation
+            };
+        }
 
-        bool active = state.isActive;
-        if (sprite != null) sprite.enabled = active;
-        if (collider != null) collider.enabled = active;
+        public override void LoadState(InteractableObjectState state)
+        {
+            if (state == null) return;
+
+            transform.position = state.position;
+            transform.rotation = state.rotation;
+
+            bool active = state.isActive;
+            if (sprite != null) sprite.enabled = active;
+            if (collider != null) collider.enabled = active;
+        }
     }
 }
