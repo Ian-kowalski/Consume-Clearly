@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: d96f3267d24d1334e9d3333e6074b46f
+guid: 6ef42b83844cc1d40852e4d0f21b339a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6487810534064747446
-    second: Rocks middle left_0
+      213: 2166554439381332400
+    second: Dust_Poof-7_0
   - first:
-      213: -5353933477633855227
-    second: Rocks middle left_1
+      213: 2480338075303647505
+    second: Dust_Poof-7_1
   - first:
-      213: 4600516722992679872
-    second: Rocks middle left_2
+      213: -6134826279092120488
+    second: Dust_Poof-7_2
   - first:
-      213: -5223773751824266016
-    second: Rocks middle left_3
+      213: -1152953957665205032
+    second: Dust_Poof-7_3
+  - first:
+      213: -810033728592594966
+    second: Dust_Poof-7_4
+  - first:
+      213: -4606519924378736932
+    second: Dust_Poof-7_5
+  - first:
+      213: -8960226671126684908
+    second: Dust_Poof-7_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -59,7 +68,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.36184907, y: 0.27470937}
+  spritePivot: {x: 0.5, y: 0.2}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -122,89 +131,155 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks middle left_0
+      name: Dust_Poof-7_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 43
-        width: 339
-        height: 232
+        x: 576
+        y: 342
+        width: 1085
+        height: 788
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4c880371baa6f5a0800000000000000
-      internalID: -6487810534064747446
+      spriteID: 0b1bed1a8c5211e10800000000000000
+      internalID: 2166554439381332400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks middle left_1
+      name: Dust_Poof-7_1
       rect:
         serializedVersion: 2
-        x: 409
-        y: 84
-        width: 23
-        height: 13
+        x: 2006
+        y: 962
+        width: 54
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 501ff825ed103b5b0800000000000000
-      internalID: -5353933477633855227
+      spriteID: 119995d865eeb6220800000000000000
+      internalID: 2480338075303647505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks middle left_2
+      name: Dust_Poof-7_2
       rect:
         serializedVersion: 2
-        x: 538
-        y: 75
-        width: 37
-        height: 17
+        x: 2022
+        y: 835
+        width: 31
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0cb0931c59158df30800000000000000
-      internalID: 4600516722992679872
+      spriteID: 8549bfbb008bcdaa0800000000000000
+      internalID: -6134826279092120488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks middle left_3
+      name: Dust_Poof-7_3
       rect:
         serializedVersion: 2
-        x: 42
-        y: 23
-        width: 28
-        height: 26
+        x: 296
+        y: 605
+        width: 310
+        height: 191
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ec418f037d6187b0800000000000000
-      internalID: -5223773751824266016
+      spriteID: 8d41cfeeb72efffe0800000000000000
+      internalID: -1152953957665205032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust_Poof-7_4
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 494
+        width: 62
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae737279d9e22c4f0800000000000000
+      internalID: -810033728592594966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust_Poof-7_5
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 544
+        width: 41
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd665a0098a5210c0800000000000000
+      internalID: -4606519924378736932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust_Poof-7_6
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 360
+        width: 107
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41b5380e051e6a380800000000000000
+      internalID: -8960226671126684908
       vertices: []
       indices: 
       edges: []
@@ -214,7 +289,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -223,10 +298,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rocks middle left_0: -6487810534064747446
-      Rocks middle left_1: -5353933477633855227
-      Rocks middle left_2: 4600516722992679872
-      Rocks middle left_3: -5223773751824266016
+      Dust_Poof-7_0: 2166554439381332400
+      Dust_Poof-7_1: 2480338075303647505
+      Dust_Poof-7_2: -6134826279092120488
+      Dust_Poof-7_3: -1152953957665205032
+      Dust_Poof-7_4: -810033728592594966
+      Dust_Poof-7_5: -4606519924378736932
+      Dust_Poof-7_6: -8960226671126684908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

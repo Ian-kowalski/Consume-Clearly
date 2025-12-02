@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 4fddae6cef5c1104eaf61feb54b6e088
+guid: b066df975d502fa48968549a8e5713da
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6984585967710525116
-    second: Rocks sleeping area_0
+      213: 6900604180682986229
+    second: Untitled_Artwork-11 3_0
+  - first:
+      213: 2601084198261394494
+    second: Untitled_Artwork-11 3_1
+  - first:
+      213: 8895941393765152518
+    second: Untitled_Artwork-11 3_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +52,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.10688541}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,23 +119,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks sleeping area_0
+      name: Untitled_Artwork-11 3_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 40
-        width: 357
-        height: 290
+        x: 1032
+        y: 1288
+        width: 51
+        height: 75
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 449af6b7114c11f90800000000000000
-      internalID: -6984585967710525116
+      spriteID: 5f25f2df0fed3cf50800000000000000
+      internalID: 6900604180682986229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-11 3_1
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 1317
+        width: 52
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3c80441c48e81420800000000000000
+      internalID: 2601084198261394494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-11 3_2
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 113
+        width: 615
+        height: 1172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 607b01e909bb47b70800000000000000
+      internalID: 8895941393765152518
       vertices: []
       indices: 
       edges: []
@@ -138,8 +188,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rocks sleeping area_0: -6984585967710525116
+      Untitled_Artwork-11 3_0: 6900604180682986229
+      Untitled_Artwork-11 3_1: 2601084198261394494
+      Untitled_Artwork-11 3_2: 8895941393765152518
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

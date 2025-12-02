@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 4fddae6cef5c1104eaf61feb54b6e088
+guid: 35d7e36a3063f4b49b2763c788a42abf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6984585967710525116
-    second: Rocks sleeping area_0
+      213: 1890907892599915103
+    second: Untitled_Artwork-8 3_0
+  - first:
+      213: -71044316387602551
+    second: Untitled_Artwork-8 3_1
+  - first:
+      213: -7060890066451506808
+    second: Untitled_Artwork-8 3_2
+  - first:
+      213: 7444610364106900399
+    second: Untitled_Artwork-8 3_3
+  - first:
+      213: -6293497719805729558
+    second: Untitled_Artwork-8 3_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +58,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.10688541}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,23 +125,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks sleeping area_0
+      name: Untitled_Artwork-8 3_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 40
-        width: 357
-        height: 290
+        x: 1205
+        y: 1549
+        width: 31
+        height: 34
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 449af6b7114c11f90800000000000000
-      internalID: -6984585967710525116
+      spriteID: f528669b5badd3a10800000000000000
+      internalID: 1890907892599915103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-8 3_1
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 1398
+        width: 72
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98f08661299930ff0800000000000000
+      internalID: -71044316387602551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-8 3_2
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 1362
+        width: 69
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889d21f05eda20e90800000000000000
+      internalID: -7060890066451506808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-8 3_3
+      rect:
+        serializedVersion: 2
+        x: 1376
+        y: 1356
+        width: 47
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa388c3dea1905760800000000000000
+      internalID: 7444610364106900399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-8 3_4
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 113
+        width: 620
+        height: 1217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae4af301b2109a8a0800000000000000
+      internalID: -6293497719805729558
       vertices: []
       indices: 
       edges: []
@@ -138,8 +238,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rocks sleeping area_0: -6984585967710525116
+      Untitled_Artwork-8 3_0: 1890907892599915103
+      Untitled_Artwork-8 3_1: -71044316387602551
+      Untitled_Artwork-8 3_2: -7060890066451506808
+      Untitled_Artwork-8 3_3: 7444610364106900399
+      Untitled_Artwork-8 3_4: -6293497719805729558
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

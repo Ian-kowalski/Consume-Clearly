@@ -1,31 +1,37 @@
 fileFormatVersion: 2
-guid: 7247b59b4dfb04d4588ed02359ddffe2
+guid: 8d55a161e06f1ea4a8bccf1eeb47edde
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2310918962487146387
-    second: Rocks storage hut_0
+      213: -6035069959188329259
+    second: Dust_Poof-5_0
   - first:
-      213: -3326953795230380666
-    second: Rocks storage hut_1
+      213: -6351597218238320547
+    second: Dust_Poof-5_1
   - first:
-      213: -5292592506285039216
-    second: Rocks storage hut_2
+      213: 4916000615676376254
+    second: Dust_Poof-5_2
   - first:
-      213: -5083185093612802264
-    second: Rocks storage hut_3
+      213: 1251830746945843532
+    second: Dust_Poof-5_3
   - first:
-      213: -7095771118496209530
-    second: Rocks storage hut_4
+      213: -7626073241755878619
+    second: Dust_Poof-5_4
   - first:
-      213: -3789971993005793401
-    second: Rocks storage hut_5
+      213: 3433147037490560655
+    second: Dust_Poof-5_5
   - first:
-      213: 6486346077851365075
-    second: Rocks storage hut_6
+      213: 99755162375763197
+    second: Dust_Poof-5_6
   - first:
-      213: 2530580121878454153
-    second: Rocks storage hut_7
+      213: 6198132801968375519
+    second: Dust_Poof-5_7
+  - first:
+      213: 9057236418029262557
+    second: Dust_Poof-5_8
+  - first:
+      213: -7638532070420834424
+    second: Dust_Poof-5_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -71,7 +77,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.42954355, y: 0.1516281}
+  spritePivot: {x: 0.5, y: 0.2}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -134,177 +140,221 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks storage hut_0
+      name: Dust_Poof-5_0
       rect:
         serializedVersion: 2
-        x: 394
-        y: 414
-        width: 27
-        height: 20
+        x: 397
+        y: 208
+        width: 1246
+        height: 892
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d684d388277fdefd0800000000000000
-      internalID: -2310918962487146387
+      spriteID: 5dcc2f7e8df1f3ca0800000000000000
+      internalID: -6035069959188329259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_1
+      name: Dust_Poof-5_1
       rect:
         serializedVersion: 2
-        x: 426
-        y: 414
-        width: 19
-        height: 12
+        x: 1381
+        y: 1086
+        width: 62
+        height: 65
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68dc723762944d1d0800000000000000
-      internalID: -3326953795230380666
+      spriteID: d50bb827bf79ad7a0800000000000000
+      internalID: -6351597218238320547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_2
+      name: Dust_Poof-5_2
       rect:
         serializedVersion: 2
-        x: 120
-        y: 64
-        width: 211
-        height: 283
+        x: 1650
+        y: 910
+        width: 210
+        height: 98
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0916cf9282fec86b0800000000000000
-      internalID: -5292592506285039216
+      spriteID: eb4fdfc8384293440800000000000000
+      internalID: 4916000615676376254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_3
+      name: Dust_Poof-5_3
       rect:
         serializedVersion: 2
-        x: 325
-        y: 337
-        width: 58
-        height: 50
+        x: 1723
+        y: 706
+        width: 129
+        height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 82fe5a7d616e479b0800000000000000
-      internalID: -5083185093612802264
+      spriteID: c417e9e8e656f5110800000000000000
+      internalID: 1251830746945843532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_4
+      name: Dust_Poof-5_4
       rect:
         serializedVersion: 2
-        x: 384
-        y: 315
-        width: 25
-        height: 23
+        x: 162
+        y: 390
+        width: 135
+        height: 168
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 685ae8243c1c68d90800000000000000
-      internalID: -7095771118496209530
+      spriteID: 52b77029aceba2690800000000000000
+      internalID: -7626073241755878619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_5
+      name: Dust_Poof-5_5
       rect:
         serializedVersion: 2
-        x: 318
-        y: 300
-        width: 32
-        height: 25
+        x: 1968
+        y: 535
+        width: 66
+        height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 78fd5307d80576bc0800000000000000
-      internalID: -3789971993005793401
+      spriteID: f8e3f4f7a0df4af20800000000000000
+      internalID: 3433147037490560655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_6
+      name: Dust_Poof-5_6
       rect:
         serializedVersion: 2
-        x: 52
-        y: 64
-        width: 25
-        height: 15
+        x: 304
+        y: 382
+        width: 73
+        height: 29
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3de24944461240a50800000000000000
-      internalID: 6486346077851365075
+      spriteID: df43be9aac6626100800000000000000
+      internalID: 99755162375763197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks storage hut_7
+      name: Dust_Poof-5_7
       rect:
         serializedVersion: 2
-        x: 329
-        y: 79
-        width: 85
-        height: 40
+        x: 1671
+        y: 278
+        width: 354
+        height: 222
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 98fda38963d6e1320800000000000000
-      internalID: 2530580121878454153
+      spriteID: fd6850cb1f0340650800000000000000
+      internalID: 6198132801968375519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust_Poof-5_8
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 241
+        width: 68
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd69d5fe884c1bd70800000000000000
+      internalID: 9057236418029262557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust_Poof-5_9
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 87
+        width: 47
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88713297d8b7ef590800000000000000
+      internalID: -7638532070420834424
       vertices: []
       indices: 
       edges: []
@@ -314,7 +364,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -323,14 +373,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rocks storage hut_0: -2310918962487146387
-      Rocks storage hut_1: -3326953795230380666
-      Rocks storage hut_2: -5292592506285039216
-      Rocks storage hut_3: -5083185093612802264
-      Rocks storage hut_4: -7095771118496209530
-      Rocks storage hut_5: -3789971993005793401
-      Rocks storage hut_6: 6486346077851365075
-      Rocks storage hut_7: 2530580121878454153
+      Dust_Poof-5_0: -6035069959188329259
+      Dust_Poof-5_1: -6351597218238320547
+      Dust_Poof-5_2: 4916000615676376254
+      Dust_Poof-5_3: 1251830746945843532
+      Dust_Poof-5_4: -7626073241755878619
+      Dust_Poof-5_5: 3433147037490560655
+      Dust_Poof-5_6: 99755162375763197
+      Dust_Poof-5_7: 6198132801968375519
+      Dust_Poof-5_8: 9057236418029262557
+      Dust_Poof-5_9: -7638532070420834424
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

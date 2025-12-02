@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: d96f3267d24d1334e9d3333e6074b46f
+guid: ef997122b92a02f498f5548298b22a23
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6487810534064747446
-    second: Rocks middle left_0
+      213: 7667307899565656071
+    second: Untitled_Artwork-6 3_0
   - first:
-      213: -5353933477633855227
-    second: Rocks middle left_1
+      213: 8403282416211280144
+    second: Untitled_Artwork-6 3_1
   - first:
-      213: 4600516722992679872
-    second: Rocks middle left_2
+      213: -7188738232700159729
+    second: Untitled_Artwork-6 3_2
   - first:
-      213: -5223773751824266016
-    second: Rocks middle left_3
+      213: 9000659619043195976
+    second: Untitled_Artwork-6 3_3
+  - first:
+      213: 2511577932220258999
+    second: Untitled_Artwork-6 3_4
+  - first:
+      213: -4366144418729835010
+    second: Untitled_Artwork-6 3_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,11 +61,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.36184907, y: 0.27470937}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -122,89 +128,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks middle left_0
+      name: Untitled_Artwork-6 3_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 43
-        width: 339
-        height: 232
+        x: 1031
+        y: 1283
+        width: 101
+        height: 139
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4c880371baa6f5a0800000000000000
-      internalID: -6487810534064747446
+      spriteID: 708482959efb76a60800000000000000
+      internalID: 7667307899565656071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks middle left_1
+      name: Untitled_Artwork-6 3_1
       rect:
         serializedVersion: 2
-        x: 409
-        y: 84
-        width: 23
-        height: 13
+        x: 1166
+        y: 1219
+        width: 133
+        height: 326
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 501ff825ed103b5b0800000000000000
-      internalID: -5353933477633855227
+      spriteID: 0114f85c5d47e9470800000000000000
+      internalID: 8403282416211280144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks middle left_2
+      name: Untitled_Artwork-6 3_2
       rect:
         serializedVersion: 2
-        x: 538
-        y: 75
-        width: 37
-        height: 17
+        x: 1299
+        y: 1295
+        width: 96
+        height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0cb0931c59158df30800000000000000
-      internalID: 4600516722992679872
+      spriteID: f0933a83aa87c3c90800000000000000
+      internalID: -7188738232700159729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks middle left_3
+      name: Untitled_Artwork-6 3_3
       rect:
         serializedVersion: 2
-        x: 42
-        y: 23
-        width: 28
-        height: 26
+        x: 914
+        y: 1189
+        width: 57
+        height: 83
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ec418f037d6187b0800000000000000
-      internalID: -5223773751824266016
+      spriteID: 84cb5496c34c8ec70800000000000000
+      internalID: 9000659619043195976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-6 3_4
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 1111
+        width: 61
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bad2bb82daead220800000000000000
+      internalID: 2511577932220258999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork-6 3_5
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 125
+        width: 579
+        height: 986
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef5cd83b8c65863c0800000000000000
+      internalID: -4366144418729835010
       vertices: []
       indices: 
       edges: []
@@ -213,8 +263,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -223,10 +273,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rocks middle left_0: -6487810534064747446
-      Rocks middle left_1: -5353933477633855227
-      Rocks middle left_2: 4600516722992679872
-      Rocks middle left_3: -5223773751824266016
+      Untitled_Artwork-6 3_0: 7667307899565656071
+      Untitled_Artwork-6 3_1: 8403282416211280144
+      Untitled_Artwork-6 3_2: -7188738232700159729
+      Untitled_Artwork-6 3_3: 9000659619043195976
+      Untitled_Artwork-6 3_4: 2511577932220258999
+      Untitled_Artwork-6 3_5: -4366144418729835010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
