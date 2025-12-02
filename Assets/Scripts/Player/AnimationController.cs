@@ -12,6 +12,9 @@ namespace Player
         private static readonly string TRIGGER_JUMP = "TriggerJump";
         private static readonly string IS_IDLE = "IsIdle";
 
+        [Header("State Names")] [SerializeField]
+        private string jumpStateName = "Jump";
+
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -63,7 +66,8 @@ namespace Player
         {
             if (animator == null) return false;
             var state = animator.GetCurrentAnimatorStateInfo(0);
-            return state.IsName("Jump");
+            if (string.IsNullOrEmpty(jumpStateName)) return state.IsName("Jump");
+            return state.IsName(jumpStateName);
         }
 
         // Returns the normalized time of the current state (0..inf, 1 means the state completed one loop)
