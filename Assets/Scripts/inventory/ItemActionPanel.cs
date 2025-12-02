@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Inventory
+namespace inventory
 {
 
     public class ItemActionPanel : MonoBehaviour

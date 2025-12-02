@@ -21,6 +21,11 @@ namespace LevelObjects.staticEfects
         {
             timer += Time.deltaTime;
 
+            CheckTimer();
+        }
+
+        private void CheckTimer()
+        {
             if (timer >= flickerSpeed)
             {
                 Color color = spriteRenderer.color;

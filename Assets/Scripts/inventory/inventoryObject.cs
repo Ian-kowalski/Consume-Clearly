@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Items;
 using UnityEngine;
 
-namespace Inventory
+namespace inventory
 {
     [CreateAssetMenu(fileName = "inventoryObject", menuName = "Scriptable Objects/inventoryObject")]
     public class inventoryObject : ScriptableObject
