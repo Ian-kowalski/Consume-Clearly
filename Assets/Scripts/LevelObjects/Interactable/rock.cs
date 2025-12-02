@@ -20,65 +20,59 @@ namespace LevelObjects.Interactable
         private bool _poofPlayed;
         private bool _poofAnimatorOriginallyEnabled = false;
 
+        // Ensure refs are ready early (LoadState may run before Start)
+        private void Awake()
+        {
+            EnsureInitialized();
+        }
+
+        private void EnsureInitialized()
+        {
+            if (_collider == null) _collider = GetComponent<Collider2D>();
+            if (_sprite == null) _sprite = GetComponent<SpriteRenderer>();
+            if (_poofAnimator == null) _poofAnimator = GetComponentInChildren<Animator>(true);
+
+            if (_poofAnimator != null)
+            {
+                // Only populate renderers once
+                if (_poofRenderers.Count == 0)
+                {
+                    var allPoofRenderers = _poofAnimator.gameObject.GetComponentsInChildren<SpriteRenderer>(true);
+                    foreach (var r in allPoofRenderers)
+                    {
+                        if (r == _sprite) continue;
+                        _poofRenderers.Add(r);
+                    }
+                }
+
+                // remember original enabled state and disable animator so it doesn't draw first frame
+                _poofAnimatorOriginallyEnabled = _poofAnimator.enabled;
+                _poofAnimator.enabled = false;
+
+                // ensure poof renderers are disabled by default
+                foreach (var r in _poofRenderers)
+                    r.enabled = false;
+            }
+
+            // Determine used state from current visuals if we haven't already set it
+            bool active = _sprite != null && _sprite.enabled && _collider != null && _collider.enabled;
+            _used = !active;
+        }
+
         void Start()
         {
             Debug.Log($"[{name}] rock.Start() called");
 
-            _collider = GetComponent<Collider2D>();
-            _sprite = GetComponent<SpriteRenderer>();
-            _poofAnimator = GetComponentInChildren<Animator>();
+            // Keep Start logging but rely on EnsureInitialized for setup
+            EnsureInitialized();
 
-            if (_poofAnimator != null)
-            {
-                _poofAnimatorOriginallyEnabled = _poofAnimator.enabled;
-                _poofAnimator.enabled = false;
-                Debug.Log($"[{name}] Found Animator (controller assigned={_poofAnimator.runtimeAnimatorController != null}). Disabled Animator to prevent auto-first-frame draw.");
-                
-                var allPoofRenderers = _poofAnimator.gameObject.GetComponentsInChildren<SpriteRenderer>(true);
-                foreach (var r in allPoofRenderers)
-                {
-                    if (r == _sprite) continue;
-                    _poofRenderers.Add(r);
-                }
-                
-                foreach (var r in _poofRenderers)
-                {
-                    r.enabled = false;
-                }
-                
-                var controller = _poofAnimator.runtimeAnimatorController;
-                if (controller != null && controller.animationClips != null && controller.animationClips.Length > 0)
-                {
-                    bool found = false;
-                    foreach (var c in controller.animationClips)
-                    {
-                        Debug.Log($"[{name}] Animator clip: {c.name} (length={c.length})");
-                        if (string.Equals(c.name, poofClipName, StringComparison.OrdinalIgnoreCase))
-                        {
-                            Debug.Log($"[{name}] Found poof clip '{poofClipName}' with length {c.length}");
-                            found = true;
-                        }
-                    }
-                    if (!found)
-                        Debug.Log($"[{name}] Poof clip '{poofClipName}' not found in Animator controller.");
-                }
-                else
-                {
-                    Debug.Log($"[{name}] Animator has no controller or no clips.");
-                }
-            }
-            else
-            {
-                Debug.Log($"[{name}] No Animator found on rock or its children.");
-            }
-            
-            bool active = _sprite != null && _sprite.enabled && _collider != null && _collider.enabled;
-            _used = !active;
-            Debug.Log($"[{name}] Initialized. active={active}, used={_used}");
+            Debug.Log($"[{name}] Initialized. active={_sprite != null && _sprite.enabled && _collider != null && _collider.enabled}, used={_used}");
         }
 
         public override void Interact()
         {
+            EnsureInitialized();
+
             Debug.Log($"[{name}] Interact() called. used={_used}");
 
             if (_used) return;
@@ -173,7 +167,7 @@ namespace LevelObjects.Interactable
         {
             return new InteractableObjectState
             {
-                uniqueId = gameObject.name,
+                uniqueId = GetUniqueId(),
                 isActive = _sprite != null && _sprite.enabled && _collider != null && _collider.enabled,
                 position = transform.position,
                 rotation = transform.rotation
@@ -184,6 +178,15 @@ namespace LevelObjects.Interactable
         {
             if (state == null) return;
 
+            // Only load state intended for this object
+            if (string.IsNullOrEmpty(state.uniqueId) || state.uniqueId != GetUniqueId())
+            {
+                Debug.Log($"[{name}] LoadState skipped: id mismatch (saved='{state.uniqueId}' this='{GetUniqueId()}')");
+                return;
+            }
+
+            EnsureInitialized();
+
             transform.position = state.position;
             transform.rotation = state.rotation;
 
@@ -192,7 +195,18 @@ namespace LevelObjects.Interactable
             if (_collider != null) _collider.enabled = active;
             _used = !active;
 
-            Debug.Log($"[{name}] LoadState completed. active={active}, used={_used}");
+            // Option A: do NOT replay poof on load. If rock is used (active==false) mark poof as already played
+            _poofPlayed = !active;
+
+            // Ensure poof visuals/animator are disabled on load to avoid accidental first-frame flashes
+            if (_poofAnimator != null)
+            {
+                _poofAnimator.enabled = false;
+            }
+            foreach (var r in _poofRenderers)
+                r.enabled = false;
+
+            Debug.Log($"[{name}] LoadState completed. active={active}, used={_used}, poofPlayed={_poofPlayed}");
         }
     }
 }
