@@ -1,10 +1,10 @@
-thank you for playing our game!
+Thank you for playing our game!
 We hope you enjoyed the experience.
 
 Developed by:
 038Games
 
-on request of:
+At the request of:
 - Gertjan van Stam
 - Peter Giel
 
@@ -13,19 +13,16 @@ Special thanks to our development team:
 - Ian Kowalski
 - Robin van Maanen
 
-art and design by:
+Art and design by:
 - Emma Hoogland
 - Sidney Vogel
 - Kentin Poos
 
-rechurch by:
-- Mislina
-- Isabella
+Research by:
+- Mislina Akbulut
+- Isabelle Brown
 
-powered by Unity
-
+Powered by Unity.
 
 Made with passion and creativity.
 Thank you for your support!
-
-

@@ -1,17 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Credits
 {
     public class CreditsManager : MonoBehaviour
     {
         private const string MAIN_MENU_SCENE = "MainMenu";
-    
+
         [SerializeField] private Animation creditsTextAnimation;
+        [SerializeField] private TextMeshProUGUI creditsTextUI;
+        [SerializeField] private TextAsset creditsTextAsset;
 
         private void Start()
         {
-            // If you have multiple animations, you can play the specific one you want
+            if (creditsTextUI != null && creditsTextAsset != null)
+            {
+                creditsTextUI.text = creditsTextAsset.text;
+            }
+
             if (creditsTextAnimation != null && creditsTextAnimation.clip != null)
             {
                 creditsTextAnimation.Play();
@@ -20,7 +27,6 @@ namespace Credits
 
         public void ReturnToMainMenu()
         {
-            // Stop the creditsTextAnimation before switching scenes
             if (creditsTextAnimation != null)
             {
                 creditsTextAnimation.Stop();
