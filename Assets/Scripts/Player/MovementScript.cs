@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -30,6 +31,7 @@ namespace Player
         private float accelRate;
         private float coyoteTimeCounter;
         private float jumpBufferTimeCounter;
+        private bool waitingForJumpAnimation = false;
 
         private AnimationController animationController;
     
@@ -161,7 +163,9 @@ namespace Player
         {
             if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+                animationController.TriggerJump();
+                StartCoroutine(ApplyJumpAfterAnimation());
+                // clear buffer so we don't retrigger immediately
                 jumpBufferTimeCounter = 0f;
             }
 
@@ -172,6 +176,23 @@ namespace Player
             }
         }
 
+        private IEnumerator ApplyJumpAfterAnimation()
+        {
+            waitingForJumpAnimation = true;
+
+            // Wait until animator has entered the jump state
+            yield return new WaitUntil(() => animationController.IsInJumpState());
+
+            // Optionally wait a short bit to ensure the animation has started playing.
+            yield return new WaitUntil(() => animationController.GetCurrentStateNormalizedTime() >= 0.05f);
+
+            // Apply the actual jump physics after animation starts/played
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+
+            waitingForJumpAnimation = false;
+
+        }
+        
 #if UNITY_EDITOR
         public void Test_SetHorizontal(float value)
         {
