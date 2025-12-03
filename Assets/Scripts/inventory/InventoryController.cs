@@ -1,40 +1,40 @@
 using Items;
 using UnityEngine;
 
-namespace inventory
+namespace Inventory
 {
     public class InventoryController : MonoBehaviour
     {
-        private InventoryLogic inventory;
+        private InventoryLogic _inventoryLogic;
         [SerializeField]
-        private inventoryObject inventoryData;
-        public inventoryObject InventoryObject => inventoryData;
+        private InventoryObject _inventoryData;
+        public InventoryObject InventoryObject => _inventoryData;
 
         private void Start()
         {
             PrepareUI();
-            inventory.inventorySizeTest();
+            _inventoryLogic.InventorySizeTest();
         }
 
         private void PrepareUI()
         {
-            inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
-            inventory.InitializeInventory(inventoryData.Size);
-            inventory.OnDescriptionRequested += HandleDescriptionRequest;
-            InventoryObject.OnItemModified += inventory.manipulateItemFuction;
+            _inventoryLogic = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
+            _inventoryLogic.InitializeInventory(_inventoryData.Size);
+            _inventoryLogic.OnDescriptionRequested += HandleDescriptionRequest;
+            InventoryObject.OnItemModified += _inventoryLogic.ManipulateItemFuction;
         }
 
         private void HandleDescriptionRequest(int itemIndex)
         {
             Debug.Log($"in handledescriptionrequest");
-            inventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
-            if (inventoryItem.isEmpty)
+            InventoryItem inventoryItem = _inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.IsEmpty)
             {
-                inventory.ResetDescription();
+                _inventoryLogic.ResetDescription();
                 return;
             }
-            itemObject item = inventoryItem.item;
-            inventory.UpdateDescription(itemIndex, item.ItemImage,
+            ItemObject item = inventoryItem.Item;
+            _inventoryLogic.UpdateDescription(itemIndex, item.ItemImage,
                 item.name, item.Description);
         }
 
@@ -42,20 +42,20 @@ namespace inventory
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                if (!inventory.isActiveAndEnabled)
+                if (!_inventoryLogic.isActiveAndEnabled)
                 {
-                    inventory.Show();
-                    foreach (var item in inventoryData.GetCurrentInventoryState())
+                    _inventoryLogic.Show();
+                    foreach (var item in _inventoryData.GetCurrentInventoryState())
                     {
-                        inventory.UpdateData(item.Key,
-                            item.Value.item.ItemImage,
-                            item.Value.quantity,
-                            item.Value.item.IsUsable);
+                        _inventoryLogic.UpdateData(item.Key,
+                            item.Value.Item.ItemImage,
+                            item.Value.Quantity,
+                            item.Value.Item.IsUsable);
                     }
                 }
                 else
                 {
-                    inventory.Hide();
+                    _inventoryLogic.Hide();
                 }
             }
         }

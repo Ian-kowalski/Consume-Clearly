@@ -1,6 +1,6 @@
 using System.Collections;
 using Save;
-using inventory;
+using Inventory;
 using UnityEngine;
 
 namespace LevelObjects.Interactable
@@ -8,13 +8,13 @@ namespace LevelObjects.Interactable
     public class Hook : Interactable
     {
         private InventoryController inventoryController;
-        private inventoryObject InventoryData;
-        private bool RopeAttached;
-        private bool EnableRopeLogs = true;
+        private InventoryObject _InventoryData;
+        private bool _ropeAttached;
+        private bool _enableRopeLogs = true;
 
         void RopeLog(string message)
         {
-            if (EnableRopeLogs)
+            if (_enableRopeLogs)
                 Debug.Log(message);
         }
 
@@ -22,8 +22,8 @@ namespace LevelObjects.Interactable
         {
             inventoryController = FindFirstObjectByType<InventoryController>(FindObjectsInactive.Include);
             RopeLog("Inventory Controller found: " + (inventoryController != null));
-            InventoryData = inventoryController.InventoryObject;
-            RopeLog("Inventory Data found: " + (InventoryData != null));
+            _InventoryData = inventoryController.InventoryObject;
+            RopeLog("Inventory Data found: " + (_InventoryData != null));
         }
 
         public override void Interact()
@@ -33,29 +33,29 @@ namespace LevelObjects.Interactable
 
         public IEnumerator UseHook()
         {
-            if (InventoryData == null)
+            if (_InventoryData == null)
             {
                 RopeLog("Inventory data not found.");
                 yield break;
             }
-            int ropeIndex = InventoryData.FindItemIndexWithName("Rope");
+            int ropeIndex = _InventoryData.FindItemIndexWithName("Rope");
             if (ropeIndex == -1)
             {
                 RopeLog("Rope item not found in inventory.");
                 yield break;
             }
-            var ropeItem = InventoryData.GetItemAt(ropeIndex);
-            bool hasRope = !ropeItem.isEmpty && ropeItem.quantity > 0;
-            if (hasRope && !RopeAttached)
+            var ropeItem = _InventoryData.GetItemAt(ropeIndex);
+            bool hasRope = !ropeItem.IsEmpty && ropeItem.Quantity > 0;
+            if (hasRope && !_ropeAttached)
             {
-                InventoryData.ChangeQuantityAt(ropeIndex, 0);
-                RopeAttached = true;
+                _InventoryData.ChangeQuantityAt(ropeIndex, 0);
+                _ropeAttached = true;
                 RopeLog("Rope attached to the hook.");
             }
-            else if (RopeAttached)
+            else if (_ropeAttached)
             {
-                InventoryData.ChangeQuantityAt(ropeIndex, 1);
-                RopeAttached = false;
+                _InventoryData.ChangeQuantityAt(ropeIndex, 1);
+                _ropeAttached = false;
                 RopeLog("Rope removed from the hook.");
             }
             else

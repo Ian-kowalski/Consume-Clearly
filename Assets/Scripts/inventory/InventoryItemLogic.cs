@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace inventory
+namespace Inventory
 {
     public class InventoryItemLogic : MonoBehaviour
     {
@@ -17,9 +17,9 @@ namespace inventory
         [SerializeField]
         private Image itemBorder;
         [SerializeField]
-        private ItemActionPanel itemactionpanel;
+        private ItemActionPanel _itemActionPanel;
         [SerializeField]
-        private bool Usable;
+        private bool _usable;
         private Color ImageColor;
 
 
@@ -45,7 +45,7 @@ namespace inventory
             itemBorder.enabled = false;
         }
 
-        public void manipulateEventTrigger(bool emptying)
+        public void ManipulateEventTrigger(bool emptying)
         {
             Debug.Log("manipulateEventTrigger called with emptying: " + emptying);
             if (this == null || gameObject == null) return; // the object was destroyed
@@ -64,7 +64,7 @@ namespace inventory
         {
             this.itemIcon.gameObject.SetActive(true);
             this.itemIcon.sprite = sprite;
-            this.Usable = isUsable;
+            this._usable = isUsable;
             itemIcon.color = isUsable ? Color.white : Color.gray;
             this.itemQuantity.text = quantity.ToString();
         }
@@ -76,7 +76,7 @@ namespace inventory
 
         public void OnPointerClick(BaseEventData eventData)
         {
-            if (Usable)
+            if (_usable)
             {
                 PointerEventData pointerData = eventData as PointerEventData;
                 if (pointerData != null)
@@ -94,14 +94,14 @@ namespace inventory
             }
         }
 
-        public void btnEnable()
+        public void ButtonEnable()
         {
-            itemactionpanel.enable();
+            _itemActionPanel.Enable();
         }
 
-        public void btnDisable()
+        public void ButtonDisable()
         {
-            itemactionpanel.disable();
+            _itemActionPanel.Disable();
         }
 
     }

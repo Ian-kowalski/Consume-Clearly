@@ -1,22 +1,23 @@
+using System;
 using UnityEngine;
 
 namespace Items
 {
     [CreateAssetMenu(fileName = "Item Object", menuName = "Scriptable Objects/itemObject")]
-    public class itemObject : ScriptableObject
+    public class ItemObject : ScriptableObject
     {
         [field: SerializeField]
         public bool IsStackable { get; set; }
 
-        public int ID => GetInstanceID();
+        public int Id => GetInstanceID();
 
         [field: SerializeField]
         public int MaxStackSize { get; set; } = 1;
         [field: SerializeField]
-        string Name { get; set; }
+        String Name { get; set; }
         [field: SerializeField]
         [field: TextArea]
-        public string Description { get; set; }
+        public String Description { get; set; }
         [field: SerializeField]
         public Sprite ItemImage { get; set; }
         [field: SerializeField]
