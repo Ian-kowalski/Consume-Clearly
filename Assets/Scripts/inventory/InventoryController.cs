@@ -8,6 +8,7 @@ namespace inventory
         private InventoryLogic inventory;
         [SerializeField]
         private inventoryObject inventoryData;
+        public inventoryObject InventoryObject => inventoryData;
 
         private void Start()
         {
@@ -20,6 +21,7 @@ namespace inventory
             inventory = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
             inventory.InitializeInventory(inventoryData.Size);
             inventory.OnDescriptionRequested += HandleDescriptionRequest;
+            InventoryObject.OnItemModified += inventory.manipulateItemFuction;
         }
 
         private void HandleDescriptionRequest(int itemIndex)
@@ -47,7 +49,8 @@ namespace inventory
                     {
                         inventory.UpdateData(item.Key,
                             item.Value.item.ItemImage,
-                            item.Value.quantity);
+                            item.Value.quantity,
+                            item.Value.item.IsUsable);
                     }
                 }
                 else
