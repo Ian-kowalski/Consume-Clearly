@@ -31,8 +31,8 @@ MonoBehaviour:
     item: {fileID: 0}
   - quantity: 0
     item: {fileID: 0}
-  - quantity: 1
-    item: {fileID: 11400000, guid: 8375d93d8e79b4b45ace7e2be84b02db, type: 2}
+  - quantity: 0
+    item: {fileID: 0}
   - quantity: 0
     item: {fileID: 0}
   - quantity: 0
