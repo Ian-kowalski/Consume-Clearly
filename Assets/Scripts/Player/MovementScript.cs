@@ -253,14 +253,21 @@ namespace Player
         }
         public void Test_Jump()
         {
-            // For tests, set coyote time so the jump will be allowed regardless of tight grounding timing in tests.
-            coyoteTimeCounter = coyoteTime;
+            // For tests, simulate a jump button press by filling the jump buffer and calling the jump logic.
+            // Do NOT force coyote time or directly set the rigidbody velocity here so tests that depend
+            // on actual grounded/coyote timing remain valid.
+            jumpBufferTimeCounter = jumpBufferTime;
+            jumpAction();
+        }
 
+        // Backwards-compatible helper for tests that want to force a jump regardless of coyote timing.
+        public void Test_Jump_ForceCoyote()
+        {
+            coyoteTimeCounter = coyoteTime;
             jumpBufferTimeCounter = jumpBufferTime;
             jumpAction();
 
-            // Ensure tests observe the jump immediately: set the rigidbody's vertical velocity directly
-            // (tests check rb.linearVelocity immediately after calling this helper).
+            // Ensure tests observing velocity immediately can see the applied jump.
             if (rb != null)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
