@@ -6,22 +6,24 @@ using UnityEngine;
 
 namespace LevelObjects.Interactable
 {
-    public class rock : Interactable
+    public class Rock : Interactable
     {
         private Collider2D _collider;
         private SpriteRenderer _sprite;
         
         private Animator _poofAnimator;
         private List<SpriteRenderer> _poofRenderers = new List<SpriteRenderer>();
-        private const string poofClipName = "DustPoof";
-        private const string poofTriggerName = "Poof";
+        private const string PoofClipName = "DustPoof";
+        private const string PoofTriggerName = "Poof";
 
         private bool _used;
         private bool _poofPlayed;
-        private bool _poofAnimatorOriginallyEnabled = false;
+        // Cached lookup: whether the poof animator has the trigger parameter
+        private bool _poofAnimatorHasTrigger;
+        private int _poofTriggerHash;
 
         // Ensure refs are ready early (LoadState may run before Start)
-        private void Awake()
+        protected override void Awake()
         {
             EnsureInitialized();
         }
@@ -34,6 +36,8 @@ namespace LevelObjects.Interactable
 
             if (_poofAnimator != null)
             {
+                // precompute hash for the Poof trigger (faster than repeated string lookups)
+                _poofTriggerHash = Animator.StringToHash(PoofTriggerName);
                 // Only populate renderers once
                 if (_poofRenderers.Count == 0)
                 {
@@ -45,8 +49,18 @@ namespace LevelObjects.Interactable
                     }
                 }
 
-                // remember original enabled state and disable animator so it doesn't draw first frame
-                _poofAnimatorOriginallyEnabled = _poofAnimator.enabled;
+                // Cache whether the animator has the 'Poof' trigger so we don't need to scan parameters on every interact
+                _poofAnimatorHasTrigger = false;
+                foreach (var p in _poofAnimator.parameters)
+                {
+                    if (p.type == AnimatorControllerParameterType.Trigger && p.name == PoofTriggerName)
+                    {
+                        _poofAnimatorHasTrigger = true;
+                        break;
+                    }
+                }
+
+                // disable animator so it doesn't draw first frame
                 _poofAnimator.enabled = false;
 
                 // ensure poof renderers are disabled by default
@@ -61,26 +75,17 @@ namespace LevelObjects.Interactable
 
         void Start()
         {
-            Debug.Log($"[{name}] rock.Start() called");
-
-            // Keep Start logging but rely on EnsureInitialized for setup
             EnsureInitialized();
-
-            Debug.Log($"[{name}] Initialized. active={_sprite != null && _sprite.enabled && _collider != null && _collider.enabled}, used={_used}");
         }
 
         public override void Interact()
         {
             EnsureInitialized();
 
-            Debug.Log($"[{name}] Interact() called. used={_used}");
-
             if (_used) return;
             _used = true;
 
             if (_collider != null) _collider.enabled = false;
-            
-            Debug.Log($"[{name}] Interact stack trace:\n" + Environment.StackTrace);
 
             if (_poofAnimator != null && !_poofPlayed)
             {
@@ -91,15 +96,13 @@ namespace LevelObjects.Interactable
                 
                 _poofAnimator.enabled = true;
                 
-                if (HasAnimatorTrigger(_poofAnimator, poofTriggerName))
+                if (_poofAnimatorHasTrigger)
                 {
-                    Debug.Log($"[{name}] Triggering animator trigger '{poofTriggerName}'");
-                    _poofAnimator.SetTrigger(poofTriggerName);
+                    _poofAnimator.SetTrigger(_poofTriggerHash);
                 }
                 else
                 {
-                    Debug.Log($"[{name}] Playing animator state '{poofClipName}'");
-                    _poofAnimator.Play(poofClipName, -1, 0f);
+                    _poofAnimator.Play(PoofClipName, -1, 0f);
                 }
 
                 StartCoroutine(DisableAfterPoofFromAnimator());
@@ -109,19 +112,7 @@ namespace LevelObjects.Interactable
             if (_sprite != null)
             {
                 _sprite.enabled = false;
-                Debug.Log($"[{name}] No animator found or already played; sprite disabled immediately.");
             }
-        }
-
-        private bool HasAnimatorTrigger(Animator animator, string trigger)
-        {
-            if (animator == null) return false;
-            foreach (var p in animator.parameters)
-            {
-                if (p.type == AnimatorControllerParameterType.Trigger && p.name == trigger)
-                    return true;
-            }
-            return false;
         }
 
         private IEnumerator DisableAfterPoofFromAnimator()
@@ -132,7 +123,7 @@ namespace LevelObjects.Interactable
             {
                 foreach (var c in controller.animationClips)
                 {
-                    if (string.Equals(c.name, poofClipName, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(c.name, PoofClipName, StringComparison.OrdinalIgnoreCase))
                     {
                         duration = c.length;
                         break;
@@ -143,15 +134,12 @@ namespace LevelObjects.Interactable
                     duration = controller.animationClips[0].length;
             }
 
-            Debug.Log($"[{name}] Poof duration determined: {duration} seconds. Waiting...");
-
             if (duration > 0f)
                 yield return new WaitForSeconds(duration);
             else
                 yield return null;
 
             if (_sprite != null) _sprite.enabled = false;
-            Debug.Log($"[{name}] Poof finished; sprite disabled.");
             
             foreach (var r in _poofRenderers)
                 r.enabled = false;
@@ -159,7 +147,6 @@ namespace LevelObjects.Interactable
             if (_poofAnimator != null)
             {
                 _poofAnimator.enabled = false;
-                Debug.Log($"[{name}] Animator disabled after poof.");
             }
         }
 
@@ -181,7 +168,6 @@ namespace LevelObjects.Interactable
             // Only load state intended for this object
             if (string.IsNullOrEmpty(state.uniqueId) || state.uniqueId != GetUniqueId())
             {
-                Debug.Log($"[{name}] LoadState skipped: id mismatch (saved='{state.uniqueId}' this='{GetUniqueId()}')");
                 return;
             }
 
@@ -195,8 +181,11 @@ namespace LevelObjects.Interactable
             if (_collider != null) _collider.enabled = active;
             _used = !active;
 
-            // Option A: do NOT replay poof on load. If rock is used (active==false) mark poof as already played
-            _poofPlayed = !active;
+            if (active)
+            {
+                _poofPlayed = false;
+            }
+            
 
             // Ensure poof visuals/animator are disabled on load to avoid accidental first-frame flashes
             if (_poofAnimator != null)
@@ -205,8 +194,7 @@ namespace LevelObjects.Interactable
             }
             foreach (var r in _poofRenderers)
                 r.enabled = false;
-
-            Debug.Log($"[{name}] LoadState completed. active={active}, used={_used}, poofPlayed={_poofPlayed}");
         }
     }
 }
+

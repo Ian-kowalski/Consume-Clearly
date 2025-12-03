@@ -183,7 +183,6 @@ namespace Player
                     Debug.Log("Jump applied immediately (physics + animation simultaneously) - applied from jumpAction");
 
                     animationController.TriggerJump();
-                    Debug.Log("Jump animation triggered");
                     StartCoroutine(ApplyJumpAfterAnimation());
                 }
 
@@ -249,7 +248,6 @@ namespace Player
             // Clear waiting state; do not reapply physics if already applied.
             waitingForJumpAnimation = false;
             jumpApplied = false;
-            Debug.Log("Jump finished via Animation Event");
         }
 
 #if UNITY_EDITOR
