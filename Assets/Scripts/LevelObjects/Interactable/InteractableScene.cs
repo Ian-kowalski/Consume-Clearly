@@ -12,11 +12,6 @@ namespace LevelObjects.Interactable
         [Header("Scene to load")] [Tooltip("Choose which scene needs to be load")] [SerializeField]
         private Object sceneToLoad;
 
-        private void Start()
-        {
-            Debug.Log(sceneToLoad.name);
-        }
-
         public override void Interact()
         {
             var scene=sceneToLoad.name;
@@ -36,7 +31,7 @@ namespace LevelObjects.Interactable
         {
             if (state == null || state.uniqueId != GetUniqueId()) return;
 
-            Debug.Log("coucou");
+            Debug.Log("Loading Scene Changer");
         }
     }
 }
