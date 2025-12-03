@@ -17,3 +17,4 @@ MonoBehaviour:
   <Name>k__BackingField: Rope
   <Description>k__BackingField: Used to reach Higher places
   <ItemImage>k__BackingField: {fileID: -4570153536982545689, guid: 756f2426d9db9c8499593cf1f529a608, type: 3}
+  <IsUsable>k__BackingField: 1

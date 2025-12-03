@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace inventory
 {
@@ -36,13 +37,16 @@ namespace inventory
             }
         }
 
-        public void UpdateData(int index, Sprite sprite, int quantity)
+        public void UpdateData(int index, Sprite sprite, int quantity, bool isUsable)
         {
-            if (inventoryitems.Count >= index)
-            {
-                inventoryitems[index].SetData(sprite, quantity);
-            }
-        
+            if (index < 0 || index >= inventoryitems.Count) return;
+            inventoryitems[index].SetData(sprite, quantity,isUsable);
+        }
+
+        public void manipulateItemFuction(int index, bool emptying)
+        {
+            Debug.Log("Manipulating item function called for index: " + index + " with emptying: " + emptying);
+            inventoryitems[index].manipulateEventTrigger(emptying);
         }
 
         private void HandleShowItemAction(InventoryItemLogic logic)
@@ -74,9 +78,9 @@ namespace inventory
             ResetDescription();
         }
 
-        public void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
+        public void UpdateDescription(int itemIndex, Sprite itemSprite, string name, string description)
         {
-            descriptionpanel.SetDescription(itemImage, name, description);
+            descriptionpanel.SetDescription(itemSprite, name, description);
             DeselectAllSelections();
             inventoryitems[itemIndex].Select();
         }
