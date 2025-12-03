@@ -307,6 +307,7 @@ MonoBehaviour:
   itemQuantity: {fileID: 5788520365023775141}
   itemBorder: {fileID: 6058747352565167461}
   itemactionpanel: {fileID: 2307004498708546217}
+  Usable: 0
 --- !u!114 &4805745730538180776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,7 +457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8652512736978027705
 RectTransform:
   m_ObjectHideFlags: 0

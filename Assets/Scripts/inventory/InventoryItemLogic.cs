@@ -1,3 +1,4 @@
+using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer;
 using System;
 using TMPro;
 using UnityEngine;
@@ -17,20 +18,26 @@ namespace inventory
         private Image itemBorder;
         [SerializeField]
         private ItemActionPanel itemactionpanel;
+        [SerializeField]
+        private bool Usable;
+        private Color ImageColor;
+
 
         public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
-
-        private bool empty = true;
 
         private void Start()
         {
             Deselect();
         }
 
+        private void Update()
+        {
+            itemIcon.color = ImageColor;
+        }
+
         public void ResetData()
         {
             this.itemIcon.gameObject.SetActive(false);
-            empty = true;
         }
 
         public void Deselect()
@@ -38,12 +45,28 @@ namespace inventory
             itemBorder.enabled = false;
         }
 
-        public void SetData(Sprite sprite, int quantity)
+        public void manipulateEventTrigger(bool emptying)
+        {
+            Debug.Log("manipulateEventTrigger called with emptying: " + emptying);
+            if (this == null || gameObject == null) return; // the object was destroyed
+            EventTrigger trigger = this.GetComponent<EventTrigger>();
+            if (trigger != null)
+            {
+                trigger.enabled = emptying;
+                Debug.Log("EventTrigger enabled : " + (trigger.enabled));
+                itemQuantity.enabled = emptying;
+                Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
+                ImageColor = emptying ? Color.white : Color.gray;
+            }
+        }
+
+        public void SetData(Sprite sprite, int quantity, bool isUsable)
         {
             this.itemIcon.gameObject.SetActive(true);
             this.itemIcon.sprite = sprite;
+            this.Usable = isUsable;
+            itemIcon.color = isUsable ? Color.white : Color.gray;
             this.itemQuantity.text = quantity.ToString();
-            empty = false;
         }
 
         public void Select() 
@@ -53,18 +76,20 @@ namespace inventory
 
         public void OnPointerClick(BaseEventData eventData)
         {
-            Debug.Log("Pointer click detected on inventory item.");
-            PointerEventData pointerData = eventData as PointerEventData;
-            if (pointerData != null)
+            if (Usable)
             {
-                if (pointerData.button == PointerEventData.InputButton.Left)
+                PointerEventData pointerData = eventData as PointerEventData;
+                if (pointerData != null)
                 {
-                    Debug.Log("Left click detected on inventory item.");
-                    OnItemClicked?.Invoke(this);
-                }
-                else if (pointerData.button == PointerEventData.InputButton.Right)
-                {
-                    OnRightMouseBtnClick?.Invoke(this);
+                    if (pointerData.button == PointerEventData.InputButton.Left)
+                    {
+                        Debug.Log("Left click detected on inventory item.");
+                        OnItemClicked?.Invoke(this);
+                    }
+                    else if (pointerData.button == PointerEventData.InputButton.Right)
+                    {
+                        OnRightMouseBtnClick?.Invoke(this);
+                    }
                 }
             }
         }
