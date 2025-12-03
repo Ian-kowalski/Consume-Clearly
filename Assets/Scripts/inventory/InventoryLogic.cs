@@ -1,48 +1,52 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace inventory
+namespace Inventory
 {
     public class InventoryLogic : MonoBehaviour
     {
         [SerializeField]
-        private InventoryItemLogic itemprefab;
+        private InventoryItemLogic _itemPrefab;
         [SerializeField]
-        private RectTransform contentpanel;
+        private RectTransform _contentPanel;
         [SerializeField]
-        private InventoryDescription descriptionpanel;
+        private InventoryDescription _descriptionPanel;
 
-        private List<InventoryItemLogic> inventoryitems = new List<InventoryItemLogic>();
+        private List<InventoryItemLogic> _inventoryItems = new List<InventoryItemLogic>();
 
-        public event Action<int> OnDescriptionRequested, OnItemRequested;
+        public event Action<int> OnDescriptionRequested;
 
         private void Awake()
         {
-            descriptionpanel.ResetDescription();
+            _descriptionPanel.ResetDescription();
         }
 
         public void InitializeInventory(int size)
         {
-            inventoryitems = new List<InventoryItemLogic>();
-            contentpanel.DetachChildren();
+            _inventoryItems = new List<InventoryItemLogic>();
+            _contentPanel.DetachChildren();
             for (int i = 0; i < size; i++)
             {
-                InventoryItemLogic newitem = Instantiate(itemprefab, Vector3.zero, Quaternion.identity);
-                newitem.transform.SetParent(contentpanel);
-                inventoryitems.Add(newitem);
+                InventoryItemLogic newitem = Instantiate(_itemPrefab, Vector3.zero, Quaternion.identity);
+                newitem.transform.SetParent(_contentPanel);
+                _inventoryItems.Add(newitem);
                 newitem.OnItemClicked += HandleItemSelected;
                 newitem.OnRightMouseBtnClick += HandleShowItemAction;
             }
         }
 
-        public void UpdateData(int index, Sprite sprite, int quantity)
+        public void UpdateData(int index, Sprite sprite, int quantity, bool isUsable)
         {
-            if (inventoryitems.Count >= index)
-            {
-                inventoryitems[index].SetData(sprite, quantity);
-            }
-        
+            if (index < 0 || index >= _inventoryItems.Count) return;
+            _inventoryItems[index].SetData(sprite, quantity,isUsable);
+        }
+
+        public void ManipulateItemFuction(int index, bool emptying)
+        {
+            Debug.Log("Manipulating item function called for index: " + index + " with emptying: " + emptying);
+            _inventoryItems[index].ManipulateEventTrigger(emptying);
         }
 
         private void HandleShowItemAction(InventoryItemLogic logic)
@@ -57,7 +61,7 @@ namespace inventory
         {
             Debug.Log("Item selected");
             ResetDescription();
-            int index = inventoryitems.IndexOf(logic);
+            int index = _inventoryItems.IndexOf(logic);
             if (index < 0) return;
             OnDescriptionRequested?.Invoke(index);
         }
@@ -74,23 +78,23 @@ namespace inventory
             ResetDescription();
         }
 
-        public void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
+        public void UpdateDescription(int itemIndex, Sprite itemSprite, string name, string description)
         {
-            descriptionpanel.SetDescription(itemImage, name, description);
+            _descriptionPanel.SetDescription(itemSprite, name, description);
             DeselectAllSelections();
-            inventoryitems[itemIndex].Select();
+            _inventoryItems[itemIndex].Select();
         }
 
         public void ResetDescription()
         {
-            descriptionpanel.ResetDescription();
+            _descriptionPanel.ResetDescription();
             DeselectAllSelections();
             HideButtons();
         }
 
         private void DeselectAllSelections()
         {
-            foreach (InventoryItemLogic item in inventoryitems)
+            foreach (InventoryItemLogic item in _inventoryItems)
             {
                 item.Deselect();
             }
@@ -99,15 +103,15 @@ namespace inventory
 
         private void HideButtons()
         {
-            foreach (InventoryItemLogic item in inventoryitems)
+            foreach (InventoryItemLogic item in _inventoryItems)
             {
-                item.btnDisable();
+                item.ButtonDisable();
             }
         }
 
-        public void inventorySizeTest()
+        public void InventorySizeTest()
         {
-            Debug.Log("Inventory size is: " + inventoryitems.Count);
+            Debug.Log("Inventory size is: " + _inventoryItems.Count);
         }
     }
 }
