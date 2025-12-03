@@ -209,6 +209,14 @@ namespace Player
                 return;
             }
 
+            // Prefer using CompanionManager if available
+            if (State.CompanionManager.Instance != null)
+            {
+                State.CompanionManager.Instance.AssignTargetsToAll(targetPoint);
+                return;
+            }
+
+            // Fallback: assign directly to any CompanionFollow2D in the scene
             foreach (var companion in FindObjectsOfType<CompanionFollow2D>())
             {
                 companion.SetTarget(targetPoint);
