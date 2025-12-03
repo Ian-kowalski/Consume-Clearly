@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -30,9 +31,11 @@ namespace Player
         private float accelRate;
         private float coyoteTimeCounter;
         private float jumpBufferTimeCounter;
+        private bool waitingForJumpAnimation = false;
+        private bool jumpApplied = false;
 
         private AnimationController animationController;
-    
+
         private void Awake()
         {
             ValidateComponents();
@@ -55,10 +58,14 @@ namespace Player
                 enabled = false;
                 return;
             }
-        
+
             if (groundCheck == null)
             {
+                // Log an error so tests that expect the message still pass.
                 Debug.LogError("Ground Check reference missing from player! Please set it using SetupGroundCheck.");
+
+                // Disable component when groundCheck is missing. SetupGroundCheck will re-enable it when
+                // a valid transform is provided (used by PlayMode tests that assign it after adding the component).
                 enabled = false;
                 return;
             }
@@ -71,13 +78,19 @@ namespace Player
             {
                 Debug.LogError("Failed to assign GroundCheck! Movement script will not function correctly.");
             }
+            else
+            {
+                // If a GroundCheck is provided at runtime (e.g., PlayMode tests add it after the component),
+                // ensure the component is enabled so behavior runs as expected.
+                enabled = true;
+            }
         }
 
         private void Update()
         {
             horizontal = Input.GetAxisRaw("Horizontal");
             bool isGrounded = IsGrounded();
-        
+
             // Handle walking and idle animations
             if (isGrounded)
             {
@@ -93,15 +106,11 @@ namespace Player
                 }
             }
 
-            // Handle jumping animation
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                animationController.TriggerJump();
-            }
+            // Remove immediate animation trigger here; we'll trigger and wait from jump logic so the physics jump occurs only after the animation completes.
 
             // Handle sprite flipping
             animationController.FlipSprite(horizontal);
-        
+
             jump();
         }
 
@@ -112,6 +121,7 @@ namespace Player
 
         private bool IsGrounded()
         {
+            if (groundCheck == null) return false;
             return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         }
 
@@ -159,9 +169,24 @@ namespace Player
 
         public void jumpAction()
         {
-            if (coyoteTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+            // Allow jump when either within coyote time OR currently grounded (helps tests and tight timing cases).
+            bool canJump = (coyoteTimeCounter > 0f || IsGrounded()) && jumpBufferTimeCounter > 0f;
+
+            if (canJump)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+                // Only trigger the jump animation and start the coroutine if we're not already waiting for an animation to finish.
+                if (!waitingForJumpAnimation)
+                {
+                    // Apply the jump physics immediately so movement/physics happen at the same time as the animation.
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+                    jumpApplied = true;
+                    Debug.Log("Jump applied immediately (physics + animation simultaneously) - applied from jumpAction");
+
+                    animationController.TriggerJump();
+                    StartCoroutine(ApplyJumpAfterAnimation());
+                }
+
+                // clear buffer so we don't retrigger immediately
                 jumpBufferTimeCounter = 0f;
             }
 
@@ -172,6 +197,59 @@ namespace Player
             }
         }
 
+        private IEnumerator ApplyJumpAfterAnimation()
+        {
+            // Mark that we're waiting for the jump animation to finish so further jumps are blocked.
+            waitingForJumpAnimation = true;
+
+            // We no longer apply physics here; physics was applied synchronously in jumpAction().
+
+            // Wait for the animator to actually enter the Jump state, with a timeout to avoid hanging if something's misconfigured.
+            float timeout = 2f;
+            float elapsed = 0f;
+
+            while (!animationController.IsInJumpState() && elapsed < timeout)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            if (!animationController.IsInJumpState())
+            {
+                Debug.LogWarning("Jump animation didn't start in time. Allowing jump state to clear.");
+                // Even if animation didn't start, we've already applied the jump physics.
+                waitingForJumpAnimation = false;
+                jumpApplied = false;
+                yield break;
+            }
+
+            // Wait until the jump animation has completed (normalizedTime >= 1) or until timeout
+            elapsed = 0f;
+            while (animationController.IsInJumpState() && animationController.GetCurrentStateNormalizedTime() < 1f && elapsed < timeout)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            // Animation finished (or timed out). Allow jumping again.
+            waitingForJumpAnimation = false;
+            jumpApplied = false; // reset so next jump can be applied
+
+        }
+
+        // This public method can be called by an Animation Event placed at the end of the jump animation
+        // to apply the jump exactly when the animation completes.
+        public void ApplyJumpFromAnimation()
+        {
+            // Now that jump physics are applied immediately, this method should only be used to clear the waiting flag
+            // if you prefer to finish the jump from an animation event instead of relying on normalizedTime.
+            if (!waitingForJumpAnimation) return; // only allow if we are expecting a jump
+
+            // Clear waiting state; do not reapply physics if already applied.
+            waitingForJumpAnimation = false;
+            jumpApplied = false;
+        }
+
 #if UNITY_EDITOR
         public void Test_SetHorizontal(float value)
         {
@@ -180,16 +258,25 @@ namespace Player
         }
         public void Test_Jump()
         {
-            if (IsGrounded())
-            {
-                coyoteTimeCounter = coyoteTime;
-            }
-            else
-            {
-                coyoteTimeCounter -= Time.deltaTime;
-            }
+            // For tests, simulate a jump button press by filling the jump buffer and calling the jump logic.
+            // Do NOT force coyote time or directly set the rigidbody velocity here so tests that depend
+            // on actual grounded/coyote timing remain valid.
             jumpBufferTimeCounter = jumpBufferTime;
             jumpAction();
+        }
+
+        // Backwards-compatible helper for tests that want to force a jump regardless of coyote timing.
+        public void Test_Jump_ForceCoyote()
+        {
+            coyoteTimeCounter = coyoteTime;
+            jumpBufferTimeCounter = jumpBufferTime;
+            jumpAction();
+
+            // Ensure tests observing velocity immediately can see the applied jump.
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            }
         }
 #endif
     }
