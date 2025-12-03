@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Items;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace inventory
 {
@@ -111,14 +112,8 @@ namespace inventory
 
         public int FindItemIndexWithName(String Name)
         {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (!items[i].isEmpty && items[i].itemName == Name)
-                {
-                    return i;
-                }
-            }
-            return -1;
+            int index = items.FindIndex(item => !item.isEmpty && item.itemName == Name);
+            return index;
         }
     }
 
