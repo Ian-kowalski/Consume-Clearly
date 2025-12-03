@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace inventory
+namespace Inventory
 {
 
     public class ItemActionPanel : MonoBehaviour
@@ -8,14 +8,14 @@ namespace inventory
         [SerializeField]
         private GameObject button;
 
-        public void enable()
+        public void Enable()
         {
             if(!button.activeSelf)
                 button.SetActive(true);
             else return;
         }
 
-        public void disable()
+        public void Disable()
         {
             if (button.activeSelf)
                 button.SetActive(false);
