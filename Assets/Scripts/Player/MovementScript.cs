@@ -61,12 +61,13 @@ namespace Player
 
             if (groundCheck == null)
             {
-                // Log an error so tests that expect the message still pass, but do not disable the component.
-                // Tests create the ground check after adding the component; disabling here prevents tests from
-                // calling methods like Test_Jump on the component. Instead, guard against a null groundCheck
-                // in IsGrounded().
+                // Log an error so tests that expect the message still pass.
                 Debug.LogError("Ground Check reference missing from player! Please set it using SetupGroundCheck.");
-                // don't disable; the IsGrounded() method will handle null groundCheck safely.
+
+                // Disable component when groundCheck is missing. SetupGroundCheck will re-enable it when
+                // a valid transform is provided (used by PlayMode tests that assign it after adding the component).
+                enabled = false;
+                return;
             }
         }
 
@@ -76,6 +77,12 @@ namespace Player
             if (groundCheck == null)
             {
                 Debug.LogError("Failed to assign GroundCheck! Movement script will not function correctly.");
+            }
+            else
+            {
+                // If a GroundCheck is provided at runtime (e.g., PlayMode tests add it after the component),
+                // ensure the component is enabled so behavior runs as expected.
+                enabled = true;
             }
         }
 
