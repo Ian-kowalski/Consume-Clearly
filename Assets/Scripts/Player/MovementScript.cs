@@ -36,6 +36,12 @@ namespace Player
 
         private AnimationController animationController;
 
+        // Climb related
+        public bool IsClimbing { get; private set; } = false;
+        private float climbVerticalVelocity = 0f; // set by ClimbController each FixedUpdate
+        private Transform currentClimbTransform = null;
+        private bool currentClimbIsLadder = false;
+
         private void Awake()
         {
             ValidateComponents();
@@ -92,7 +98,7 @@ namespace Player
             bool isGrounded = IsGrounded();
 
             // Handle walking and idle animations
-            if (isGrounded)
+            if (isGrounded && !IsClimbing)
             {
                 if (Mathf.Abs(horizontal) > 0.1f)
                 {
@@ -117,6 +123,14 @@ namespace Player
         private void FixedUpdate()
         {
             Move();
+
+            // If climbing, apply the vertical velocity set by the ClimbController
+            if (IsClimbing)
+            {
+                // Preserve horizontal velocity (we want to lock horizontal while climbing)
+                float currentX = rb.linearVelocity.x;
+                rb.linearVelocity = new Vector2(currentX, climbVerticalVelocity);
+            }
         }
 
         private bool IsGrounded()
@@ -127,6 +141,14 @@ namespace Player
 
         private void Move()
         {
+            // While climbing we avoid applying horizontal control. Horizontal remains locked or zero.
+            if (IsClimbing)
+            {
+                // Option: lock horizontal movement while climbing
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+                return;
+            }
+
             targetSpeed = horizontal * speed;
 
             if (!IsGrounded())
@@ -249,6 +271,55 @@ namespace Player
             waitingForJumpAnimation = false;
             jumpApplied = false;
         }
+
+        // Climb control API ------------------
+        public void EnterClimb(Transform climbTransform, bool isLadder, bool snapToX = true)
+        {
+            IsClimbing = true;
+            currentClimbTransform = climbTransform;
+            currentClimbIsLadder = isLadder;
+
+            // Snap player X to climb object's X (snap-to-ladder behavior)
+            if (snapToX && currentClimbTransform != null)
+            {
+                Vector3 pos = transform.position;
+                pos.x = currentClimbTransform.position.x;
+                transform.position = pos;
+            }
+
+            // Ensure velocity reset on enter
+            rb.linearVelocity = new Vector2(0f, 0f);
+
+            // Notify animator via AnimationController
+            animationController.SetClimbActive(true);
+            animationController.SetClimbLadder(isLadder);
+            animationController.SetClimbRope(!isLadder);
+        }
+
+        public void ExitClimb(Vector2 exitVelocity)
+        {
+            IsClimbing = false;
+            currentClimbTransform = null;
+            currentClimbIsLadder = false;
+
+            // Apply exit velocity
+            rb.linearVelocity = exitVelocity;
+
+            // Reset climb vertical control
+            climbVerticalVelocity = 0f;
+
+            // Notify animator
+            animationController.SetClimbActive(false);
+            animationController.SetClimbLadder(false);
+            animationController.SetClimbRope(false);
+        }
+
+        // Called by ClimbController each FixedUpdate to specify the vertical velocity while climbing
+        public void SetClimbVertical(float verticalVelocity)
+        {
+            climbVerticalVelocity = verticalVelocity;
+        }
+
 
 #if UNITY_EDITOR
         public void Test_SetHorizontal(float value)
