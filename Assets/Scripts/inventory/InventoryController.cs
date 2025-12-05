@@ -9,7 +9,6 @@ namespace Inventory
         [SerializeField]
         private InventoryObject _inventoryData;
         public InventoryObject InventoryObject => _inventoryData;
-
         private void Start()
         {
             PrepareUI();
@@ -26,7 +25,6 @@ namespace Inventory
 
         private void HandleDescriptionRequest(int itemIndex)
         {
-            Debug.Log($"in handledescriptionrequest");
             InventoryItem inventoryItem = _inventoryData.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
             {

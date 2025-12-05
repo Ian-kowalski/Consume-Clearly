@@ -48,20 +48,14 @@ namespace Inventory
             ItemObject item = _items[index].Item;
             if (item != null)
             {
-                Debug.Log("Item found: " + item.name);
-                Debug.Log("Previous Quantity: " + prevQuantity + ", New Quantity: " + newQuantity);
                 bool crossedThreshold =
                     (prevQuantity == 0 && newQuantity > 0) || // 0 to 1 and more
                     (prevQuantity > 0 && newQuantity == 0);   // 1 and more to 0
-                Debug.Log("Crossed threshold: " + crossedThreshold);
 
                 if (crossedThreshold)
                 {
-                    Debug.Log("item usability is:" + item.IsUsable);
                     item.IsUsable = !item.IsUsable;
                     bool test = item.IsUsable;
-                    Debug.Log("Item usability changed to: " + item.IsUsable);
-                    Debug.Log("test is" + test);
 
                     _items[index].Item.IsUsable = item.IsUsable;
                     OnItemModified?.Invoke(index, test);

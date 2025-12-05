@@ -20,19 +20,23 @@ namespace Inventory
         private ItemActionPanel _itemActionPanel;
         [SerializeField]
         private bool _usable;
-        private Color ImageColor;
+        private Color ImageColor = Color.white;
+        private bool triggerEnabled = true;
+        private EventTrigger trigger;
 
 
         public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
 
         private void Start()
         {
+            trigger = this.GetComponent<EventTrigger>();
             Deselect();
         }
 
         private void Update()
         {
             itemIcon.color = ImageColor;
+            trigger.enabled = triggerEnabled;
         }
 
         public void ResetData()
@@ -49,11 +53,12 @@ namespace Inventory
         {
             Debug.Log("manipulateEventTrigger called with emptying: " + emptying);
             if (this == null || gameObject == null) return; // the object was destroyed
-            EventTrigger trigger = this.GetComponent<EventTrigger>();
+            trigger = this.GetComponent<EventTrigger>();
+            Debug.Log("" + trigger);
             if (trigger != null)
             {
-                trigger.enabled = emptying;
-                Debug.Log("EventTrigger enabled : " + (trigger.enabled));
+                triggerEnabled = emptying;
+                Debug.Log("EventTrigger enabled : " + (triggerEnabled));
                 itemQuantity.enabled = emptying;
                 Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
                 ImageColor = emptying ? Color.white : Color.gray;
@@ -83,7 +88,6 @@ namespace Inventory
                 {
                     if (pointerData.button == PointerEventData.InputButton.Left)
                     {
-                        Debug.Log("Left click detected on inventory item.");
                         OnItemClicked?.Invoke(this);
                     }
                     else if (pointerData.button == PointerEventData.InputButton.Right)

@@ -359,6 +359,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5553747274094957253, guid: d04970f683333b64a808e77cedc5239a, type: 3}
+      propertyPath: _contentPanel
+      value: 
+      objectReference: {fileID: 394441179}
     - target: {fileID: 8232966953266245271, guid: d04970f683333b64a808e77cedc5239a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 574
@@ -600,6 +604,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &394441179 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1014239599418018295, guid: d04970f683333b64a808e77cedc5239a, type: 3}
+  m_PrefabInstance: {fileID: 70160396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &654324539
 GameObject:
   m_ObjectHideFlags: 0

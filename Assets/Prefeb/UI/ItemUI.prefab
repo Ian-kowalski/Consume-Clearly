@@ -306,8 +306,8 @@ MonoBehaviour:
   itemIcon: {fileID: 1806057324712723164}
   itemQuantity: {fileID: 5788520365023775141}
   itemBorder: {fileID: 6058747352565167461}
-  itemactionpanel: {fileID: 2307004498708546217}
-  Usable: 0
+  _itemActionPanel: {fileID: 2307004498708546217}
+  _usable: 0
 --- !u!114 &4805745730538180776
 MonoBehaviour:
   m_ObjectHideFlags: 0
