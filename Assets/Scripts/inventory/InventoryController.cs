@@ -25,9 +25,11 @@ namespace Inventory
 
         private void HandleDescriptionRequest(int itemIndex)
         {
+            Debug.Log($"Description requested for item at index: {itemIndex}");
             InventoryItem inventoryItem = _inventoryData.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
             {
+                Debug.Log("Item is empty, resetting description.");
                 _inventoryLogic.ResetDescription();
                 return;
             }

@@ -307,7 +307,7 @@ MonoBehaviour:
   itemQuantity: {fileID: 5788520365023775141}
   itemBorder: {fileID: 6058747352565167461}
   _itemActionPanel: {fileID: 2307004498708546217}
-  _usable: 0
+  _usable: 1
 --- !u!114 &4805745730538180776
 MonoBehaviour:
   m_ObjectHideFlags: 0

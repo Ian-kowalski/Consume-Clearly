@@ -19,7 +19,7 @@ namespace Inventory
         [SerializeField]
         private ItemActionPanel _itemActionPanel;
         [SerializeField]
-        private bool _usable;
+        private bool _usable = true;
         private Color ImageColor = Color.white;
         private bool triggerEnabled = true;
         private EventTrigger trigger;
@@ -39,7 +39,7 @@ namespace Inventory
             trigger.enabled = triggerEnabled;
         }
 
-        public void ResetData()
+        public void ResetData() //not used, i think
         {
             this.itemIcon.gameObject.SetActive(false);
         }
@@ -52,8 +52,7 @@ namespace Inventory
         public void ManipulateEventTrigger(bool emptying)
         {
             Debug.Log("manipulateEventTrigger called with emptying: " + emptying);
-            if (this == null || gameObject == null) return; // the object was destroyed
-            trigger = this.GetComponent<EventTrigger>();
+            if (this == null || gameObject == null) return;
             Debug.Log("" + trigger);
             if (trigger != null)
             {
