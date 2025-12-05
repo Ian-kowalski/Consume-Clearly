@@ -11,10 +11,10 @@ namespace Player
         private static readonly string IS_WALKING = "IsWalking";
         private static readonly string TRIGGER_JUMP = "TriggerJump";
         private static readonly string IS_IDLE = "IsIdle";
-        private static readonly string TRIGGER_CLIMB_ROPE = "TriggerClimbRope";
-        private static readonly string TRIGGER_CLIMB_LADDER = "TriggerClimbLadder";
         private static readonly string CLIMB_ROPE = "ClimbRope";
         private static readonly string CLIMB_LADDER = "ClimbLadder";
+        private static readonly string CLIMB_ACTIVE = "ClimbActive";
+        
 
         // Animation state names
         private static readonly string JUMP_STATE_NAME = "Jump";
@@ -65,20 +65,6 @@ namespace Player
             SetIdle(false);
         }
         
-        public void TriggerClimbRope()
-        {
-            if (animator == null) return;
-            animator.SetTrigger(TRIGGER_CLIMB_ROPE);
-            SetIdle(false);
-        }
-        
-        public void TriggerClimbLadder()
-        {
-            if (animator == null) return;
-            animator.SetTrigger(TRIGGER_CLIMB_LADDER);
-            SetIdle(false);
-        }
-        
         public void SetClimbRope(bool isClimbing)
         {
             if (animator == null) return;
@@ -117,6 +103,14 @@ namespace Player
             {
                 spriteRenderer.flipX = horizontalInput < 0;
             }
+        }
+
+        // Added: expose CLIMB_ACTIVE animator parameter so other systems can toggle climb states.
+        public void SetClimbActive(bool isActive)
+        {
+            if (animator == null) return;
+            animator.SetBool(CLIMB_ACTIVE, isActive);
+            if (isActive) SetIdle(false);
         }
     }
 }
