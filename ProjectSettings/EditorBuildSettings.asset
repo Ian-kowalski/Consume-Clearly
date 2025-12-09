@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoamingArea/TrainStation.unity
     guid: d3fb9bc2638214b4b83e5274aba1f322
+  - enabled: 1
+    path: Assets/Scenes/RoamingArea/Appartement.unity
+    guid: 945b6f6c03c43fa4f947c82648bbb99e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
