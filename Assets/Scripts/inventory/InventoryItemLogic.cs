@@ -82,11 +82,14 @@ namespace Inventory
         {
             if (_usable)
             {
+                Debug.Log("OnPointerClick detected");
                 PointerEventData pointerData = eventData as PointerEventData;
                 if (pointerData != null)
                 {
+                    Debug.Log("PointerEventData is valid");
                     if (pointerData.button == PointerEventData.InputButton.Left)
                     {
+                        Debug.Log("Left mouse button clicked");
                         OnItemClicked?.Invoke(this);
                     }
                     else if (pointerData.button == PointerEventData.InputButton.Right)

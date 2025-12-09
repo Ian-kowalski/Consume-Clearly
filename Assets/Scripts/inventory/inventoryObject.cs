@@ -55,7 +55,7 @@ namespace Inventory
                 if (crossedThreshold)
                 {
                     item.IsUsable = !item.IsUsable;
-                    bool test = item.IsUsable;
+                    bool test = !item.IsUsable;
 
                     _items[index].Item.IsUsable = item.IsUsable;
                     OnItemModified?.Invoke(index, test);
