@@ -831,13 +831,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2604fa0d0ac8749931ed2b5397f1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  itemprefab: {fileID: 7924026398829100520, guid: 372805ce5d0ae434b8125fbdc1d8d176, type: 3}
-  contentpanel: {fileID: 1014239599418018295}
-  descriptionpanel: {fileID: 5290137031703090499}
-  testSprite: {fileID: -4570153536982545689, guid: 756f2426d9db9c8499593cf1f529a608, type: 3}
-  testQuantity: 1
-  testTitle: Rope
-  testDescription: For reaching areas
+  _itemPrefab: {fileID: 7924026398829100520, guid: 372805ce5d0ae434b8125fbdc1d8d176, type: 3}
+  _contentPanel: {fileID: 1014239599418018295}
+  _descriptionPanel: {fileID: 5290137031703090499}
 --- !u!1 &5129382400810751907
 GameObject:
   m_ObjectHideFlags: 0

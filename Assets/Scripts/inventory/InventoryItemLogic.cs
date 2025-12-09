@@ -19,23 +19,27 @@ namespace Inventory
         [SerializeField]
         private ItemActionPanel _itemActionPanel;
         [SerializeField]
-        private bool _usable;
-        private Color ImageColor;
+        private bool _usable = true;
+        private Color ImageColor = Color.white;
+        private bool triggerEnabled = true;
+        private EventTrigger trigger;
 
 
         public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
 
         private void Start()
         {
+            trigger = this.GetComponent<EventTrigger>();
             Deselect();
         }
 
         private void Update()
         {
             itemIcon.color = ImageColor;
+            trigger.enabled = triggerEnabled;
         }
 
-        public void ResetData()
+        public void ResetData() //not used, i think
         {
             this.itemIcon.gameObject.SetActive(false);
         }
@@ -48,12 +52,12 @@ namespace Inventory
         public void ManipulateEventTrigger(bool emptying)
         {
             Debug.Log("manipulateEventTrigger called with emptying: " + emptying);
-            if (this == null || gameObject == null) return; // the object was destroyed
-            EventTrigger trigger = this.GetComponent<EventTrigger>();
+            if (this == null || gameObject == null) return;
+            Debug.Log("" + trigger);
             if (trigger != null)
             {
-                trigger.enabled = emptying;
-                Debug.Log("EventTrigger enabled : " + (trigger.enabled));
+                triggerEnabled = emptying;
+                Debug.Log("EventTrigger enabled : " + (triggerEnabled));
                 itemQuantity.enabled = emptying;
                 Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
                 ImageColor = emptying ? Color.white : Color.gray;
@@ -78,12 +82,14 @@ namespace Inventory
         {
             if (_usable)
             {
+                Debug.Log("OnPointerClick detected");
                 PointerEventData pointerData = eventData as PointerEventData;
                 if (pointerData != null)
                 {
+                    Debug.Log("PointerEventData is valid");
                     if (pointerData.button == PointerEventData.InputButton.Left)
                     {
-                        Debug.Log("Left click detected on inventory item.");
+                        Debug.Log("Left mouse button clicked");
                         OnItemClicked?.Invoke(this);
                     }
                     else if (pointerData.button == PointerEventData.InputButton.Right)
