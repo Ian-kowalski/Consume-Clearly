@@ -2766,6 +2766,22 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1456055498080726146, guid: f68b7f545b139a44b9e954055174f11d, type: 3}
+      propertyPath: airAcceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456055498080726146, guid: f68b7f545b139a44b9e954055174f11d, type: 3}
+      propertyPath: airDeceleration
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456055498080726146, guid: f68b7f545b139a44b9e954055174f11d, type: 3}
+      propertyPath: landAcceleration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456055498080726146, guid: f68b7f545b139a44b9e954055174f11d, type: 3}
+      propertyPath: landDeceleration
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4036169441490382326, guid: f68b7f545b139a44b9e954055174f11d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.5

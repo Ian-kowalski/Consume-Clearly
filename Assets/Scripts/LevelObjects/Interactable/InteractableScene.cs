@@ -2,6 +2,7 @@ using UnityEngine;
 using Save;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Player;
 
 namespace LevelObjects.Interactable
 {
@@ -15,6 +16,7 @@ namespace LevelObjects.Interactable
         public override void Interact()
         {
             var scene=sceneToLoad.name;
+            Debug.Log(scene);
             SceneManager.LoadScene(scene);
         }
 
