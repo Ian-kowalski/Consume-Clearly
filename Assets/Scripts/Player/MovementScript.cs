@@ -88,10 +88,17 @@ namespace Player
 
         private void Update()
         {
+
+            animationController.FlipSprite(horizontal);
+
+            jump();
+        }
+
+        private void FixedUpdate()
+        {
             horizontal = Input.GetAxisRaw("Horizontal");
             bool isGrounded = IsGrounded();
-
-            // Handle walking and idle animations
+            
             if (isGrounded)
             {
                 if (Mathf.Abs(horizontal) > 0.1f)
@@ -105,17 +112,7 @@ namespace Player
                     animationController.SetIdle(true);
                 }
             }
-
-            // Remove immediate animation trigger here; we'll trigger and wait from jump logic so the physics jump occurs only after the animation completes.
-
-            // Handle sprite flipping
-            animationController.FlipSprite(horizontal);
-
-            jump();
-        }
-
-        private void FixedUpdate()
-        {
+            
             Move();
         }
 
