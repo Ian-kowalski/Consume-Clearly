@@ -69,6 +69,7 @@ namespace Tests.PlayMode
             for (int i = 0; i < fixtedUpdatesToSimulate; i++)
             {
                 yield return new WaitForFixedUpdate();
+                Debug.Log("Fixed Update " + (i + 1) + ": Player Velocity = " + rb.linearVelocity);
             }
             
             Assert.Greater(rb.linearVelocity.x, 0.05f, "Player should move right when horizontal input is positive.");
