@@ -64,9 +64,9 @@ namespace Tests.PlayMode
         public IEnumerator PlayerMovesRightWhenInputIsPositive()
         {
             int fixtedUpdatesToSimulate = 1;
-            movementScript.Test_ApplyHorizontalForFixedUpdates(1f,fixtedUpdatesToSimulate);
+            movementScript.Test_ApplyHorizontalForFixedUpdates(1f,3);
 
-            for (int i = 0; i < fixtedUpdatesToSimulate; i++)
+            for (int i = 0; i < 2; i++)
             {
                 yield return new WaitForFixedUpdate();
                 Debug.Log("Fixed Update " + (i + 1) + ": Player Velocity = " + rb.linearVelocity);
