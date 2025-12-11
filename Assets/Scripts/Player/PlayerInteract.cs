@@ -6,7 +6,7 @@ namespace Player
     public class PlayerInteract : MonoBehaviour
     {
         public float interactRange = 2f;
-        public KeyCode interactKey = KeyCode.Q;
+        public KeyCode interactKey = KeyCode.E;
         public LayerMask interactableLayer;
 
         [Header("Raycast tuning")]
