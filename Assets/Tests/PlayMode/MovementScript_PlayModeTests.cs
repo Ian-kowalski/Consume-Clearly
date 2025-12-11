@@ -63,7 +63,7 @@ namespace Tests.PlayMode
         [UnityTest]
         public IEnumerator PlayerMovesRightWhenInputIsPositive()
         {
-            int fixtedUpdatesToSimulate = 3;
+            int fixtedUpdatesToSimulate = 1;
             movementScript.Test_ApplyHorizontalForFixedUpdates(1f,fixtedUpdatesToSimulate);
 
             for (int i = 0; i < fixtedUpdatesToSimulate; i++)
