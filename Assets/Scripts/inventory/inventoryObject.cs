@@ -7,13 +7,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-namespace inventory
+namespace Inventory
 {
     [CreateAssetMenu(fileName = "inventoryObject", menuName = "Scriptable Objects/inventoryObject")]
-    public class inventoryObject : ScriptableObject
+    public class InventoryObject : ScriptableObject
     {
         [SerializeField]
-        private List<inventoryItem> items;
+        private List<InventoryItem> _items;
 
         [field: SerializeField]
         public int Size { get; private set; } = 36;
@@ -22,37 +22,37 @@ namespace inventory
 
         public void Initialize()
         {
-            items = new List<inventoryItem>();
+            _items = new List<InventoryItem>();
             for (int i = 0; i < Size; i++)
             {
-                items.Add(inventoryItem.getEmpty());
+                _items.Add(InventoryItem.GetEmpty());
             }
 
         }
 
-        public void AddItem(itemObject item, int quantity)
+        public void AddItem(ItemObject item, int quantity)
         {
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < _items.Count; i++)
             {
-                if (items[i].isEmpty)
+                if (_items[i].IsEmpty)
                 {
-                    items[i] = new inventoryItem { item = item, quantity = quantity };
+                    _items[i] = new InventoryItem { Item = item, Quantity = quantity };
                     return;
                 }
             }
         }
 
-        public void manipulateItem(int Index, int NewQuantity, int PrevQuantity)
+        public void ManipulateItem(int index, int newQuantity, int prevQuantity)
         {
-            Debug.Log("Manipulating item at index: " + Index);
-            itemObject item = items[Index].item;
+            Debug.Log("Manipulating item at index: " + index);
+            ItemObject item = _items[index].Item;
             if (item != null)
             {
                 Debug.Log("Item found: " + item.name);
-                Debug.Log("Previous Quantity: " + PrevQuantity + ", New Quantity: " + NewQuantity);
+                Debug.Log("Previous Quantity: " + prevQuantity + ", New Quantity: " + newQuantity);
                 bool crossedThreshold =
-                    (PrevQuantity == 0 && NewQuantity > 0) || // 0 to 1 and more
-                    (PrevQuantity > 0 && NewQuantity == 0);   // 1 and more to 0
+                    (prevQuantity == 0 && newQuantity > 0) || // 0 to 1 and more
+                    (prevQuantity > 0 && newQuantity == 0);   // 1 and more to 0
                 Debug.Log("Crossed threshold: " + crossedThreshold);
 
                 if (crossedThreshold)
@@ -63,79 +63,79 @@ namespace inventory
                     Debug.Log("Item usability changed to: " + item.IsUsable);
                     Debug.Log("test is" + test);
 
-                    items[Index].item.IsUsable = item.IsUsable;
-                    OnItemModified?.Invoke(Index, test);
+                    _items[index].Item.IsUsable = item.IsUsable;
+                    OnItemModified?.Invoke(index, test);
                 }
             }
-            else Debug.Log("No item to at index: " + Index);
+            else Debug.Log("No item to at index: " + index);
         }
 
         public void ChangeQuantityAt(int index, int newAmount)
         {
-            if (index < 0 || index >= items.Count)
+            if (index < 0 || index >= _items.Count)
             {
                 Debug.LogWarning($"ChangeQuantityAt: index out of range {index}");
                 return;
             }
-            var current = items[index];
-            if (current.isEmpty)
+            var current = _items[index];
+            if (current.IsEmpty)
             {
                 Debug.LogWarning($"ChangeQuantityAt: no item at index {index}");
                 return;
             }
-            int prevQuantity = current.quantity;
+            int prevQuantity = current.Quantity;
             Debug.Log("Previous quantity: " + prevQuantity);
             Debug.Log("newAmount: " + newAmount);
-            if (current.item != null)
+            if (current.Item != null)
             {
-                manipulateItem(index, newAmount, prevQuantity);
-                items[index] = current.ChangeQuantity(newAmount);
+                ManipulateItem(index, newAmount, prevQuantity);
+                _items[index] = current.ChangeQuantity(newAmount);
             }
         }
 
 
-        public Dictionary<int, inventoryItem> GetCurrentInventoryState()
+        public Dictionary<int, InventoryItem> GetCurrentInventoryState()
         {
-            Dictionary<int, inventoryItem> itemDictionary = new Dictionary<int, inventoryItem>();
-            for (int i = 0; i < items.Count; i++)
+            Dictionary<int, InventoryItem> itemDictionary = new Dictionary<int, InventoryItem>();
+            for (int i = 0; i < _items.Count; i++)
             {
-                if (items[i].isEmpty) continue;
-                itemDictionary[i] = items[i];
+                if (_items[i].IsEmpty) continue;
+                itemDictionary[i] = _items[i];
             }
             return itemDictionary;
         }
 
-        public inventoryItem GetItemAt(int itemIndex)
+        public InventoryItem GetItemAt(int itemIndex)
         {
-            return items[itemIndex];
+            return _items[itemIndex];
         }
 
-        public int FindItemIndexWithName(String Name)
+        public int FindItemIndexWithName(String name)
         {
-            int index = items.FindIndex(item => !item.isEmpty && item.itemName == Name);
+            int index = _items.FindIndex(item => !item.IsEmpty && item.ItemName == name);
             return index;
         }
     }
 
     [Serializable]
-    public struct inventoryItem 
+    public struct InventoryItem 
     {
-        public int quantity;
-        public itemObject item;
-        public Sprite itemSprite => item != null ? item.ItemImage : null;
-        public string itemDescription => item != null ? item.Description : "";
-        public string itemName => item != null ? item.name : "";
-        public bool isEmpty => item == null;
+        public int Quantity;
+        public ItemObject Item;
+        public Sprite ItemSprite => Item != null ? Item.ItemImage : null;
+        public string ItemDescription => Item != null ? Item.Description : "";
+        public string ItemName => Item != null ? Item.name : "";
+        public bool IsEmpty => Item == null;
 
-        public inventoryItem ChangeQuantity(int newAmount)
+        public InventoryItem ChangeQuantity(int newAmount)
         {
-            return new inventoryItem
+            return new InventoryItem
             {
-                item = this.item,
-                quantity = newAmount
+                Item = this.Item,
+                Quantity = newAmount
             };
         }
 
-        public static inventoryItem getEmpty() => new inventoryItem { item = null, quantity = 0 };
+        public static InventoryItem GetEmpty() => new InventoryItem { Item = null, Quantity = 0 };
     }
 }
