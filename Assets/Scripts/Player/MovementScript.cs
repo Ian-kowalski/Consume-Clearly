@@ -250,12 +250,20 @@ namespace Player
             jumpApplied = false;
         }
 
+       
 #if UNITY_EDITOR
-        public void Test_SetHorizontal(float value)
+        public void Test_ApplyHorizontalForFixedUpdates(float horizontalValue, int steps = 3)
         {
-            horizontal = value;
-            Move();
+            if (rb == null) rb = GetComponent<Rigidbody2D>();
+            
+            for (int i = 0; i < Mathf.Max(1, steps); i++)
+            {
+                horizontal = horizontalValue;
+                Move();
+            }
         }
+
+        
         public void Test_Jump()
         {
             // For tests, simulate a jump button press by filling the jump buffer and calling the jump logic.

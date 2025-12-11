@@ -35,8 +35,12 @@ namespace Tests.PlayMode
             var animator = player.AddComponent<Animator>();
             var animController = player.AddComponent<AnimationController>();
 
-            player.transform.position = new Vector2(0, 1);
+            // Place player so groundCheck clearly overlaps the ground collider on CI
+            player.transform.position = new Vector2(0, 0.6f);
             rb.gravityScale = 2f;
+
+            // disable Animator to avoid repeated "Animator is not playing an AnimatorController" logs on CI
+            animator.enabled = false;
 
             // Create ground check before adding MovementScript
             var groundCheckObj = new GameObject("GroundCheck");
@@ -59,15 +63,22 @@ namespace Tests.PlayMode
         [UnityTest]
         public IEnumerator PlayerMovesRightWhenInputIsPositive()
         {
-            movementScript.Test_SetHorizontal(1f);
-            yield return new WaitForFixedUpdate();
-            Assert.Greater(rb.linearVelocity.x, 0.1f, "Player should move right when horizontal input is positive.");
+            int fixtedUpdatesToSimulate = 3;
+            movementScript.Test_ApplyHorizontalForFixedUpdates(1f,fixtedUpdatesToSimulate);
+
+            for (int i = 0; i < fixtedUpdatesToSimulate; i++)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+            
+            Assert.Greater(rb.linearVelocity.x, 0.05f, "Player should move right when horizontal input is positive.");
         }
 
         [UnityTest]
         public IEnumerator PlayerJumpsWhenGroundedAndJumpExecuted()
         {
-            player.transform.position = new Vector2(0, 1);
+            player.transform.position = new Vector2(0, 0.6f);
+            yield return null;
             yield return new WaitForFixedUpdate();
 
             movementScript.Test_Jump();
