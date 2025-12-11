@@ -88,10 +88,17 @@ namespace Player
 
         private void Update()
         {
+
+            animationController.FlipSprite(horizontal);
+
+            jump();
+        }
+
+        private void FixedUpdate()
+        {
             horizontal = Input.GetAxisRaw("Horizontal");
             bool isGrounded = IsGrounded();
-
-            // Handle walking and idle animations
+            
             if (isGrounded)
             {
                 if (Mathf.Abs(horizontal) > 0.1f)
@@ -105,17 +112,7 @@ namespace Player
                     animationController.SetIdle(true);
                 }
             }
-
-            // Remove immediate animation trigger here; we'll trigger and wait from jump logic so the physics jump occurs only after the animation completes.
-
-            // Handle sprite flipping
-            animationController.FlipSprite(horizontal);
-
-            jump();
-        }
-
-        private void FixedUpdate()
-        {
+            
             Move();
         }
 
@@ -250,12 +247,20 @@ namespace Player
             jumpApplied = false;
         }
 
+       
 #if UNITY_EDITOR
-        public void Test_SetHorizontal(float value)
+        public void Test_ApplyHorizontalForFixedUpdates(float horizontalValue, int steps = 3)
         {
-            horizontal = value;
-            Move();
+            if (rb == null) rb = GetComponent<Rigidbody2D>();
+            
+            for (int i = 0; i < Mathf.Max(1, steps); i++)
+            {
+                horizontal = horizontalValue;
+                Move();
+            }
         }
+
+        
         public void Test_Jump()
         {
             // For tests, simulate a jump button press by filling the jump buffer and calling the jump logic.
