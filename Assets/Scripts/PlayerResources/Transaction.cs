@@ -1,7 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
-using inventory;
+using Inventory;
 using Items;
 
 namespace PlayerResources
@@ -21,8 +21,8 @@ namespace PlayerResources
         [SerializeField] public float MSValue;
         [SerializeField] public float CSValue;
 
-        [SerializeField] private inventoryObject inventory;
-        [SerializeField] private itemObject itemObject;
+        [SerializeField] private InventoryObject inventory;
+        [SerializeField] private ItemObject itemObject;
 
         private void Start()
         {
