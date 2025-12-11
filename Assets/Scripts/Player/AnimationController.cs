@@ -12,6 +12,9 @@ namespace Player
         private static readonly string TRIGGER_JUMP = "TriggerJump";
         private static readonly string IS_IDLE = "IsIdle";
 
+        // Animation state names
+        private static readonly string JUMP_STATE_NAME = "Jump";
+
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -56,6 +59,21 @@ namespace Player
         {
             animator.SetTrigger(TRIGGER_JUMP);
             SetIdle(false);
+        }
+        
+        // Helper to detect if the animator is currently in the jump state.
+        public bool IsInJumpState()
+        {
+            if (animator == null) return false;
+            var state = animator.GetCurrentAnimatorStateInfo(0);
+            return state.IsName(JUMP_STATE_NAME);
+        }
+
+        // Returns the normalized time of the current state (0..inf, 1 means the state completed one loop)
+        public float GetCurrentStateNormalizedTime()
+        {
+            if (animator == null) return 0f;
+            return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
         }
 
         public void SetIdle(bool isIdle)
