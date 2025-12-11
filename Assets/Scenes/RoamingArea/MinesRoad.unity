@@ -167,6 +167,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: a8a1cf78-4217-4603-b486-bbc76bcb97f0
   sceneToLoad: {fileID: 102900000, guid: bdc37d2348c8de0499f0af7ced2c9929, type: 3}
+  gameManager: {fileID: 648753194}
 --- !u!61 &53395282
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1275,6 +1276,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: 1b6722d1-7d0c-4735-8428-dbf7fe4d0116
   sceneToLoad: {fileID: 102900000, guid: 3e4b97dd67980834db8293f45c9689c3, type: 3}
+  gameManager: {fileID: 648753194}
 --- !u!61 &692733606
 BoxCollider2D:
   m_ObjectHideFlags: 0

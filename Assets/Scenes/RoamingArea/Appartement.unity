@@ -609,6 +609,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: 57ab37b3-ab61-4f43-95f5-a4aed77027ee
   sceneToLoad: {fileID: 102900000, guid: 3e4b97dd67980834db8293f45c9689c3, type: 3}
+  gameManager: {fileID: 1823887124}
 --- !u!61 &642849417
 BoxCollider2D:
   m_ObjectHideFlags: 0

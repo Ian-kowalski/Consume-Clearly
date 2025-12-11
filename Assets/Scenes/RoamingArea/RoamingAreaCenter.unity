@@ -474,6 +474,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: a082a34b-33a2-4cef-937b-f561b4237382
   sceneToLoad: {fileID: 102900000, guid: 945b6f6c03c43fa4f947c82648bbb99e, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!61 &273528264
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1084,6 +1085,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: a082a34b-33a2-4cef-937b-f561b4237382
   sceneToLoad: {fileID: 102900000, guid: bdc37d2348c8de0499f0af7ced2c9929, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!61 &461889345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1935,6 +1937,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: 6176c4e8-10a3-4678-9099-ccc427e2b9c4
   sceneToLoad: {fileID: 102900000, guid: 5e90393581a921e409a20ce76272d6b6, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!61 &964240932
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2326,6 +2329,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: acf8949a-89e4-4cea-9aa9-f316e87f16ce
   sceneToLoad: {fileID: 102900000, guid: bdc37d2348c8de0499f0af7ced2c9929, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!61 &1084128939
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2436,6 +2440,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: a082a34b-33a2-4cef-937b-f561b4237382
   sceneToLoad: {fileID: 102900000, guid: bc60536e62204d84ea676f6381f962e4, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!61 &1101118523
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3336,6 +3341,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: a082a34b-33a2-4cef-937b-f561b4237382
   sceneToLoad: {fileID: 102900000, guid: 945b6f6c03c43fa4f947c82648bbb99e, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!61 &1529875904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3707,6 +3713,7 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: c4d2c3a3-af2f-4c3d-a1e3-c64a7809507f
   sceneToLoad: {fileID: 102900000, guid: d3fb9bc2638214b4b83e5274aba1f322, type: 3}
+  gameManager: {fileID: 1319448961}
 --- !u!1 &1903959845
 GameObject:
   m_ObjectHideFlags: 0
