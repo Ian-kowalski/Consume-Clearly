@@ -42,23 +42,30 @@ namespace Inventory
             }
         }
 
+        public void RemoveItem(int index)
+        {
+            if (index < 0 || index >= _items.Count)
+            {
+                Debug.LogWarning($"removeItem: index out of range {index}");
+                return;
+            }
+            _items[index] = InventoryItem.GetEmpty();
+        }
+
         public void ManipulateItem(int index, int newQuantity, int prevQuantity)
         {
             Debug.Log("Manipulating item at index: " + index);
             ItemObject item = _items[index].Item;
             if (item != null)
             {
-                bool crossedThreshold =
-                    (prevQuantity == 0 && newQuantity > 0) || // 0 to 1 and more
-                    (prevQuantity > 0 && newQuantity == 0);   // 1 and more to 0
-
+                bool wasEmpty = prevQuantity == 0;
+                bool isEmptyNow = newQuantity == 0;
+                bool crossedThreshold = wasEmpty != isEmptyNow;
                 if (crossedThreshold)
                 {
-                    item.IsUsable = !item.IsUsable;
-                    bool test = !item.IsUsable;
-
+                    item.IsUsable = newQuantity > 0;
                     _items[index].Item.IsUsable = item.IsUsable;
-                    OnItemModified?.Invoke(index, test);
+                    OnItemModified?.Invoke(index, item.IsUsable);
                 }
             }
             else Debug.Log("No item to at index: " + index);
@@ -82,6 +89,11 @@ namespace Inventory
             Debug.Log("newAmount: " + newAmount);
             if (current.Item != null)
             {
+                if (current.Item.MaxStackSize < newAmount)
+                {
+                    Debug.LogWarning($"ChangeQuantityAt: new amount {newAmount} exceeds max stack size {current.Item.MaxStackSize} for item {current.Item.name}");
+                    return;
+                }
                 ManipulateItem(index, newAmount, prevQuantity);
                 _items[index] = current.ChangeQuantity(newAmount);
             }
