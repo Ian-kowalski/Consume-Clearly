@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 273528265}
   - component: {fileID: 273528264}
   - component: {fileID: 273528263}
+  - component: {fileID: 273528266}
   m_Layer: 8
   m_Name: loadbuildings
   m_TagString: Untagged
@@ -675,6 +676,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &273528266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273528261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &346790177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1160,7 @@ GameObject:
   - component: {fileID: 461889346}
   - component: {fileID: 461889345}
   - component: {fileID: 461889344}
+  - component: {fileID: 461889347}
   m_Layer: 8
   m_Name: loadWindesheim
   m_TagString: Untagged
@@ -1285,30 +1302,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &462560275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 462560277}
-  - component: {fileID: 462560276}
-  m_Layer: 0
-  m_Name: PlayerSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &462560276
+--- !u!114 &461889347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462560275}
+  m_GameObject: {fileID: 461889342}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
@@ -1317,21 +1317,6 @@ MonoBehaviour:
   isDefaultSpawn: 1
   spawnType: 0
   spawnID: 
---- !u!4 &462560277
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462560275}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44, y: 11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &480303326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,6 +1985,7 @@ GameObject:
   - component: {fileID: 964240930}
   - component: {fileID: 964240932}
   - component: {fileID: 964240931}
+  - component: {fileID: 964240933}
   m_Layer: 8
   m_Name: loadMinesRoad
   m_TagString: Untagged
@@ -2083,6 +2069,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &964240933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964240929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &965861950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,6 +2407,7 @@ GameObject:
   - component: {fileID: 1084128940}
   - component: {fileID: 1084128939}
   - component: {fileID: 1084128938}
+  - component: {fileID: 1084128941}
   m_Layer: 0
   m_Name: loadFoundry
   m_TagString: Untagged
@@ -2489,6 +2491,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 346790178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1084128941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084128937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &1101118520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,6 +2518,7 @@ GameObject:
   - component: {fileID: 1101118524}
   - component: {fileID: 1101118523}
   - component: {fileID: 1101118522}
+  - component: {fileID: 1101118525}
   m_Layer: 8
   m_Name: loadComunityBuilding
   m_TagString: Untagged
@@ -2642,6 +2660,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1101118525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101118520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!4 &1111742096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8559603078208366587, guid: a37cad1638bf380459a25c0f2e6aa825, type: 3}
@@ -3401,6 +3434,7 @@ GameObject:
   - component: {fileID: 1529875905}
   - component: {fileID: 1529875904}
   - component: {fileID: 1529875903}
+  - component: {fileID: 1529875906}
   m_Layer: 8
   m_Name: loadAppartment
   m_TagString: Untagged
@@ -3542,6 +3576,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1529875906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529875901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &1633524135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3726,6 +3775,7 @@ GameObject:
   - component: {fileID: 1744830968}
   - component: {fileID: 1744830970}
   - component: {fileID: 1744830971}
+  - component: {fileID: 1744830972}
   m_Layer: 8
   m_Name: loadTrainStation
   m_TagString: Untagged
@@ -3809,6 +3859,21 @@ MonoBehaviour:
   requiresLever: 0
   uniqueId: c4d2c3a3-af2f-4c3d-a1e3-c64a7809507f
   sceneToLoad: {fileID: 102900000, guid: d3fb9bc2638214b4b83e5274aba1f322, type: 3}
+--- !u!114 &1744830972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744830967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &1903959845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4047,6 +4112,7 @@ GameObject:
   - component: {fileID: 2139727972}
   - component: {fileID: 2139727974}
   - component: {fileID: 2139727973}
+  - component: {fileID: 2139727975}
   m_Layer: 6
   m_Name: frontBuilding
   m_TagString: Untagged
@@ -4173,6 +4239,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2139727975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139727971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4182,7 +4263,6 @@ SceneRoots:
   - {fileID: 732986732}
   - {fileID: 1903959846}
   - {fileID: 31052832}
-  - {fileID: 462560277}
   - {fileID: 1319448963}
   - {fileID: 2000930579}
   - {fileID: 1281957551}

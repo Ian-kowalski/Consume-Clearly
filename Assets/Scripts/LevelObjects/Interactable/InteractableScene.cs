@@ -16,8 +16,21 @@ namespace LevelObjects.Interactable
         public override void Interact()
         {
             var scene=sceneToLoad.name;
+            PlayerSpawnPoint[] spawnPoints = FindObjectsOfType<PlayerSpawnPoint>();
+            if (spawnPoints.Length > 0)
+            {
+                Debug.Log("More than one spawn point");
+                foreach (var spawnPoint in spawnPoints)
+                {
+                    if (spawnPoint.transform == transform)
+                    {
+                        Debug.Log("set default spawn");
+                    }
+                }
+            }
+
             Debug.Log(scene);
-            SceneManager.LoadScene(scene);
+            //SceneManager.LoadScene(scene);
         }
 
         public override InteractableObjectState SaveState()
