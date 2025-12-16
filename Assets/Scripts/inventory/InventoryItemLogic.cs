@@ -57,6 +57,11 @@ namespace Inventory
                 itemQuantity.enabled = emptying;
                 Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
                 ImageColor = emptying ? Color.white : Color.gray;
+                // Apply color immediately to the visible icon to avoid depending on Update() timing in tests/runtime
+                if (itemIcon != null)
+                {
+                    itemIcon.color = ImageColor;
+                }
             }
         }
 

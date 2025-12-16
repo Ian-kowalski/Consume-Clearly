@@ -20,7 +20,10 @@ namespace Inventory
 
         private void Awake()
         {
-            _descriptionPanel.ResetDescription();
+            if (_descriptionPanel != null)
+            {
+                _descriptionPanel.ResetDescription();
+            }
         }
 
         public void InitializeInventory(int size)
