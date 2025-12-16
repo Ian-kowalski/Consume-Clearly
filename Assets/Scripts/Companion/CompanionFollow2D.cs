@@ -1,10 +1,10 @@
 using System.Collections;
 using NavMeshPlus.NavMeshPlus_master.NavMeshComponents.Scripts;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
-using Player;
 
-namespace State
+namespace Companion
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(AnimationController))]

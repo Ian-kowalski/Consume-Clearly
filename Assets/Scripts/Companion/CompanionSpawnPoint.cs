@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace State
+namespace Companion
 {
     public class CompanionSpawnPoint : MonoBehaviour
     {

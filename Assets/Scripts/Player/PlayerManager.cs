@@ -1,5 +1,5 @@
 using System.Collections;
-using State;
+using Companion;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -210,9 +210,9 @@ namespace Player
             }
 
             // Prefer using CompanionManager if available
-            if (State.CompanionManager.Instance != null)
+            if (CompanionManager.Instance != null)
             {
-                State.CompanionManager.Instance.AssignTargetsToAll(targetPoint);
+                CompanionManager.Instance.AssignTargetsToAll(targetPoint);
                 return;
             }
 

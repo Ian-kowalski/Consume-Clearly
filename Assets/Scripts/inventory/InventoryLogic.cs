@@ -36,7 +36,8 @@ namespace Inventory
                 newitem.transform.SetParent(_contentPanel);
                 _inventoryItems.Add(newitem);
                 newitem.OnItemClicked += HandleItemSelected;
-                newitem.OnRightMouseBtnClick += HandleShowItemAction;
+                newitem.OnRightMouseBtnClick += HandleShowItemAction; 
+                newitem.SetSlotIndex(i);
             }
         }
 
@@ -46,18 +47,22 @@ namespace Inventory
             _inventoryItems[index].SetData(sprite, quantity,isUsable);
         }
 
-        public void ManipulateItemFuction(int index, bool emptying)
+        public void ManipulateItemFunction(int index, bool isUsable)
         {
-            Debug.Log("Manipulating item function called for index: " + index + " with emptying: " + emptying);
-            _inventoryItems[index].ManipulateEventTrigger(emptying);
+            Debug.Log("Manipulating item function called for index: " + index + " with emptying: " + isUsable);
+            _inventoryItems[index].ManipulateEventTrigger(isUsable);
+            ResetDescription();
         }
 
         private void HandleShowItemAction(InventoryItemLogic logic)
         {
-            //HideButtons();
-            //int index = inventoryitems.IndexOf(logic);
-            //if (index < 0) return;
-            //inventoryitems[index].btnEnable();
+            HideButtons();
+            int index = _inventoryItems.IndexOf(logic);
+            if (index < 0) return;
+            if (_inventoryItems[index].HasItem) 
+            {
+                _inventoryItems[index].ButtonEnable();
+            }
         }
 
         private void HandleItemSelected(InventoryItemLogic logic)

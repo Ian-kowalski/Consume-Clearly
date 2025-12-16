@@ -9,7 +9,6 @@ namespace Inventory
         [SerializeField]
         private InventoryObject _inventoryData;
         public InventoryObject InventoryObject => _inventoryData;
-
         private void Start()
         {
             PrepareUI();
@@ -21,15 +20,16 @@ namespace Inventory
             _inventoryLogic = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
             _inventoryLogic.InitializeInventory(_inventoryData.Size);
             _inventoryLogic.OnDescriptionRequested += HandleDescriptionRequest;
-            InventoryObject.OnItemModified += _inventoryLogic.ManipulateItemFuction;
+            InventoryObject.OnItemModified += _inventoryLogic.ManipulateItemFunction;
         }
 
         private void HandleDescriptionRequest(int itemIndex)
         {
-            Debug.Log($"in handledescriptionrequest");
+            Debug.Log($"Description requested for item at index: {itemIndex}");
             InventoryItem inventoryItem = _inventoryData.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
             {
+                Debug.Log("Item is empty, resetting description.");
                 _inventoryLogic.ResetDescription();
                 return;
             }

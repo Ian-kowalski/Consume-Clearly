@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -8249197410289733627}
   - component: {fileID: 6978252231117196438}
   - component: {fileID: 3325875414331394727}
+  - component: {fileID: 2895222603076180700}
   m_Layer: 3
   m_Name: player
   m_TagString: Player
@@ -235,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17d686654617d4485dd179130b3e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::InventoryController
-  _inventoryData: {fileID: 0}
+  _inventoryData: {fileID: 11400000, guid: 6b2c4cdbc3940d84e8dfc146e0274b3b, type: 2}
 --- !u!114 &3325875414331394727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +256,23 @@ MonoBehaviour:
     m_Bits: 256
   originOffset: 0.5
   circleRadius: 0.12
+--- !u!114 &2895222603076180700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823572384380113146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa074dd7923413f9a285cc4723a3fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.ClimbController
+  climbSpeed: 3
+  debugLogs: 1
+  pushOffHorizontal: 6
+  pushOffVertical: 3
+  jumpOffVertical: 8
 --- !u!1 &2287662028223444186
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,9 @@
-using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 
 namespace Inventory
 {
@@ -19,11 +19,14 @@ namespace Inventory
         [SerializeField]
         private ItemActionPanel _itemActionPanel;
         [SerializeField]
-        private bool _usable;
-        private Color ImageColor;
-
+        private bool _usable = true;
+        private Color _imageColor = Color.white;
+        private bool _leftClickEnabled = true;
 
         public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
+        public int SlotIndex { get; private set; } = -1;
+        public void SetSlotIndex(int index) => SlotIndex = index;
+        public bool HasItem => itemIcon != null && itemIcon.gameObject.activeSelf;
 
         private void Start()
         {
@@ -32,10 +35,10 @@ namespace Inventory
 
         private void Update()
         {
-            itemIcon.color = ImageColor;
+            itemIcon.color = _imageColor;
         }
 
-        public void ResetData()
+        public void ResetData() //not used, i think
         {
             this.itemIcon.gameObject.SetActive(false);
         }
@@ -45,24 +48,16 @@ namespace Inventory
             itemBorder.enabled = false;
         }
 
-        public void ManipulateEventTrigger(bool emptying)
+        public void ManipulateEventTrigger(bool isUsable)
         {
-            Debug.Log("manipulateEventTrigger called with emptying: " + emptying);
-            if (this == null || gameObject == null) return; // the object was destroyed
-            EventTrigger trigger = this.GetComponent<EventTrigger>();
-            if (trigger != null)
-            {
-                trigger.enabled = emptying;
-                Debug.Log("EventTrigger enabled : " + (trigger.enabled));
-                itemQuantity.enabled = emptying;
-                Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
-                ImageColor = emptying ? Color.white : Color.gray;
-                // Apply color immediately to the visible icon to avoid depending on Update() timing in tests/runtime
-                if (itemIcon != null)
-                {
-                    itemIcon.color = ImageColor;
-                }
-            }
+            Debug.Log("manipulateEventTrigger called with emptying: " + isUsable);
+            if (this == null || gameObject == null) return;
+            _leftClickEnabled = isUsable;
+            Debug.Log("Left Click Trigger enabled : " + (_leftClickEnabled));
+            itemQuantity.enabled = isUsable;
+            Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
+            _imageColor = isUsable ? Color.white : Color.gray;
+            Debug.Log("Image color set to : " + (_imageColor));
         }
 
         public void SetData(Sprite sprite, int quantity, bool isUsable)
@@ -81,21 +76,27 @@ namespace Inventory
 
         public void OnPointerClick(BaseEventData eventData)
         {
-            if (_usable)
+            PointerEventData pointerData = eventData as PointerEventData;
+            if (pointerData == null) return;
+
+            if (pointerData.button == PointerEventData.InputButton.Left)
             {
-                PointerEventData pointerData = eventData as PointerEventData;
-                if (pointerData != null)
+                // Only invoke left-click if both the item is usable and left-click handling is enabled.
+                if (_leftClickEnabled)
                 {
-                    if (pointerData.button == PointerEventData.InputButton.Left)
-                    {
-                        Debug.Log("Left click detected on inventory item.");
-                        OnItemClicked?.Invoke(this);
-                    }
-                    else if (pointerData.button == PointerEventData.InputButton.Right)
-                    {
-                        OnRightMouseBtnClick?.Invoke(this);
-                    }
+                    Debug.Log("Left mouse button clicked");
+                    OnItemClicked?.Invoke(this);
                 }
+                else
+                {
+                    Debug.Log("Left-click ignored (, leftClickEnabled: " + _leftClickEnabled + ")");
+                }
+            }
+            else if (pointerData.button == PointerEventData.InputButton.Right)
+            {
+                // Right-click remains active regardless of _leftClickEnabled.
+                Debug.Log("Right mouse button clicked");
+                OnRightMouseBtnClick?.Invoke(this);
             }
         }
 

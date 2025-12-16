@@ -11,6 +11,10 @@ namespace Player
         private static readonly string IS_WALKING = "IsWalking";
         private static readonly string TRIGGER_JUMP = "TriggerJump";
         private static readonly string IS_IDLE = "IsIdle";
+        private static readonly string CLIMB_ROPE = "ClimbRope";
+        private static readonly string CLIMB_LADDER = "ClimbLadder";
+        private static readonly string CLIMB_ACTIVE = "ClimbActive";
+        
 
         // Animation state names
         private static readonly string JUMP_STATE_NAME = "Jump";
@@ -61,15 +65,27 @@ namespace Player
             SetIdle(false);
         }
         
-        // Helper to detect if the animator is currently in the jump state.
+        public void SetClimbRope(bool isClimbing)
+        {
+            if (animator == null) return;
+            animator.SetBool(CLIMB_ROPE, isClimbing);
+            if (isClimbing) SetIdle(false);
+        }
+
+        public void SetClimbLadder(bool isClimbing)
+        {
+            if (animator == null) return;
+            animator.SetBool(CLIMB_LADDER, isClimbing);
+            if (isClimbing) SetIdle(false);
+        }
+        
         public bool IsInJumpState()
         {
             if (animator == null) return false;
             var state = animator.GetCurrentAnimatorStateInfo(0);
             return state.IsName(JUMP_STATE_NAME);
         }
-
-        // Returns the normalized time of the current state (0..inf, 1 means the state completed one loop)
+        
         public float GetCurrentStateNormalizedTime()
         {
             if (animator == null) return 0f;
@@ -87,6 +103,14 @@ namespace Player
             {
                 spriteRenderer.flipX = horizontalInput < 0;
             }
+        }
+
+        // Added: expose CLIMB_ACTIVE animator parameter so other systems can toggle climb states.
+        public void SetClimbActive(bool isActive)
+        {
+            if (animator == null) return;
+            animator.SetBool(CLIMB_ACTIVE, isActive);
+            if (isActive) SetIdle(false);
         }
     }
 }
