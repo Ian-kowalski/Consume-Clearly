@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace State
+namespace Companion
 {
     public class FollowState : MonoBehaviour
     {
