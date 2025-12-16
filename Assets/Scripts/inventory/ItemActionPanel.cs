@@ -6,20 +6,70 @@ namespace Inventory
     public class ItemActionPanel : MonoBehaviour
     {
         [SerializeField]
-        private GameObject button;
+        private GameObject quantityButton;
+        [SerializeField]
+        private GameObject removeButton;
 
         public void Enable()
         {
-            if(!button.activeSelf)
-                button.SetActive(true);
+            if (!removeButton.activeSelf && !quantityButton.activeSelf)
+            {
+                removeButton.SetActive(true);
+                quantityButton.SetActive(true);
+            }
             else return;
         }
 
         public void Disable()
         {
-            if (button.activeSelf)
-                button.SetActive(false);
+            if (removeButton.activeSelf && quantityButton.activeSelf)
+            {
+                removeButton.SetActive(false);
+                quantityButton.SetActive(false);
+            }
             else return;
+        }
+
+        public void Remove()
+        {
+            var itemSlot = GetComponentInParent<InventoryItemLogic>();
+            if (itemSlot == null)
+            {
+                Debug.LogWarning("Buttons.remove: no InventoryItemLogic found in parent chain.");
+                return;
+            }
+
+            int index = itemSlot.SlotIndex;
+            var controller = FindObjectOfType<InventoryController>(true);
+            if (controller == null)
+            {
+                Debug.LogWarning("Buttons.remove: InventoryController not found in scene.");
+                return;
+            }
+
+            controller.InventoryObject.RemoveItem(index);
+            Debug.Log($"Remove clicked for slot index: {index}");
+        }
+
+        public void QuantityUp()
+        {
+            var itemSlot = GetComponentInParent<InventoryItemLogic>();
+            if (itemSlot == null)
+            {
+                Debug.LogWarning("Buttons.remove: no InventoryItemLogic found in parent chain.");
+                return;
+            }
+
+            int index = itemSlot.SlotIndex;
+            var controller = FindObjectOfType<InventoryController>(true);
+            if (controller == null)
+            {
+                Debug.LogWarning("Buttons.remove: InventoryController not found in scene.");
+                return;
+            }
+            int itemQ = controller.InventoryObject.GetItemAt(index).Quantity;
+            controller.InventoryObject.ManipulateItem(index, itemQ+1, itemQ);
+            Debug.Log($"Remove clicked for slot index: {index}");
         }
     }
 }

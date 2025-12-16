@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/MineLevel/NavMesh-NavMesh Surface.asset.meta
-guid: 8125d3e2c49b9bb458721dca9299129c
+guid: 72d77d32ce23db1409e067eee81f71cc
 NativeFormatImporter:
-========
 guid: 15f73ac44dc4a9f4f83c42d9485f6136
 folderAsset: yes
 DefaultImporter:
->>>>>>>> main:Assets/Scenes/RoamingArea.meta
   externalObjects: {}
   mainObjectFileID: 23800000
   userData: 

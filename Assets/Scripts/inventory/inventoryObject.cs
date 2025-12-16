@@ -42,29 +42,30 @@ namespace Inventory
             }
         }
 
+        public void RemoveItem(int index)
+        {
+            if (index < 0 || index >= _items.Count)
+            {
+                Debug.LogWarning($"removeItem: index out of range {index}");
+                return;
+            }
+            _items[index] = InventoryItem.GetEmpty();
+        }
+
         public void ManipulateItem(int index, int newQuantity, int prevQuantity)
         {
             Debug.Log("Manipulating item at index: " + index);
             ItemObject item = _items[index].Item;
             if (item != null)
             {
-                Debug.Log("Item found: " + item.name);
-                Debug.Log("Previous Quantity: " + prevQuantity + ", New Quantity: " + newQuantity);
-                bool crossedThreshold =
-                    (prevQuantity == 0 && newQuantity > 0) || // 0 to 1 and more
-                    (prevQuantity > 0 && newQuantity == 0);   // 1 and more to 0
-                Debug.Log("Crossed threshold: " + crossedThreshold);
-
+                bool wasEmpty = prevQuantity == 0;
+                bool isEmptyNow = newQuantity == 0;
+                bool crossedThreshold = wasEmpty != isEmptyNow;
                 if (crossedThreshold)
                 {
-                    Debug.Log("item usability is:" + item.IsUsable);
-                    item.IsUsable = !item.IsUsable;
-                    bool test = item.IsUsable;
-                    Debug.Log("Item usability changed to: " + item.IsUsable);
-                    Debug.Log("test is" + test);
-
+                    item.IsUsable = newQuantity > 0;
                     _items[index].Item.IsUsable = item.IsUsable;
-                    OnItemModified?.Invoke(index, test);
+                    OnItemModified?.Invoke(index, item.IsUsable);
                 }
             }
             else Debug.Log("No item to at index: " + index);
@@ -88,6 +89,11 @@ namespace Inventory
             Debug.Log("newAmount: " + newAmount);
             if (current.Item != null)
             {
+                if (current.Item.MaxStackSize < newAmount)
+                {
+                    Debug.LogWarning($"ChangeQuantityAt: new amount {newAmount} exceeds max stack size {current.Item.MaxStackSize} for item {current.Item.name}");
+                    return;
+                }
                 ManipulateItem(index, newAmount, prevQuantity);
                 _items[index] = current.ChangeQuantity(newAmount);
             }
