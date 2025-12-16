@@ -41,19 +41,19 @@ namespace Tests.EditMode
         [Test]
         public void IsSceneValidForCamera_ReturnsFalseForMainMenu()
         {
-            // set private CurrentScene to MainMenu
-            typeof(GameManager).GetField("CurrentScene", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic)
-                .SetValue(gm, "MainMenu");
+            // set CurrentScene to MainMenu via its non-public setter
+            var currentSceneProp = typeof(GameManager).GetProperty("CurrentScene", BindingFlags.Public | BindingFlags.Instance);
+            var setMethod = currentSceneProp.GetSetMethod(true); // non-public setter
+            setMethod.Invoke(gm, new object[] { "MainMenu" });
 
             var method = typeof(GameManager).GetMethod("IsSceneValidForCamera", BindingFlags.NonPublic | BindingFlags.Instance);
             var result = (bool)method.Invoke(gm, null);
             Assert.IsFalse(result);
 
-            typeof(GameManager).GetField("CurrentScene", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic)
-                .SetValue(gm, "Level1");
+            // set CurrentScene to Level1 via setter
+            setMethod.Invoke(gm, new object[] { "Level1" });
             result = (bool)method.Invoke(gm, null);
             Assert.IsTrue(result);
         }
     }
 }
-
