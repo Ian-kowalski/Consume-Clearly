@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b4e1cd9d9f5824c87cbc1ed4dbff92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::PlayerAnimationController
+  jumpStateName: Jump
 --- !u!70 &-8249197410289733627
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -238,15 +239,18 @@ MonoBehaviour:
   jumpForce: 12
   canJump: 1
   followDistance: 2
+  lookAheadDistance: 2
   groundCheckRadius: 0.1
   groundCheck: {fileID: 8132787090314073876}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  coyoteTime: 0.2
-  jumpBufferTime: 0.2
+    m_Bits: 64
   repathDistance: 1
   stuckCheckDistance: 2
+  stuckTimeout: 1
+  smoothingPoints: 3
+  linkJumpHeight: 2.5
+  linkJumpDuration: 0.5
 --- !u!1 &7993382541483594524
 GameObject:
   m_ObjectHideFlags: 0

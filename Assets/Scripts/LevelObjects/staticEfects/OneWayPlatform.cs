@@ -18,7 +18,7 @@ namespace LevelObjects.staticEfects
     
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 StartCoroutine(DisableCollision());
             }
@@ -28,7 +28,7 @@ namespace LevelObjects.staticEfects
         {
             // Temporarily disable the platform
             platformEffector.rotationalOffset = 180f;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.7f);
             platformEffector.rotationalOffset = 0f;
         }
     }
