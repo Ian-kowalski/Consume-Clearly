@@ -61,6 +61,7 @@ namespace LevelObjects.Interactable
             else
             {
                 RopeLog("No rope available in inventory or to take from hook.");
+                RopeLog("has rope= " + hasRope + " ropeattached= " + _ropeAttached);
             }
             yield break;
         }
@@ -71,7 +72,7 @@ namespace LevelObjects.Interactable
             return new InteractableObjectState
             {
                 uniqueId = GetUniqueId(),
-                isActive = gameObject.activeSelf
+                isActive = _ropeAttached,
             };
         }
 
@@ -79,6 +80,9 @@ namespace LevelObjects.Interactable
         {
             if (state == null || state.uniqueId != GetUniqueId()) return;
             StopAllCoroutines();
+
+            _ropeAttached = state.isActive;
+            RopeLog("Loaded ropeAttached (from isActive): " + _ropeAttached);
         }
     }
 }

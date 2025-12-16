@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17d686654617d4485dd179130b3e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::InventoryController
-  _inventoryData: {fileID: 0}
+  _inventoryData: {fileID: 11400000, guid: 6b2c4cdbc3940d84e8dfc146e0274b3b, type: 2}
 --- !u!114 &3325875414331394727
 MonoBehaviour:
   m_ObjectHideFlags: 0
