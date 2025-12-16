@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48245dbdf5f93854e8c71387c75b24dd, type: 3}
   m_Name: Rope
   m_EditorClassIdentifier: Main:Items:ItemObject
-  isStackable: 0
-  maxStackSize: 1
-  displayName: Rope
-  description: used to climb
-  itemImage: {fileID: -4570153536982545689, guid: 756f2426d9db9c8499593cf1f529a608, type: 3}
-  isUsable: 1
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Rope
+  <Description>k__BackingField: Used to climb
+  <ItemImage>k__BackingField: {fileID: -4570153536982545689, guid: 756f2426d9db9c8499593cf1f529a608, type: 3}
+  <IsUsable>k__BackingField: 1
