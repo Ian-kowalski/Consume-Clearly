@@ -2440,6 +2440,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2132027755086850326, guid: 3c5fc5c63abc5c84782fc9cf103448c2, type: 3}
+      propertyPath: uniqueId
+      value: 88d790c1-3cc9-4131-9a44-981f4871089a
+      objectReference: {fileID: 0}
     - target: {fileID: 2581630075129105177, guid: 3c5fc5c63abc5c84782fc9cf103448c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.56
@@ -2492,10 +2496,7 @@ PrefabInstance:
     - {fileID: 7155199445858799552, guid: 3c5fc5c63abc5c84782fc9cf103448c2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2628635114628146425, guid: 3c5fc5c63abc5c84782fc9cf103448c2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1645729501}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c5fc5c63abc5c84782fc9cf103448c2, type: 3}
 --- !u!1 &905371726
 GameObject:
@@ -5700,28 +5701,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1645729499 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2628635114628146425, guid: 3c5fc5c63abc5c84782fc9cf103448c2, type: 3}
-  m_PrefabInstance: {fileID: 892217852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1645729501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645729499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1205fec76386dc14ca0c9b01d557ff88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Main::LevelObjects.Interactable.Hook
-  requiresLever: 0
-  uniqueId: 1ec8605e-aa57-462c-a96f-49f96473460a
-  ropePrefab: {fileID: 2364229924494128044, guid: 0db7614ec8e912c4ab5f01a388cc3bb6, type: 3}
-  ropeParent: {fileID: 1413607083}
-  ropeVariants: []
 --- !u!1 &1677244458
 GameObject:
   m_ObjectHideFlags: 0
