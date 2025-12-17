@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerInteract
   interactRange: 1
-  interactKey: 113
+  interactKey: 101
   interactableLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -270,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::Player.ClimbController
   climbSpeed: 3
   debugLogs: 1
+  debugEnterKey: 107
   pushOffHorizontal: 6
   pushOffVertical: 3
   jumpOffVertical: 8
