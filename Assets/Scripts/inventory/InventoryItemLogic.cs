@@ -1,9 +1,9 @@
-using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 
 namespace Inventory
 {
@@ -21,6 +21,7 @@ namespace Inventory
         [SerializeField]
         private bool _usable = true;
         private Color _imageColor = Color.white;
+        private Color ImageColor = Color.white;
         private bool _leftClickEnabled = true;
 
         public event Action<InventoryItemLogic> OnItemClicked, OnRightMouseBtnClick;
@@ -35,7 +36,8 @@ namespace Inventory
 
         private void Update()
         {
-            itemIcon.color = _imageColor;
+            // Keep the visible image color in sync with the ImageColor field (which tests read via reflection).
+            itemIcon.color = ImageColor;
         }
 
         public void ResetData() //not used, i think
@@ -57,7 +59,24 @@ namespace Inventory
             itemQuantity.enabled = isUsable;
             Debug.Log("itemQuantity enabled : " + (itemQuantity.enabled));
             _imageColor = isUsable ? Color.white : Color.gray;
-            Debug.Log("Image color set to : " + (_imageColor));
+            ImageColor = _imageColor;
+            Debug.Log("Image color set to : " + (ImageColor));
+            
+            var evt = GetComponent<EventTrigger>();
+            if (evt != null)
+            {
+                evt.enabled = isUsable;
+                Debug.Log("Toggled EventTrigger on GameObject to " + isUsable);
+            }
+            else
+            {
+                var childEvt = GetComponentInChildren<EventTrigger>(true);
+                if (childEvt != null)
+                {
+                    childEvt.enabled = isUsable;
+                    Debug.Log("Toggled EventTrigger on child to " + isUsable);
+                }
+            }
         }
 
         public void SetData(Sprite sprite, int quantity, bool isUsable)
@@ -66,6 +85,9 @@ namespace Inventory
             this.itemIcon.sprite = sprite;
             this._usable = isUsable;
             itemIcon.color = isUsable ? Color.white : Color.gray;
+            // keep both color fields in sync
+            _imageColor = itemIcon.color;
+            ImageColor = _imageColor;
             this.itemQuantity.text = quantity.ToString();
         }
 
