@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Player
 {
-    // Simple climb controller that detects Ladder/Rope triggers and drives the MovementScript climbing API.
     // Requirements: Ladder and Rope objects should be tagged with "Ladder" or "Rope" and have a Trigger Collider2D.
     public class ClimbController : MonoBehaviour
     {
