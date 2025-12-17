@@ -14,6 +14,7 @@ namespace Player
         private static readonly string CLIMB_ROPE = "ClimbRope";
         private static readonly string CLIMB_LADDER = "ClimbLadder";
         private static readonly string CLIMB_ACTIVE = "ClimbActive";
+        private static readonly string TURN_BACK="TurnBack";
         
 
         // Animation state names
@@ -111,6 +112,17 @@ namespace Player
             if (animator == null) return;
             animator.SetBool(CLIMB_ACTIVE, isActive);
             if (isActive) SetIdle(false);
+        }
+
+        public void SetTurnBack(bool turnBack)
+        {
+            if (animator == null) return;
+            animator.SetBool(TURN_BACK, turnBack);
+            if (turnBack)
+            {
+                SetIdle(false);
+                SetWalking(false);
+            }
         }
     }
 }

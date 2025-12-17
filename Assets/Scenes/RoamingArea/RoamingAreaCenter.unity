@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!1 &346790177
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!1 &480303326
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!1 &965861950
@@ -2503,7 +2503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!1 &1101118520
@@ -2672,7 +2672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!4 &1111742096 stripped
@@ -3871,7 +3871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!1 &1903959845
@@ -4251,7 +4251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
+  isDefaultSpawn: 0
   spawnType: 0
   spawnID: 
 --- !u!1660057539 &9223372036854775807

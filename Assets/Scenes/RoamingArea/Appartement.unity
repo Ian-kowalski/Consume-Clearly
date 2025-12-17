@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 642849418}
   - component: {fileID: 642849417}
   - component: {fileID: 642849416}
+  - component: {fileID: 642849419}
   m_Layer: 8
   m_Name: loadRoamingArea
   m_TagString: Untagged
@@ -710,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.InteractableScene
   requiresLever: 0
   uniqueId: 57ab37b3-ab61-4f43-95f5-a4aed77027ee
-  sceneToLoad: {fileID: 102900000, guid: 3e4b97dd67980834db8293f45c9689c3, type: 3}
+  sceneToLoad: {fileID: 102900000, guid: 861957ea801fa6e43903c097d6619919, type: 3}
 --- !u!61 &642849417
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -815,6 +816,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &642849419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642849414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &690956114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,53 +1820,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1612928693
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1612928695}
-  - component: {fileID: 1612928694}
-  m_Layer: 0
-  m_Name: playerSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1612928694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612928693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
-  spawnType: 0
-  spawnID: 
---- !u!4 &1612928695
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612928693}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1823887124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,7 +1916,6 @@ SceneRoots:
   - {fileID: 615428576}
   - {fileID: 1823887126}
   - {fileID: 1890679114}
-  - {fileID: 1612928695}
   - {fileID: 76124315}
   - {fileID: 476942279}
   - {fileID: 747039893}
