@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2581630075129105177}
-  - component: {fileID: 7155199445858799552}
   - component: {fileID: 7697367244008082870}
+  - component: {fileID: 493381419933538865}
+  - component: {fileID: 2132027755086850326}
   m_Layer: 8
   m_Name: Hook
   m_TagString: Untagged
@@ -34,23 +35,6 @@ Transform:
   - {fileID: 1621043171585443181}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7155199445858799552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2628635114628146425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7382f1291b0dd48a9338a838bfeb13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Main::LevelObjects.Interactable.Hook
-  requiresLever: 0
-  uniqueId: 77e57bdd-8980-40d0-8141-8f330d0a56bd
-  ropePrefab: {fileID: 2364229924494128044, guid: 0db7614ec8e912c4ab5f01a388cc3bb6, type: 3}
-  ropeParent: {fileID: 2581630075129105177}
-  ropeVariants: []
 --- !u!58 &7697367244008082870
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -87,6 +71,40 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1
+--- !u!114 &493381419933538865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628635114628146425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1205fec76386dc14ca0c9b01d557ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::LevelObjects.Interactable.Hook
+  requiresLever: 0
+  uniqueId: 22958e08-bd0b-4f15-a5f4-b458115f30c8
+  ropePrefab: {fileID: 2364229924494128044, guid: 0db7614ec8e912c4ab5f01a388cc3bb6, type: 3}
+  ropeParent: {fileID: 2581630075129105177}
+  ropeVariants: []
+--- !u!114 &2132027755086850326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628635114628146425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1205fec76386dc14ca0c9b01d557ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::LevelObjects.Interactable.Hook
+  requiresLever: 0
+  uniqueId: 1ec8605e-aa57-462c-a96f-49f96473460a
+  ropePrefab: {fileID: 2364229924494128044, guid: 0db7614ec8e912c4ab5f01a388cc3bb6, type: 3}
+  ropeParent: {fileID: 2581630075129105177}
+  ropeVariants: []
 --- !u!1 &5675959969666372743
 GameObject:
   m_ObjectHideFlags: 0
