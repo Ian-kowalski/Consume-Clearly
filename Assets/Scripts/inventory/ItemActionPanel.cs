@@ -9,6 +9,8 @@ namespace Inventory
         private GameObject quantityButton;
         [SerializeField]
         private GameObject removeButton;
+        [SerializeField]
+        private GameObject button;
 
         public void Enable()
         {
