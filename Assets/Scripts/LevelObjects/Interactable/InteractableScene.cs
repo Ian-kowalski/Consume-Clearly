@@ -16,9 +16,11 @@ namespace LevelObjects.Interactable
         
         private AnimationController animationController;
         private IEnumerator coroutine;
+        private GameManager gameManager;
 
         private void Start()
         {
+            gameManager=GameObject.Find("GameManager").GetComponent<GameManager>();
             animationController=GameObject.FindGameObjectWithTag("Player").GetComponent<AnimationController>();
             animationController.SetTurnBack(false);
         }
@@ -42,6 +44,7 @@ namespace LevelObjects.Interactable
                     }
                 }
             }
+            gameManager.SaveProgress();
             animationController.SetTurnBack(true);
             coroutine=WaitAnimFinish(1.0f);
             StartCoroutine(coroutine);
@@ -51,7 +54,7 @@ namespace LevelObjects.Interactable
         {
             var scene=sceneToLoad.name;
             yield return new WaitForSeconds(waitTime);
-            SceneManager.LoadScene(scene);
+            gameManager.LoadScene(scene);
 
         }
 
