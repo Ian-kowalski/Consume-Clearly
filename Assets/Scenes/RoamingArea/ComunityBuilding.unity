@@ -1087,7 +1087,6 @@ GameObject:
   - component: {fileID: 427138845}
   - component: {fileID: 427138844}
   - component: {fileID: 427138843}
-  - component: {fileID: 427138846}
   m_Layer: 8
   m_Name: loadUnderground
   m_TagString: Untagged
@@ -1229,21 +1228,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &427138846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427138841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 0
-  spawnType: 0
-  spawnID: 
 --- !u!1 &491539807
 GameObject:
   m_ObjectHideFlags: 0

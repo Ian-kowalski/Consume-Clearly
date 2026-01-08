@@ -154,7 +154,7 @@
                 }
             }
         
-            public void SaveProgress()
+            public void SaveProgress(string customFileName = null)
             {
                 GameObject player = PlayerManager.Instance?.GetPlayer();
                 SaveData saveData = new SaveData
@@ -179,14 +179,14 @@
                     }
                 }
         
-                SaveSystem.Save(saveData);
+                SaveSystem.Save(saveData,customFileName);
                 Debug.Log($"Game saved! {saveData.InteractableStates.Count} interactable objects saved.");
             }
         
-            public void LoadProgress()
+            public void LoadProgress(string customFileName = null)
             {
                 Debug.Log("Loading game progress...");
-                data = SaveSystem.Load();
+                data = SaveSystem.Load(customFileName);
                 if (data != null)
                 {
                     Debug.Log(

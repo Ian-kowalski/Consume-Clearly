@@ -27,26 +27,9 @@ namespace LevelObjects.Interactable
 
         public override void Interact()
         {
-        
-            PlayerSpawnPoint[] spawnPoints = FindObjectsOfType<PlayerSpawnPoint>();
-            if (spawnPoints.Length > 0)
-            {
-                Debug.Log("More than one spawn point");
-                foreach (var spawnPoint in spawnPoints)
-                {
-                    if (spawnPoint.transform == transform)
-                    {
-                        spawnPoint.SetDefault();
-                    }
-                    else
-                    {
-                        spawnPoint.SetCheckpoint();
-                    }
-                }
-            }
-            gameManager.SaveProgress();
             animationController.SetTurnBack(true);
             coroutine=WaitAnimFinish(1.0f);
+            gameManager.SaveProgress(SceneManager.GetActiveScene().name);
             StartCoroutine(coroutine);
         }
 
@@ -55,6 +38,7 @@ namespace LevelObjects.Interactable
             var scene=sceneToLoad.name;
             yield return new WaitForSeconds(waitTime);
             gameManager.LoadScene(scene);
+            gameManager.LoadProgress(scene);
 
         }
 
