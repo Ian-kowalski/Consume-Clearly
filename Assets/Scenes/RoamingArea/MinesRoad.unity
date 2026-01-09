@@ -1413,7 +1413,7 @@ GameObject:
   - component: {fileID: 648753196}
   - component: {fileID: 648753195}
   m_Layer: 0
-  m_Name: gameManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.InteractableScene
   requiresLever: 0
   uniqueId: 1b6722d1-7d0c-4735-8428-dbf7fe4d0116
-  sceneToLoad: {fileID: 102900000, guid: 3e4b97dd67980834db8293f45c9689c3, type: 3}
+  sceneToLoad: {fileID: 102900000, guid: 861957ea801fa6e43903c097d6619919, type: 3}
 --- !u!61 &692733606
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 using Save;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using Player;
 
 namespace LevelObjects.Interactable
@@ -12,12 +13,33 @@ namespace LevelObjects.Interactable
     {
         [Header("Scene to load")] [Tooltip("Choose which scene needs to be load")] [SerializeField]
         private Object sceneToLoad;
+        
+        private AnimationController animationController;
+        private IEnumerator coroutine;
+        private GameManager gameManager;
+
+        private void Start()
+        {
+            gameManager=GameObject.Find("GameManager").GetComponent<GameManager>();
+            animationController=GameObject.FindGameObjectWithTag("Player").GetComponent<AnimationController>();
+            animationController.SetTurnBack(false);
+        }
 
         public override void Interact()
         {
+            animationController.SetTurnBack(true);
+            coroutine=WaitAnimFinish(1.0f);
+            gameManager.SaveProgress(SceneManager.GetActiveScene().name);
+            StartCoroutine(coroutine);
+        }
+
+        private IEnumerator WaitAnimFinish(float waitTime)
+        {
             var scene=sceneToLoad.name;
-            Debug.Log(scene);
-            SceneManager.LoadScene(scene);
+            yield return new WaitForSeconds(waitTime);
+            gameManager.LoadScene(scene);
+            gameManager.LoadProgress(scene);
+
         }
 
         public override InteractableObjectState SaveState()
@@ -27,13 +49,13 @@ namespace LevelObjects.Interactable
                 uniqueId = GetUniqueId(),
                 position = transform.position,
             };
+
         }
 
         public override void LoadState(InteractableObjectState state)
         {
             if (state == null || state.uniqueId != GetUniqueId()) return;
-
-            Debug.Log("Loading Scene Changer");
+            Debug.Log("load interactive Scene");
         }
     }
 }
