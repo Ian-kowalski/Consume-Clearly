@@ -27,5 +27,20 @@ namespace Player
             Gizmos.DrawWireSphere(transform.position, 0.5f);
             Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2f);
         }
+        public void SetDefault()
+        {
+            spawnType=SpawnType.Default;
+            Debug.Log("set default");
+        }
+        public void SetCheckpoint()
+        {
+            spawnType=SpawnType.Checkpoint;
+            Debug.Log("set checkpoint");
+        }
+        public void SetRespawn()
+        {
+            spawnType=SpawnType.Respawn;
+            Debug.Log("set Respawn");
+        }
     }
 }

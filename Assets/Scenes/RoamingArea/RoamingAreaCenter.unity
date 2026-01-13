@@ -1285,53 +1285,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &462560275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 462560277}
-  - component: {fileID: 462560276}
-  m_Layer: 0
-  m_Name: PlayerSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &462560276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462560275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
-  isDefaultSpawn: 1
-  spawnType: 0
-  spawnID: 
---- !u!4 &462560277
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462560275}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44, y: 11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &480303326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,7 +3139,7 @@ GameObject:
   - component: {fileID: 1319448963}
   - component: {fileID: 1319448962}
   m_Layer: 0
-  m_Name: gameManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3401,6 +3354,7 @@ GameObject:
   - component: {fileID: 1529875905}
   - component: {fileID: 1529875904}
   - component: {fileID: 1529875903}
+  - component: {fileID: 1529875906}
   m_Layer: 8
   m_Name: loadAppartment
   m_TagString: Untagged
@@ -3542,6 +3496,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1529875906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529875901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d79c41ae5d93ec4c8c58b4b907aa37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Main::Player.PlayerSpawnPoint
+  isDefaultSpawn: 1
+  spawnType: 0
+  spawnID: 
 --- !u!1 &1633524135
 GameObject:
   m_ObjectHideFlags: 0
@@ -4182,7 +4151,6 @@ SceneRoots:
   - {fileID: 732986732}
   - {fileID: 1903959846}
   - {fileID: 31052832}
-  - {fileID: 462560277}
   - {fileID: 1319448963}
   - {fileID: 2000930579}
   - {fileID: 1281957551}
