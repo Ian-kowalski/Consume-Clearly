@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.InteractableScene
   requiresLever: 0
   uniqueId: 7547a2d2-3cbe-4494-8e33-284d258b9c3e
-  sceneToLoad: {fileID: 102900000, guid: 861957ea801fa6e43903c097d6619919, type: 3}
+  sceneToLoad: RoamingAreaCenter
 --- !u!61 &144415744
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.InteractableScene
   requiresLever: 0
   uniqueId: 7547a2d2-3cbe-4494-8e33-284d258b9c3e
-  sceneToLoad: {fileID: 102900000, guid: 1523f22b10f4bbd4dbc8518d58674d56, type: 3}
+  sceneToLoad: UnderGround
 --- !u!61 &427138844
 BoxCollider2D:
   m_ObjectHideFlags: 0

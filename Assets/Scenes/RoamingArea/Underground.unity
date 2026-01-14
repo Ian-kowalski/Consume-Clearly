@@ -5048,7 +5048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.InteractableScene
   requiresLever: 0
   uniqueId: 679598b4-54f1-473a-8d6a-417f59a58628
-  sceneToLoad: {fileID: 102900000, guid: bc60536e62204d84ea676f6381f962e4, type: 3}
+  sceneToLoad: ComunityBuilding
 --- !u!61 &1262589687
 BoxCollider2D:
   m_ObjectHideFlags: 0

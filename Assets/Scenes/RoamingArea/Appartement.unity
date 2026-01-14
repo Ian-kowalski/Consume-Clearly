@@ -711,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::LevelObjects.Interactable.InteractableScene
   requiresLever: 0
   uniqueId: 57ab37b3-ab61-4f43-95f5-a4aed77027ee
-  sceneToLoad: {fileID: 102900000, guid: 861957ea801fa6e43903c097d6619919, type: 3}
+  sceneToLoad: RoamingAreaCenter
 --- !u!61 &642849417
 BoxCollider2D:
   m_ObjectHideFlags: 0

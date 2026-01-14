@@ -12,7 +12,7 @@ namespace LevelObjects.Interactable
     public class InteractableScene : Interactable
     {
         [Header("Scene to load")] [Tooltip("Choose which scene needs to be load")] [SerializeField]
-        private Object sceneToLoad;
+        private string sceneToLoad;
         
         private AnimationController animationController;
         private IEnumerator coroutine;
@@ -35,10 +35,9 @@ namespace LevelObjects.Interactable
 
         private IEnumerator WaitAnimFinish(float waitTime)
         {
-            var scene=sceneToLoad.name;
             yield return new WaitForSeconds(waitTime);
-            gameManager.LoadScene(scene);
-            gameManager.LoadProgress(scene);
+            gameManager.LoadScene(sceneToLoad);
+            gameManager.LoadProgress(sceneToLoad);
 
         }
 
