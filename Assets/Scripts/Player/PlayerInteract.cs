@@ -5,9 +5,10 @@ namespace Player
 {
     public class PlayerInteract : MonoBehaviour
     {
-        public float interactRange = 2f;
         public KeyCode interactKey = KeyCode.E;
         public LayerMask interactableLayer;
+
+        public GameObject pressE;
 
         [Header("Raycast tuning")]
         public float originOffset = 0.5f;     // move the cast origin forward so it doesn't start inside the player
@@ -19,30 +20,38 @@ namespace Player
         void Awake()
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            pressE.SetActive(false);
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(interactKey))
+            Vector2 dir = GetFacingDirection();
+
+            // Compute an origin slightly in front of the player to avoid starting inside the player's collider
+            Vector2 origin = (Vector2)transform.position + dir * originOffset;
+
+            // Use CircleCast (thick ray) so the detection is more forgiving
+            RaycastHit2D hit = Physics2D.CircleCast(origin, circleRadius, dir, 0.1f, interactableLayer);
+
+            Debug.DrawRay(origin, dir * 0.1f, Color.yellow, 0.5f);
+
+            if (hit.collider != null)
             {
-                Vector2 dir = GetFacingDirection();
-
-                // Compute an origin slightly in front of the player to avoid starting inside the player's collider
-                Vector2 origin = (Vector2)transform.position + dir * originOffset;
-
-                // Use CircleCast (thick ray) so the detection is more forgiving
-                RaycastHit2D hit = Physics2D.CircleCast(origin, circleRadius, dir, interactRange, interactableLayer);
-
-                Debug.DrawRay(origin, dir * interactRange, Color.yellow, 0.5f);
-
-                if (hit.collider != null)
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                if (interactable != null && !interactable.RequiresLever)
                 {
-                    Interactable interactable = hit.collider.GetComponent<Interactable>();
-                    if (interactable != null && !interactable.RequiresLever)
+                    pressE.SetActive(true);
+                    Debug.Log("can interact");
+                    if (Input.GetKeyDown(interactKey))
                     {
                         interactable.Interact();
                     }
                 }
+            }
+            else
+            {
+                Debug.Log("hiding interaction text");
+                pressE.SetActive(false);
             }
         }
 
@@ -57,7 +66,7 @@ namespace Player
             if (transform.localScale.x > 0f) return Vector2.right;
 
             float h = Input.GetAxisRaw("Horizontal");
-            if (Mathf.Abs(h) > 0.01f) return h > 0f ? Vector2.right : Vector2.left;
+            if (Mathf.Abs(h) > 0.1f) return h > 0f ? Vector2.right : Vector2.left;
 
             return (Vector2)transform.right;
         }
@@ -67,8 +76,8 @@ namespace Player
             Gizmos.color = Color.yellow;
             Vector2 dir = Application.isPlaying ? GetFacingDirection() : (Vector2)transform.right;
             Vector2 origin = (Vector2)transform.position + dir * originOffset;
-            Gizmos.DrawLine(origin, origin + dir * interactRange);
-            Gizmos.DrawWireSphere(origin + dir * interactRange, circleRadius);
+            Gizmos.DrawLine(origin, origin + dir * 0.1f);
+            Gizmos.DrawWireSphere(origin + dir * 0.1f, circleRadius);
         }
     }
 }
