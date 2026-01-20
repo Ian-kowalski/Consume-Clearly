@@ -98,5 +98,20 @@ namespace Save
                 Debug.Log("Save data cleared.");
             }
         }
+        public static void ClearAllData()
+        {
+            string path=Application.persistentDataPath;
+            if (!Directory.Exists(path))
+            {
+                Debug.Log("No such file in path");
+                return;
+            }
+            string [] files=Directory.GetFiles(path);
+
+            foreach (var file in files)
+            {
+                ClearSaveData(file);
+            }
+        }
     }
 }
