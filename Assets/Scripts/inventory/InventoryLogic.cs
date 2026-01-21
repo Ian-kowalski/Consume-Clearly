@@ -8,60 +8,60 @@ namespace Inventory
     public class InventoryLogic : MonoBehaviour
     {
         [SerializeField]
-        private InventoryItemLogic _itemPrefab;
+        private InventoryItemLogic itemPrefab;
         [SerializeField]
-        private RectTransform _contentPanel;
+        private RectTransform contentPanel;
         [SerializeField]
-        private InventoryDescription _descriptionPanel;
+        private InventoryDescription descriptionPanel;
 
-        private List<InventoryItemLogic> _inventoryItems = new List<InventoryItemLogic>();
+        private List<InventoryItemLogic> inventoryItems = new List<InventoryItemLogic>();
 
-        public event Action<int> OnDescriptionRequested;
+        public event Action<int> DescriptionRequested;
 
         private void Awake()
         {
-            if (_descriptionPanel != null)
+            if (descriptionPanel != null)
             {
-                _descriptionPanel.ResetDescription();
+                descriptionPanel.ResetDescription();
             }
         }
 
         public void InitializeInventory(int size)
         {
-            _inventoryItems = new List<InventoryItemLogic>();
-            _contentPanel.DetachChildren();
+            inventoryItems = new List<InventoryItemLogic>();
+            contentPanel.DetachChildren();
             for (int i = 0; i < size; i++)
             {
-                InventoryItemLogic newitem = Instantiate(_itemPrefab, Vector3.zero, Quaternion.identity);
-                newitem.transform.SetParent(_contentPanel);
-                _inventoryItems.Add(newitem);
-                newitem.OnItemClicked += HandleItemSelected;
-                newitem.OnRightMouseBtnClick += HandleShowItemAction; 
-                newitem.SetSlotIndex(i);
+                InventoryItemLogic newItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
+                newItem.transform.SetParent(contentPanel);
+                inventoryItems.Add(newItem);
+                newItem.OnItemClicked += HandleItemSelected;
+                newItem.OnRightMouseBtnClick += HandleShowItemAction; 
+                newItem.SetSlotIndex(i);
             }
         }
 
         public void UpdateData(int index, Sprite sprite, int quantity, bool isUsable)
         {
-            if (index < 0 || index >= _inventoryItems.Count) return;
-            _inventoryItems[index].SetData(sprite, quantity,isUsable);
+            if (index < 0 || index >= inventoryItems.Count) return;
+            inventoryItems[index].SetData(sprite, quantity,isUsable);
         }
 
         public void ManipulateItemFunction(int index, bool isUsable)
         {
             Debug.Log("Manipulating item function called for index: " + index + " with emptying: " + isUsable);
-            _inventoryItems[index].ManipulateEventTrigger(isUsable);
+            inventoryItems[index].SetEventTriggerEnabled(isUsable);
             ResetDescription();
         }
 
         private void HandleShowItemAction(InventoryItemLogic logic)
         {
             HideButtons();
-            int index = _inventoryItems.IndexOf(logic);
+            int index = inventoryItems.IndexOf(logic);
             if (index < 0) return;
-            if (_inventoryItems[index].HasItem) 
+            if (inventoryItems[index].HasItem) 
             {
-                _inventoryItems[index].ButtonEnable();
+                inventoryItems[index].EnableActionPanel();
             }
         }
 
@@ -69,9 +69,9 @@ namespace Inventory
         {
             Debug.Log("Item selected");
             ResetDescription();
-            int index = _inventoryItems.IndexOf(logic);
+            int index = inventoryItems.IndexOf(logic);
             if (index < 0) return;
-            OnDescriptionRequested?.Invoke(index);
+            DescriptionRequested?.Invoke(index);
         }
 
         public void Show() 
@@ -88,21 +88,21 @@ namespace Inventory
 
         public void UpdateDescription(int itemIndex, Sprite itemSprite, string name, string description)
         {
-            _descriptionPanel.SetDescription(itemSprite, name, description);
+            descriptionPanel.SetDescription(itemSprite, name, description);
             DeselectAllSelections();
-            _inventoryItems[itemIndex].Select();
+            inventoryItems[itemIndex].Select();
         }
 
         public void ResetDescription()
         {
-            _descriptionPanel.ResetDescription();
+            descriptionPanel.ResetDescription();
             DeselectAllSelections();
             HideButtons();
         }
 
         private void DeselectAllSelections()
         {
-            foreach (InventoryItemLogic item in _inventoryItems)
+            foreach (InventoryItemLogic item in inventoryItems)
             {
                 item.Deselect();
             }
@@ -111,15 +111,15 @@ namespace Inventory
 
         private void HideButtons()
         {
-            foreach (InventoryItemLogic item in _inventoryItems)
+            foreach (InventoryItemLogic item in inventoryItems)
             {
-                item.ButtonDisable();
+                item.DisableActionPanel();
             }
         }
 
         public void InventorySizeTest()
         {
-            Debug.Log("Inventory size is: " + _inventoryItems.Count);
+            Debug.Log("Inventory size is: " + inventoryItems.Count);
         }
     }
 }

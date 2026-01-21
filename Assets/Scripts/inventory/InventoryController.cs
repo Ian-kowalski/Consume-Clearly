@@ -19,8 +19,8 @@ namespace Inventory
         {
             _inventoryLogic = FindFirstObjectByType<InventoryLogic>(FindObjectsInactive.Include);
             _inventoryLogic.InitializeInventory(_inventoryData.Size);
-            _inventoryLogic.OnDescriptionRequested += HandleDescriptionRequest;
-            InventoryObject.OnItemModified += _inventoryLogic.ManipulateItemFunction;
+            _inventoryLogic.DescriptionRequested += HandleDescriptionRequest;
+            InventoryObject.ItemModified += _inventoryLogic.ManipulateItemFunction;
         }
 
         private void HandleDescriptionRequest(int itemIndex)

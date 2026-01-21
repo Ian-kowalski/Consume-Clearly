@@ -14,10 +14,10 @@ namespace Items
         [field: SerializeField]
         public int MaxStackSize { get; set; } = 1;
         [field: SerializeField]
-        String Name { get; set; }
+        public string Name { get; set; }
         [field: SerializeField]
         [field: TextArea]
-        public String Description { get; set; }
+        public string Description { get; set; }
         [field: SerializeField]
         public Sprite ItemImage { get; set; }
         [field: SerializeField]

@@ -70,7 +70,7 @@ namespace Tests.EditMode
             // add EventTrigger to the object
             var trigger = go.AddComponent<EventTrigger>();
 
-            itemLogic.ManipulateEventTrigger(true);
+            itemLogic.SetEventTriggerEnabled(true);
             // read private ImageColor field immediately (ManipulateEventTrigger sets this directly)
             var imageColorField = typeof(InventoryItemLogic).GetField("ImageColor", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.IsNotNull(imageColorField, "Could not find ImageColor private field via reflection");
@@ -84,7 +84,7 @@ namespace Tests.EditMode
             Assert.IsTrue(qty.enabled);
             Assert.AreEqual(Color.white, imageColor);
 
-            itemLogic.ManipulateEventTrigger(false);
+            itemLogic.SetEventTriggerEnabled(false);
 
             var imageColorAfter = (Color)imageColorField.GetValue(itemLogic);
             Debug.Log($"ImageColor after false: {imageColorAfter}");
