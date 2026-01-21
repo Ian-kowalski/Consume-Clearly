@@ -46,7 +46,7 @@ namespace Tests.EditMode
             typeof(InventoryItemLogic).GetField("itemIcon", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(prefab, icon);
             typeof(InventoryItemLogic).GetField("itemQuantity", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(prefab, qty);
             typeof(InventoryItemLogic).GetField("itemBorder", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(prefab, border);
-            typeof(InventoryItemLogic).GetField("_itemActionPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(prefab, actionPanel);
+            typeof(InventoryItemLogic).GetField("itemActionPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(prefab, actionPanel);
 
             // create a container for content panel
             var contentObj = new GameObject("Content");
@@ -73,9 +73,9 @@ namespace Tests.EditMode
             typeof(Inventory.InventoryDescription).GetField("itemDescription", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(desc, descText);
 
             // assign private serialized fields via reflection
-            typeof(InventoryLogic).GetField("_itemPrefab", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(inventoryLogic, prefab);
-            typeof(InventoryLogic).GetField("_contentPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(inventoryLogic, rect);
-            typeof(InventoryLogic).GetField("_descriptionPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(inventoryLogic, desc);
+            typeof(InventoryLogic).GetField("itemPrefab", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(inventoryLogic, prefab);
+            typeof(InventoryLogic).GetField("contentPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(inventoryLogic, rect);
+            typeof(InventoryLogic).GetField("descriptionPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(inventoryLogic, desc);
 
             // Now that required fields are assigned, activate the GameObject so Awake() runs safely
             go.SetActive(true);
@@ -93,12 +93,12 @@ namespace Tests.EditMode
             inventoryLogic.InitializeInventory(4);
 
             // read private _inventoryItems list and its count
-            var listField = typeof(InventoryLogic).GetField("_inventoryItems", BindingFlags.NonPublic | BindingFlags.Instance);
+            var listField = typeof(InventoryLogic).GetField("inventoryItems", BindingFlags.NonPublic | BindingFlags.Instance);
             var list = (System.Collections.ICollection)listField.GetValue(inventoryLogic);
             Assert.AreEqual(4, list.Count);
 
             // check that content panel has 4 children
-            var content = (RectTransform)typeof(InventoryLogic).GetField("_contentPanel", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(inventoryLogic);
+            var content = (RectTransform)typeof(InventoryLogic).GetField("contentPanel", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(inventoryLogic);
             Assert.AreEqual(4, content.childCount);
         }
 
@@ -110,12 +110,12 @@ namespace Tests.EditMode
             yield return null;
 
             // Diagnostic logging for instantiated items
-            var tmpListField = typeof(InventoryLogic).GetField("_inventoryItems", BindingFlags.NonPublic | BindingFlags.Instance);
+            var tmpListField = typeof(InventoryLogic).GetField("inventoryItems", BindingFlags.NonPublic | BindingFlags.Instance);
             var tmpList = (System.Collections.IList)tmpListField.GetValue(inventoryLogic);
             Debug.Log($"[TestDiag] Initialized items count: {tmpList?.Count}");
 
             // Ensure items were actually created
-            Assert.IsNotNull(tmpList, "_inventoryItems was not initialized");
+            Assert.IsNotNull(tmpList, "inventoryItems was not initialized");
             Assert.AreEqual(2, tmpList.Count, "InitializeInventory did not create the expected number of items");
 
             // should not throw
@@ -123,7 +123,7 @@ namespace Tests.EditMode
             Assert.DoesNotThrow(() => inventoryLogic.UpdateData(5, null, 0, false));
 
             // ensure existing index remains default (quantity empty)
-            var listField = typeof(InventoryLogic).GetField("_inventoryItems", BindingFlags.NonPublic | BindingFlags.Instance);
+            var listField = typeof(InventoryLogic).GetField("inventoryItems", BindingFlags.NonPublic | BindingFlags.Instance);
             var list = (System.Collections.IList)listField.GetValue(inventoryLogic);
             // Some instantiation paths may not preserve prefab-assigned references; ensure each item has itemQuantity assigned
             for (int i = 0; i < list.Count; i++)
@@ -159,7 +159,7 @@ namespace Tests.EditMode
         public void ShowHide_TogglesActiveAndResetsDescription()
         {
             // Get the description panel and verify its fields were reset by Show/Hide
-            var desc = (Inventory.InventoryDescription)typeof(InventoryLogic).GetField("_descriptionPanel", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(inventoryLogic);
+            var desc = (Inventory.InventoryDescription)typeof(InventoryLogic).GetField("descriptionPanel", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(inventoryLogic);
 
             // verify Show() activates inventory and resets description fields
             inventoryLogic.Show();
