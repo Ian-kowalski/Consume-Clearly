@@ -41,7 +41,6 @@ namespace Player
                 if (interactable != null && !interactable.RequiresLever)
                 {
                     pressE.SetActive(true);
-                    Debug.Log("can interact");
                     if (Input.GetKeyDown(interactKey))
                     {
                         interactable.Interact();
@@ -50,7 +49,6 @@ namespace Player
             }
             else
             {
-                Debug.Log("hiding interaction text");
                 pressE.SetActive(false);
             }
         }
