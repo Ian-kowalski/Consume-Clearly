@@ -53,7 +53,7 @@ namespace Inventory
             Debug.Log($"Remove clicked for slot index: {index}");
         }
 
-        public void QuantityUp()
+        public void IncreaseQuantity()
         {
             var itemSlot = GetComponentInParent<InventoryItemLogic>();
             if (itemSlot == null)
