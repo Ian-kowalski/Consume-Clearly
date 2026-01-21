@@ -306,7 +306,8 @@ MonoBehaviour:
   itemIcon: {fileID: 1806057324712723164}
   itemQuantity: {fileID: 5788520365023775141}
   itemBorder: {fileID: 6058747352565167461}
-  itemActionPanel: {fileID: 2307004498708546217}
+  _itemActionPanel: {fileID: 2307004498708546217}
+  _usable: 1
 --- !u!114 &4805745730538180776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,4 +1112,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Main::ItemActionPanel
   quantityButton: {fileID: 3203852834253989766}
   removeButton: {fileID: 5922039362608392458}
-  button: {fileID: 0}

@@ -40,7 +40,7 @@ namespace Tests.EditMode
             typeof(InventoryItemLogic).GetField("itemIcon", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(itemLogic, itemIcon);
             typeof(InventoryItemLogic).GetField("itemQuantity", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(itemLogic, qtyObj);
             typeof(InventoryItemLogic).GetField("itemBorder", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(itemLogic, border);
-            typeof(InventoryItemLogic).GetField("_itemActionPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(itemLogic, actionPanel);
+            typeof(InventoryItemLogic).GetField("itemActionPanel", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(itemLogic, actionPanel);
         }
 
         [TearDown]
@@ -72,7 +72,7 @@ namespace Tests.EditMode
 
             itemLogic.SetEventTriggerEnabled(true);
             // read private ImageColor field immediately (ManipulateEventTrigger sets this directly)
-            var imageColorField = typeof(InventoryItemLogic).GetField("ImageColor", BindingFlags.NonPublic | BindingFlags.Instance);
+            var imageColorField = typeof(InventoryItemLogic).GetField("imageColor", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.IsNotNull(imageColorField, "Could not find ImageColor private field via reflection");
 
             var qty = (TextMeshProUGUI)typeof(InventoryItemLogic).GetField("itemQuantity", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(itemLogic);
@@ -109,7 +109,7 @@ namespace Tests.EditMode
         public void OnPointerClick_LeftButton_InvokesOnItemClicked()
         {
             bool called = false;
-            itemLogic.GetType().GetField("_usable", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(itemLogic, true);
+            itemLogic.SetEventTriggerEnabled(true);
             itemLogic.OnItemClicked += (l) => { called = true; };
 
             var pointer = new PointerEventData(null) { button = PointerEventData.InputButton.Left };
